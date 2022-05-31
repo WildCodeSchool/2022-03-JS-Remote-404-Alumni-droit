@@ -1,15 +1,21 @@
 import { Routes, Route } from "react-router-dom";
 
-import Home from "@pages/Home";
 import Listing from "@pages/Listing";
+import Identification from "@pages/Identification";
+import SignUp from "@pages/SignUp";
+import Profile from "@pages/Profile";
+import RGPD from "@pages/RGPD";
 
 import "./App.css";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/listing/" element={<Listing />} />
+      <Route path="/" element={<Listing />} />
+      <Route path="/identification/" element={<Identification />} />
+      <Route path="/signup/" element={<SignUp />} />
+      <Route path="/profile/" element={<Profile />} />
+      <Route path="/rgpd/" element={<RGPD />} />
     </Routes>
   );
 }
