@@ -1,19 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&family=Playfair+Display&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
-
-body {
-  font-family: "lora", serif;
-  color: #111;
-  font-size: 15px;
-}
-
-header {
-  font-family: "Playfair Display", "Georgia", serif;
-  font-size: 17px;
-  background-color: #fafafa;
-  color: #111;
-}
