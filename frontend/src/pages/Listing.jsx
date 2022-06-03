@@ -1,7 +1,10 @@
 import React from "react";
+import Footer from "../components/Footer"
 
 function Listing() {
-  return <div>Listing</div>;
+  return <div>
+    <Footer /> </div>
+
 }
 
 export default Listing;

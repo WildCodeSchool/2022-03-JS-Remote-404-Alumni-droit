@@ -1,0 +1,40 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url("https://fonts.googleapis.com/css2?family=Hind:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Expletus+Sans&family=Hind:wght@300;400&display=swap");
+
+.footer {
+  display: flex;
+  justify-content: center;
+  flex-direction:column;
+  width: 100%;
+  background-color: #EBEBEB;
+  padding: 5px 1px 5px 1px;
+ 
+}
+.global-links {
+  display: flex;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #6d6e71;
+  font-size: 8px;
+  align-items: row;
+}
+.images {
+  display: flex;
+	flex-direction: row;
+	align-items: center;
+
+}
+
+.img-social-media {
+  display: flex;
+  justify-content: row;
+  width: 0px;
+
+}
+
+@media screen and (min-width: 750px) {
+  .images {
+    display: flex;
+    padding-left: 8px;
+  }
+} 
