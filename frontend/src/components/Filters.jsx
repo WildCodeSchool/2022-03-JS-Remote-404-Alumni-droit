@@ -8,6 +8,13 @@ const Diplomes = [
   { label: "Diplôme de l'École de Droit" },
 ];
 
+const Years = [
+  { label: 1990 },
+  { label: 1991 },
+  { label: 1992 },
+  { label: 1993 },
+];
+
 function Filters() {
   return (
     <div className="flex justify-center m-3">
@@ -18,6 +25,15 @@ function Filters() {
         sx={{ width: 300 }}
         renderInput={(params) => (
           <TextField {...params} label="Diplômes" color="primary" />
+        )}
+      />
+      <Autocomplete
+        disablePortal
+        id="combo-box-demo"
+        options={Years}
+        sx={{ width: 300 }}
+        renderInput={(params) => (
+          <TextField {...params} label="Années" color="primary" />
         )}
       />
     </div>
