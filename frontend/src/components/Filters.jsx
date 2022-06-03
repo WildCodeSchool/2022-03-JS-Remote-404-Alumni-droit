@@ -17,26 +17,36 @@ const Years = [
 
 function Filters() {
   return (
-    <div className="flex justify-center m-3">
-      <Autocomplete
-        disablePortal
-        id="combo-box-demo"
-        options={Diplomes}
-        sx={{ width: 300 }}
-        renderInput={(params) => (
-          <TextField {...params} label="Diplômes" color="primary" />
-        )}
-      />
-      <Autocomplete
-        disablePortal
-        id="combo-box-demo"
-        options={Years}
-        sx={{ width: 300 }}
-        renderInput={(params) => (
-          <TextField {...params} label="Années" color="primary" />
-        )}
-      />
-    </div>
+    <>
+      <div className="flex justify-center m-3">
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={Diplomes}
+          sx={{ width: 200 }}
+          renderInput={(params) => (
+            <TextField {...params} label="Diplômes" color="primary" />
+          )}
+        />
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={Years}
+          sx={{ width: 200 }}
+          renderInput={(params) => (
+            <TextField {...params} label="Années" color="primary" />
+          )}
+        />
+      </div>
+      <div className="flex justify-center m-3">
+        <TextField
+          id="filled-basic"
+          label="Recherche par nom"
+          variant="filled"
+          sx={{ width: 400 }}
+        />
+      </div>
+    </>
   );
 }
 
