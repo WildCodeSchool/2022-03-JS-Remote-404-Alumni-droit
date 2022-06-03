@@ -23,7 +23,7 @@ function Filters() {
           disablePortal
           id="combo-box-demo"
           options={Diplomes}
-          sx={{ width: 200 }}
+          sx={{ width: 300 }}
           renderInput={(params) => (
             <TextField {...params} label="Diplômes" color="primary" />
           )}
@@ -32,7 +32,7 @@ function Filters() {
           disablePortal
           id="combo-box-demo"
           options={Years}
-          sx={{ width: 200 }}
+          sx={{ width: 300 }}
           renderInput={(params) => (
             <TextField {...params} label="Années" color="primary" />
           )}
@@ -43,7 +43,7 @@ function Filters() {
           id="filled-basic"
           label="Recherche par nom"
           variant="filled"
-          sx={{ width: 400 }}
+          sx={{ width: 600 }}
         />
       </div>
     </>
