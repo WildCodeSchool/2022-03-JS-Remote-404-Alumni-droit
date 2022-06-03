@@ -6,7 +6,6 @@ import SignUp from "@pages/SignUp";
 import Profile from "@pages/Profile";
 import RGPD from "@pages/RGPD";
 
-
 import "./App.css";
 
 function App() {
