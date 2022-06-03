@@ -9,10 +9,10 @@ const Diplomes = [
 ];
 
 const Years = [
-  { label: 1990 },
-  { label: 1991 },
-  { label: 1992 },
-  { label: 1993 },
+  { label: "1990" },
+  { label: "1991" },
+  { label: "1992" },
+  { label: "1993" },
 ];
 
 function Filters() {
