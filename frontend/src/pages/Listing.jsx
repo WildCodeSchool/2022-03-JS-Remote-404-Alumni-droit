@@ -1,7 +1,9 @@
 import React from "react";
+
 // import { useState, useEffect } from 'react';
 import Filters from "@components/Filters";
 import UserCard from "@components/UserCard";
+import Footer from "@components/Footer";
 
 function Listing() {
   // const [alumnis, setAlumnis] = useState([]);
@@ -22,7 +24,8 @@ function Listing() {
         <UserCard />
         <UserCard />
         <UserCard />
-      </div>
+       </div>
+       <Footer />
     </>
   );
 }
