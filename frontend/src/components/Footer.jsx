@@ -27,7 +27,7 @@ function Footer() {
             Suivez-nous sur les réseaux sociaux :
           </p>
         </div>
-        {/* cadre général / global links*/}
+        {/* cadre général / global links */}
         <div className="images flex flex-row space-x-5">
           {/* cadre général / images */}
           <div className="img-social-media w-10">

@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 
 import { createTheme, ThemeProvider } from "@mui/material";
-import { ThemeProvider } from "@mui/material";
 
 import App from "./App";
 
@@ -20,7 +19,7 @@ ReactDOM.render(
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <App />
-      <ThemeProvider>
+      </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
