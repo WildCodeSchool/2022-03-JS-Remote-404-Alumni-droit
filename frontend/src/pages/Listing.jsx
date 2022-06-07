@@ -24,8 +24,8 @@ function Listing() {
         <UserCard />
         <UserCard />
         <UserCard />
-       </div>
-       <Footer />
+      </div>
+      <Footer />
     </>
   );
 }
