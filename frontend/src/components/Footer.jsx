@@ -13,7 +13,7 @@ function Footer() {
       <div className="footer flex flex-col items-center">
         {" "}
         {/* cadre général */}
-        <div className="img-logo-officiel ml-20 sm:ml-52 mr-20 sm:mr-52">
+        <div className="img-logo-officiel flex-col lg:flex-row ml-20 sm:ml-52 mr-20 sm:mr-52">
           {" "}
           {/* logo officiel */}
           <img src={logoOfficiel} alt="officiel" />
