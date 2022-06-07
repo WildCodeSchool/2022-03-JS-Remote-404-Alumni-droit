@@ -1,9 +1,6 @@
 import React from "react";
-// import { useState, useEffect } from 'react';
 
-import UserCard from "@components/UserCard";
 import { TextField, Autocomplete } from "@mui/material";
-
 
 const Diplomes = [
   { label: "Diplôme du Collège de Droit" },
@@ -18,17 +15,7 @@ const Years = [
   { label: "1993" },
 ];
 
-
-
-function Listing() {
-  // const [alumnis, setAlumnis] = useState([]);
-
-  // useEffect(() => {
-  //   axios.get("")
-  //     .then(res => setAlumnis(res.data))
-  //     .catch(err => console.error(err))
-  // }, [])
-  
+function Filters() {
   return (
     <>
       <div className="flex justify-center m-3">
@@ -58,14 +45,6 @@ function Listing() {
           variant="filled"
           sx={{ width: 600 }}
         />
-      </div>
-      <div className="flex flex-wrap justify-center p-2">
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
       </div>
     </>
   );
