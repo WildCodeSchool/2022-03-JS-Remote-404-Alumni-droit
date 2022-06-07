@@ -1,11 +1,32 @@
 import React from "react";
-import Footer from "../components/Footer";
+
+// import { useState, useEffect } from 'react';
+import Filters from "@components/Filters";
+import UserCard from "@components/UserCard";
+import Footer from "@components/Footer";
 
 function Listing() {
+  // const [alumnis, setAlumnis] = useState([]);
+
+  // useEffect(() => {
+  //   axios.get("")
+  //     .then(res => setAlumnis(res.data))
+  //     .catch(err => console.error(err))
+  // }, [])
+
   return (
-    <div>
-      <Footer />
-    </div>
+    <>
+      <Filters />
+      <div className="flex flex-wrap justify-center p-2">
+        <UserCard />
+        <UserCard />
+        <UserCard />
+        <UserCard />
+        <UserCard />
+        <UserCard />
+       </div>
+       <Footer />
+    </>
   );
 }
 
