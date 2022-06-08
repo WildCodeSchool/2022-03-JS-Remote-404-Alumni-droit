@@ -1,16 +1,19 @@
 const express = require("express");
 
-const { ItemController } = require("./controllers");
+// const { ItemController } = require("./controllers");
 
 const router = express.Router();
 
 const pool = require("./models/index");
 
-router.get("/items", ItemController.browse);
-router.get("/items/:id", ItemController.read);
-router.put("/items/:id", ItemController.edit);
-router.post("/items", ItemController.add);
-router.delete("/items/:id", ItemController.delete);
+// router.get("/items", ItemController.browse);
+// router.get("/items/:id", ItemController.read);
+// router.put("/items/:id", ItemController.edit);
+// router.post("/items", ItemController.add);
+// router.delete("/items/:id", ItemController.delete);
+
+const andOrWhere = (sqlQueryToTest) =>
+  sqlQueryToTest.includes("WHERE") ? " AND" : " WHERE"; // penser à l'exporter et à l'importer
 
 router.get("/annuaire", (req, res) => {
   // good !
@@ -29,60 +32,30 @@ router.get("/annuaire/:id", (req, res) => {
 
 router.get("/test", (req, res) => {
   const { diplome, promo, job, nomPrenom } = req.query;
-  // const filtered = { diplome, promo, job, nomPrenom };
   let sqlQuery = "SELECT * FROM profile";
   const sqlValue = [];
-
-  const andOrWhere = (sqlQueryToTest) =>
-    sqlQueryToTest.includes("WHERE") ? " AND " : " WHERE ";
 
   // test des params
   // il faudra ajouter un test pour savoir si l'utilisateur est inscrit et validé, si oui 'full access' sinon 'WHERE is_private = 0'
 
   if (diplome) {
     andOrWhere(sqlQuery);
-    sqlQuery += " diplome = ?";
+    sqlQuery += `${andOrWhere(sqlQuery)} diplome = ?`;
     sqlValue.push(`${diplome}`);
   }
   if (promo) {
     andOrWhere(sqlQuery);
-    sqlQuery += " promo = ?";
+    sqlQuery += `${andOrWhere(sqlQuery)} promo = ?`;
     sqlValue.push(`${promo}`);
   }
   if (job) {
-    sqlQuery += `${andOrWhere(sqlQuery)}profession_id1 = ?`;
+    sqlQuery += `${andOrWhere(sqlQuery)} profession_id1 = ?`;
     sqlValue.push(`${job}`);
   }
   if (nomPrenom) {
-    sqlQuery += `${andOrWhere(sqlQuery)}firstname LIKE ? OR lastname LIKE ?`;
+    sqlQuery += `${andOrWhere(sqlQuery)} firstname LIKE ? OR lastname LIKE ?`;
     sqlValue.push(`%${nomPrenom}%`, `%${nomPrenom}%`);
   }
-  // switch (
-  //   nomPrenom // attention, seul nomPrenom est testé
-  // ) {
-  //   case diplome:
-  //     sqlQuery += " WHERE diplome LIKE ?";
-  //     sqlValue.push(`%${diplome}%`);
-  //     console.warn(`case diplome: ${sqlQuery}`);
-  //     break;
-  //   case promo:
-  //     andOrWhere(sqlQuery);
-  //     sqlQuery += " promo LIKE ?";
-  //     sqlValue.push(`%${promo}%`);
-  //     console.warn(`case promo: ${sqlQuery}`);
-  //   case job:
-  //     andOrWhere(sqlQuery);
-  //     sqlQuery += " job LIKE ?";
-  //     sqlValue.push(`%${job}%`);
-  //     console.warn(`case job: ${sqlQuery}`);
-  //   case nomPrenom:
-  //     sqlQuery += andOrWhere(sqlQuery) + `firstname LIKE ? OR lastname LIKE ?`;
-  //     sqlValue.push(`%${nomPrenom}%`, `%${nomPrenom}%`);
-  //     console.warn(`case nomPrenom: ${sqlQuery}`);
-  //   default:
-  //     console.warn("case: default");
-  //     break;
-  // }
 
   return pool
     .query(sqlQuery, sqlValue)
