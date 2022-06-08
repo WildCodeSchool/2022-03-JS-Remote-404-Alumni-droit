@@ -30,35 +30,32 @@ router.get("/annuaire/:id", (req, res) => {
 router.get("/test", (req, res) => {
   const { diplome, promo, job, nomPrenom } = req.query;
   // const filtered = { diplome, promo, job, nomPrenom };
-  let sqlQuery = "SELECT firstname, lastname FROM profile";
+  let sqlQuery = "SELECT * FROM profile";
   const sqlValue = [];
 
   const andOrWhere = (sqlQueryToTest) =>
     sqlQueryToTest.includes("WHERE") ? " AND " : " WHERE ";
 
   // test des params
+  // il faudra ajouter un test pour savoir si l'utilisateur est inscrit et validé, si oui 'full access' sinon 'WHERE is_private = 0'
+
   if (diplome) {
     andOrWhere(sqlQuery);
-    sqlQuery += " diplome LIKE ?";
-    sqlValue.push(`%${diplome}%`);
-    console.warn(`case diplome: ${sqlQuery}`);
+    sqlQuery += " diplome = ?";
+    sqlValue.push(`${diplome}`);
   }
   if (promo) {
     andOrWhere(sqlQuery);
-    sqlQuery += " promo LIKE ?";
-    sqlValue.push(`%${promo}%`);
-    console.warn(`case promo: ${sqlQuery}`);
+    sqlQuery += " promo = ?";
+    sqlValue.push(`${promo}`);
   }
   if (job) {
-    andOrWhere(sqlQuery);
-    sqlQuery += " job LIKE ?";
-    sqlValue.push(`%${job}%`);
-    console.warn(`case job: ${sqlQuery}`);
+    sqlQuery += `${andOrWhere(sqlQuery)}profession_id1 = ?`;
+    sqlValue.push(`${job}`);
   }
   if (nomPrenom) {
-    sqlQuery += `${andOrWhere(sqlQuery)} firstname LIKE ? OR lastname LIKE ?`;
+    sqlQuery += `${andOrWhere(sqlQuery)}firstname LIKE ? OR lastname LIKE ?`;
     sqlValue.push(`%${nomPrenom}%`, `%${nomPrenom}%`);
-    console.warn(`case nomPrenom: ${sqlQuery}`);
   }
   // switch (
   //   nomPrenom // attention, seul nomPrenom est testé
