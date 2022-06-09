@@ -42,17 +42,17 @@ router.get("/test", (req, res) => {
   if (job) {
     sqlQuery += ` INNER JOIN profession ON profession_id1 = profession.id`;
   }
-  if (diplome) {
+  if (diplome || promo) {
     sqlQuery += ` INNER JOIN profile_diplome ON profile_id = profile.user_id`;
     sqlQuery += ` INNER JOIN diplome ON diplome_id = diplome.id`;
   }
 
   if (diplome) {
-    sqlQuery += `${andOrWhere(sqlQuery)} diplome = ?`;
+    sqlQuery += `${andOrWhere(sqlQuery)} diplome.id = ?`;
     sqlValue.push(`${diplome}`);
   }
   if (promo) {
-    sqlQuery += `${andOrWhere(sqlQuery)} promo = ?`;
+    sqlQuery += `${andOrWhere(sqlQuery)} year = ?`;
     sqlValue.push(`${promo}`);
   }
   if (job) {
