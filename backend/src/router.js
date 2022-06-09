@@ -1,3 +1,4 @@
+const { LogError } = require("concurrently");
 const express = require("express");
 
 // const { ItemController } = require("./controllers");
@@ -16,21 +17,6 @@ const andOrWhere = (sqlQueryToTest) =>
   sqlQueryToTest.includes("WHERE") ? " AND" : " WHERE"; // penser à l'exporter et à l'importer
 
 router.get("/annuaire", (req, res) => {
-  // good !
-  pool
-    .query("SELECT * FROM profile")
-    .then((result) => res.status(201).send(result[0]));
-});
-
-router.get("/annuaire/:id", (req, res) => {
-  // good !
-  const { id } = req.params.id;
-  pool
-    .query("SELECT * FROM profile WHERE id = ?", [id])
-    .then((result) => res.status(201).send(result[0][0]));
-});
-
-router.get("/test", (req, res) => {
   const { diplome, promo, job, nomPrenom } = req.query;
 
   let sqlQuery = `SELECT * FROM profile`;
@@ -67,6 +53,12 @@ router.get("/test", (req, res) => {
   return pool
     .query(sqlQuery, sqlValue)
     .then((result) => res.status(200).send(result[0]));
+});
+
+router.get("/annuaire/:id", (req, res) => {
+  pool
+    .query("SELECT * FROM profile WHERE id = ?", [req.params.id])
+    .then((result) => res.status(200).send(result[0][0]));
 });
 
 module.exports = router;
