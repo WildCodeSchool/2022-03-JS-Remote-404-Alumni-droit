@@ -32,24 +32,31 @@ router.get("/annuaire/:id", (req, res) => {
 
 router.get("/test", (req, res) => {
   const { diplome, promo, job, nomPrenom } = req.query;
-  let sqlQuery = "SELECT * FROM profile";
+
+  let sqlQuery = `SELECT * FROM profile`;
   const sqlValue = [];
 
   // test des params
   // il faudra ajouter un test pour savoir si l'utilisateur est inscrit et validé, si oui 'full access' sinon 'WHERE is_private = 0'
 
+  if (job) {
+    sqlQuery += ` INNER JOIN profession ON profession_id1 = profession.id`;
+  }
   if (diplome) {
-    andOrWhere(sqlQuery);
+    sqlQuery += ` INNER JOIN profile_diplome ON profile_id = profile.user_id`;
+    sqlQuery += ` INNER JOIN diplome ON diplome_id = diplome.id`;
+  }
+
+  if (diplome) {
     sqlQuery += `${andOrWhere(sqlQuery)} diplome = ?`;
     sqlValue.push(`${diplome}`);
   }
   if (promo) {
-    andOrWhere(sqlQuery);
     sqlQuery += `${andOrWhere(sqlQuery)} promo = ?`;
     sqlValue.push(`${promo}`);
   }
   if (job) {
-    sqlQuery += `${andOrWhere(sqlQuery)} profession_id1 = ?`;
+    sqlQuery += ` ${andOrWhere(sqlQuery)} profession_id1 = ?`;
     sqlValue.push(`${job}`);
   }
   if (nomPrenom) {
