@@ -97,7 +97,7 @@ function Profile() {
               Diplômes obtenus :
             </h2>
             <p className="font-semibold">
-              Diplôme :
+              Diplôme :{" "}
               <span className="font-normal ml-1">
                 2019 - Diplôme du Collège de Droit
               </span>
@@ -118,7 +118,6 @@ function Profile() {
                 <span className="font-normal ml-1">
                   2011 - Droit pénal et sciences pénales
                   <span className="italic">
-                    {" "}
                     Université Paris Panthéon-Assas
                   </span>
                 </span>
@@ -133,17 +132,12 @@ function Profile() {
             <p className="font-semibold">
               Employeur :
               <span className="font-normal">
-                {" "}
                 Tribunal de Grande Instance Paris
               </span>
             </p>
             <p className="font-semibold">
               Poste actuel :<span className="font-normal"> Juriste</span>
             </p>
-            {/* <p className="font-semibold">
-              Email :
-              <span className="font-normal"> mariefrancoise.cd@tdgi-paris.fr</span>
-            </p> */}
             <p className="font-semibold mt-3 xl:mb-10">
               Consulter CV :<span className="font-normal"> Cliquez-ici</span>
             </p>
