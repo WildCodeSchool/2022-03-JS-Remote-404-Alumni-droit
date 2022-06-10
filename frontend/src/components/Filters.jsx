@@ -2,39 +2,63 @@ import React from "react";
 
 import { TextField, Autocomplete } from "@mui/material";
 
-const Diplomes = [
+const Diplome = [
   { label: "Diplôme du Collège de Droit" },
   { label: "Certificat de l'École de Droit" },
   { label: "Diplôme de l'École de Droit" },
 ];
 
-const Years = [
+const Année = [
   { label: "1990" },
   { label: "1991" },
   { label: "1992" },
   { label: "1993" },
 ];
 
+const Profession = [
+  { label: "Administrateur judiciaire" },
+  { label: "Avocat" },
+  { label: "Avocat au Conseil d'Etat et à la Cour de cassation" },
+  { label: "Commissaire de justice" },
+  { label: "Etudiant" },
+  { label: "Juriste d’entreprise" },
+  { label: "Magistrat" },
+  { label: "Notaire" },
+  { label: "Officier" },
+  { label: "Universitaire" },
+  { label: "Autres professions juridiques" },
+  { label: "Autres professions" },
+];
+
 function Filters() {
   return (
     <>
-      <div className="flex justify-center m-3">
+      <div className="flex justify-center m-3 sm:flex flex-col items-center space-y-2">
         <Autocomplete
           disablePortal
           id="combo-box-demo"
-          options={Diplomes}
+          options={Diplome}
           sx={{ width: 300 }}
           renderInput={(params) => (
-            <TextField {...params} label="Diplômes" color="primary" />
+            <TextField {...params} label="Diplôme" color="primary" />
           )}
         />
         <Autocomplete
           disablePortal
           id="combo-box-demo"
-          options={Years}
+          options={Profession}
           sx={{ width: 300 }}
           renderInput={(params) => (
-            <TextField {...params} label="Années" color="primary" />
+            <TextField {...params} label="Profession" color="primary" />
+          )}
+        />
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={Année}
+          sx={{ width: 300 }}
+          renderInput={(params) => (
+            <TextField {...params} label="Année" color="primary" />
           )}
         />
       </div>
