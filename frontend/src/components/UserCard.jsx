@@ -1,21 +1,18 @@
 import React from "react";
 
-import PortraitAlumni from "../assets/alumni-girl.jpg";
-
-function UserCard() {
+function UserCard(props) {
+  const { lastname, firstname, photo, job } = props;
   return (
     <div className="w-[45%] md:w-[30%] lg:w-[23%] flex flex-col flex-wrap rounded-lg shadow-md m-2 p-3 border-2 h-auto">
       <div>
-        <img src={PortraitAlumni} alt="alumni girl" />
+        <img src={photo} alt="alumni girl" />
       </div>
       <div className="flex justify-center flex-col text-center bg-red-800 text-slate-50 p-2 xl:p-4 leading-4">
-        <p className="text-1xl lg:text-1xl xl:text-2xl">Marie-Françoise</p>
-        <p className="font-bold text-xl lg:text-2xl xl:text-4xl">
-          Clara Dupont
-        </p>
+        <p className="text-1xl lg:text-1xl xl:text-2xl">{firstname}</p>
+        <p className="font-bold text-xl lg:text-2xl xl:text-4xl">{lastname}</p>
       </div>
       <div className="flex flex-col justify-center w-full h-auto text-xs md:text-sm pt-2 leading-snug">
-        <p className="">Universitaire</p>
+        <p className="">{job}</p>
         <p className="">Collège de droit 2018</p>
         <p className="">Ecole de droit 2020</p>
       </div>

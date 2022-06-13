@@ -1,29 +1,32 @@
-import React from "react";
-
-// import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import Filters from "@components/Filters";
 import UserCard from "@components/UserCard";
 import Footer from "@components/Footer";
 
-function Listing() {
-  // const [alumnis, setAlumnis] = useState([]);
+import axios from "axios";
 
-  // useEffect(() => {
-  //   axios.get("")
-  //     .then(res => setAlumnis(res.data))
-  //     .catch(err => console.error(err))
-  // }, [])
+function Listing() {
+  const [rows, setRows] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/annuaire")
+      .then((res) => setRows(res.data))
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
     <>
       <Filters />
       <div className="flex flex-wrap justify-center p-2">
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
+        {rows.map((row) => (
+          <UserCard
+            lastname={row.lastname}
+            firstname={row.firstname}
+            photo={row.photo}
+            job={row.profession_id1}
+          />
+        ))}
       </div>
       <Footer />
     </>
