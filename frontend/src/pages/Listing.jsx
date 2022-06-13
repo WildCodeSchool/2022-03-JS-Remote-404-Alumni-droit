@@ -8,14 +8,35 @@ import Footer from "@components/Footer";
 
 function Listing() {
   // const [alumnis, setAlumnis] = useState([]);
+  // const [filters, setFilters] = useState();
+
+  // const getAlumnis = () => {
+  //   axios
+  //     .get("")
+  //     .then((res) => {
+  //       setAlumnis(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // };
+
+  // const getFilters = () => {
+  //   axios
+  //     .get("")
+  //     .then((res) => {
+  //       setFilters(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // };
 
   // useEffect(() => {
-  //   axios.get("")
-  //     .then(res => setAlumnis(res.data))
-  //     .catch(err => console.error(err))
-  // }, [])
+  //   getAlumnis();
+  //   getFilters();
+  // }, []);
 
-  // const [filters, setFilters] = useState();
   return (
     <>
       <Filters />
