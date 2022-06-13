@@ -40,7 +40,7 @@ function Listing() {
   return (
     <>
       <Filters />
-      {/* filters={filters} onChange={() => setFilters}  */}
+      {/* filters={filters} onChange={() => setFilters()}  */}
       <div className="flex flex-wrap justify-center p-2">
         <UserCard />
         <UserCard />

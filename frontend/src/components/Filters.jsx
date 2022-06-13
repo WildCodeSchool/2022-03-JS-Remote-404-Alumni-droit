@@ -30,15 +30,23 @@ const Profession = [
   { label: "Autres professions" },
 ];
 
+// ["640px", "768px", "1024px"];
+// ["40em", "52em", "64em"],
 function Filters() {
   return (
     <>
-      <div className="flex flex-col items-center space-y-2 m-3 md:flex-row justify-center space-x-2">
+      <div className="flex flex-col items-center mt-10 md:flex-row justify-center">
         <Autocomplete
           disablePortal
           id="combo-box-demo"
           options={Diplome}
-          sx={{ width: 300, mt: 1 }}
+          sx={{
+            width: 300,
+            mb: 1,
+            "@media screen and (min-width: 52em)": {
+              mr: 1,
+            },
+          }}
           // label={filters.diplome}
           renderInput={(params) => (
             <TextField {...params} label="Diplôme" color="primary" />
@@ -48,7 +56,13 @@ function Filters() {
           disablePortal
           id="combo-box-demo"
           options={Profession}
-          sx={{ width: 300 }}
+          sx={{
+            width: 300,
+            mb: 1,
+            "@media screen and (min-width: 52em)": {
+              mr: 1,
+            },
+          }}
           // label={filters.profession}
           renderInput={(params) => (
             <TextField {...params} label="Profession" color="primary" />
@@ -58,19 +72,30 @@ function Filters() {
           disablePortal
           id="combo-box-demo"
           options={Année}
-          sx={{ width: 300 }}
+          sx={{
+            width: 300,
+            mb: 1,
+            "@media screen and (min-width: 52em)": {
+              mr: 1,
+            },
+          }}
           // label={filters.annee}
           renderInput={(params) => (
             <TextField {...params} label="Année" color="primary" />
           )}
         />
       </div>
-      <div className="flex justify-center m-3">
+      <div className="flex justify-center m-2">
         <TextField
           id="filled-basic"
           label="Recherche par nom"
           variant="filled"
-          sx={{ width: 300 }}
+          sx={{
+            width: 300,
+            "@media screen and (min-width: 52em)": {
+              width: 500,
+            },
+          }}
         />
       </div>
     </>
