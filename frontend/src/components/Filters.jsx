@@ -47,7 +47,8 @@ function Filters() {
               mr: 1,
             },
           }}
-          // label={filters.diplome}
+          // value={filters.diplome}
+          // onChange={handleChange}
           renderInput={(params) => (
             <TextField {...params} label="Diplôme" color="primary" />
           )}
@@ -63,7 +64,8 @@ function Filters() {
               mr: 1,
             },
           }}
-          // label={filters.profession}
+          // value={filters.profession}
+          // onChange={handleChange}
           renderInput={(params) => (
             <TextField {...params} label="Profession" color="primary" />
           )}
@@ -79,9 +81,15 @@ function Filters() {
               mr: 1,
             },
           }}
-          // label={filters.annee}
+          // value={filters.annees}
+          // onChange={handleChange}
           renderInput={(params) => (
-            <TextField {...params} label="Année" color="primary" />
+            <TextField
+              type="number"
+              {...params}
+              label="Année"
+              color="primary"
+            />
           )}
         />
       </div>
@@ -93,9 +101,11 @@ function Filters() {
           sx={{
             width: 300,
             "@media screen and (min-width: 52em)": {
-              width: 500,
+              width: 400,
             },
           }}
+          // value={filters.name}
+          // onChange={handleChange}
         />
       </div>
     </>
