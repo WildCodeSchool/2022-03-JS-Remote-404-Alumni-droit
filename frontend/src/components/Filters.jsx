@@ -33,12 +33,12 @@ const Profession = [
 function Filters() {
   return (
     <>
-      <div className="flex justify-center m-3 sm:flex flex-col items-center space-y-2">
+      <div className="flex flex-col items-center space-y-2 m-3  md:flex-row justify-center">
         <Autocomplete
           disablePortal
           id="combo-box-demo"
           options={Diplome}
-          sx={{ width: 300 }}
+          sx={{ width: 300, mt: 1 }}
           renderInput={(params) => (
             <TextField {...params} label="Diplôme" color="primary" />
           )}
@@ -67,7 +67,7 @@ function Filters() {
           id="filled-basic"
           label="Recherche par nom"
           variant="filled"
-          sx={{ width: 600 }}
+          sx={{ width: 300 }}
         />
       </div>
     </>
