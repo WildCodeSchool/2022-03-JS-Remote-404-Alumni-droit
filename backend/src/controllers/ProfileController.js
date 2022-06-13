@@ -1,3 +1,4 @@
+// const { LogError } = require("concurrently");
 const models = require("../models");
 
 class ProfileController {
@@ -6,6 +7,7 @@ class ProfileController {
       .findAll(req.query)
       .then(([rows]) => {
         res.status(200).json(rows);
+        // ici
       })
       .catch((err) => {
         console.error(err);
