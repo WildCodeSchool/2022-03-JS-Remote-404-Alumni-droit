@@ -60,7 +60,7 @@ function Profile() {
           <img
             src={PortraitAlumni}
             alt="alumni girl"
-            className="relative md:absolute md:flex md:justify-start z-10 w-[30%] md:w-[15%] lg:w-[13%] xl:w-[10%] mt-2 mx-auto top-3 md:top-[5rem] lg:top-[4rem] md:left-20 lg:left-[8rem] xl:left-60 md:mt-5 rounded-full"
+            className="relative md:absolute md:flex md:justify-start z-10 w-[30%] md:w-[15%] lg:w-[13%] xl:w-[10%] mt-2 mx-auto top-2 md:top-[5rem] lg:top-[4rem] md:left-20 lg:left-[8rem] xl:left-60 md:mt-5 rounded-full"
           />
           <div className="flex justify-center items-center md:relative md:text-start bg-red-800 text-slate-50 h-[3rem] md:h-[3rem] w-full md:w-[100%] md:rounded-t-md">
             <p className="text-xl mr-2 md:pl-[8rem] lg:text-1xl xl:text-2xl">
@@ -74,13 +74,30 @@ function Profile() {
 
         {/* INFORMATIONS */}
 
-        <div className="flex flex-col md:flex-row justify-center md:justify-around w-[90%] md:w-[95%] h-auto text-base md:text-sm pt-4 md:pt-0 mx-auto md:mt-10 xl:mt-[4rem] leading-snug">
+        <div className="flex flex-col md:flex-row justify-center md:justify-around w-[90%] md:w-[95%] h-auto text-base md:text-sm pt-4 md:pt-0 mx-auto md:mt-10 xl:mt-[4rem] xl:mb-[2rem] leading-snug">
           {/* COLONNE 1 */}
           <div className="md:w-[45%]">
-            <h2 className="mb-1 text-2xl font-bold text-red-800">
+            {/* PROFESSION ACTUELLE */}
+            <h2 className="mt-0 mb-1 text-2xl font-bold my-5 text-red-800">
+              Profession actuelle :
+            </h2>
+            <p className="font-semibold">
+              Employeur :
+              <span className="font-normal">
+                Tribunal de Grande Instance Paris
+              </span>
+            </p>
+            <p className="font-semibold">
+              Poste actuel :<span className="font-normal"> Juriste</span>
+            </p>
+            <p className="font-semibold mt-2">
+              Consulter CV :<span className="font-normal"> Cliquez-ici</span>
+            </p>
+
+            {/* COORDONNEES */}
+            <h2 className="mt-3 mb-1 text-2xl font-bold text-red-800">
               Coordonnées :
             </h2>
-
             <p className="font-semibold">
               Email :{" "}
               <span className="font-normal">
@@ -92,8 +109,7 @@ function Profile() {
             </p>
 
             {/* DIPLOMES OBTENUS */}
-
-            <h2 className="mb-1 text-2xl font-bold text-red-800">
+            <h2 className="mt-3 mb-1 text-2xl font-bold text-red-800">
               Diplômes obtenus :
             </h2>
             <p className="font-semibold">
@@ -117,29 +133,11 @@ function Profile() {
                 Master 2 :
                 <span className="font-normal ml-1">
                   2011 - Droit pénal et sciences pénales
-                  <span className="italic">
+                  <span className="italic ml-1">
                     Université Paris Panthéon-Assas
                   </span>
                 </span>
               </p>
-            </p>
-
-            {/* PROFESSION ACTUELLE */}
-
-            <h2 className="mb-1 text-2xl font-bold my-5 text-red-800">
-              Profession actuelle :
-            </h2>
-            <p className="font-semibold">
-              Employeur :
-              <span className="font-normal">
-                Tribunal de Grande Instance Paris
-              </span>
-            </p>
-            <p className="font-semibold">
-              Poste actuel :<span className="font-normal"> Juriste</span>
-            </p>
-            <p className="font-semibold mt-3 xl:mb-10">
-              Consulter CV :<span className="font-normal"> Cliquez-ici</span>
             </p>
           </div>
 
