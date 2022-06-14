@@ -23,43 +23,6 @@ class ProfileController {
     } catch {
       res.status(500).send("erreur");
     }
-    //   // ici
-    // promise all
-    // find by id
-    // rows.forEach(row =>{ model.diplome.find(row.id) })
-
-    // passer en async await, déclarer le profile controller en async
-
-    // try {
-    //   const objets = await db.query("SELECT * FROM objets WHERE id_pages = ?", [
-    //     id,
-    //   ]);
-    //   const objetsDetail = [];
-    //   for (let i = 0; i < objets[0].length; i++) {
-    //     const detailsProvisoire = await db.query(
-    //       "SELECT * FROM profession WHERE id_objets = ?",
-    //       [objets[0][i].id_objets]
-    //     );
-    //     const objetsProvisoire = {
-    //       component: "objets",
-    //       data: {
-    //         ...objets[0][i],
-    //         details: detailsProvisoire[0],
-    //       },
-    //     };
-    //     objetsDetail.push(objetsProvisoire);
-    //   }
-    //   return objetsDetail;
-    // } catch (error) {
-    //   console.error(error);
-    // }
-
-    //
-    // })
-    // .catch((err) => {
-    //   console.error(err);
-    //   res.sendStatus(500);
-    // });
   };
 
   static read = (req, res) => {
