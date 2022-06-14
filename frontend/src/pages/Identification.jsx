@@ -1,7 +1,7 @@
 import React from "react";
 import Footer from "../components/Footer";
 
-function SignUp() {
+function Identification() {
   return (
     <>
       <div className="flex flex-col justify-center mb-10 md:m-20 lg:m-20 xl:m-20 lg:w-[50%] mx-auto text-center space-y-4 rounded-md shadow-md border-2 bg-zinc-100 m-3 mt-[2.5rem] p-3">
@@ -28,11 +28,12 @@ function SignUp() {
           type="button"
           className="m-14 md:m-10 lg:m-14 xl:m-14 text-center mx-auto text-red-700 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm lg:text-base xl:text-lg mt-5 px-5 py-2.5 inline-flex items-center dark:bg-gray-200 dark:hover:bg-gray-200 dark:focus:ring-gray-200"
         >
-          <p>Créer votre compte</p>
+          <p>Creer votre compte</p>
         </button>
       </div>
       <Footer />
     </>
   );
 }
-export default SignUp;
+
+export default Identification;
