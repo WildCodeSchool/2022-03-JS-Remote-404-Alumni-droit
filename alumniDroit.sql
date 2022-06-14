@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `alumni_droits`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `password` VARCHAR(255) NOT NULL,
   `email` VARCHAR(80) NOT NULL,
-  `role` VARCHAR(5) NOT NULL DEFAULT 'user' COMMENT 'User, admin',
+  `role` VARCHAR(5) NOT NULL DEFAULT 'user',
   `is_valid` TINYINT NULL DEFAULT 0,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
   PRIMARY KEY (`id`),
@@ -41,7 +41,7 @@ DROP TABLE IF EXISTS `alumni_droits`.`profession` ;
 
 CREATE TABLE IF NOT EXISTS `alumni_droits`.`profession` (
   `id` INT NOT NULL,
-  `job` VARCHAR(100) NULL COMMENT 'Liste fermée fournie par le client',
+  `job` VARCHAR(100) NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `job_UNIQUE` (`job` ASC) VISIBLE)
 ENGINE = InnoDB;
@@ -75,8 +75,8 @@ CREATE TABLE IF NOT EXISTS `alumni_droits`.`profile` (
   `emailpro` VARCHAR(80) NULL,
   `cv` VARCHAR(255) NULL,
   `profession_id1` INT NOT NULL,
-  `employeur` VARCHAR(255) NULL COMMENT 'Employeur actuel',
-  `poste` VARCHAR(255) NULL COMMENT '\'intitulé du poste actuel\'',
+  `employeur` VARCHAR(255) NULL,
+  `poste` VARCHAR(255) NULL,
   `bio` TEXT NULL,
   `siteweb` VARCHAR(255) NULL,
   `facebook` VARCHAR(100) NULL,
@@ -184,7 +184,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `alumni_droits`;
-INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (100, 'password', 'email@verif.com', 'admin', true);
+INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (0, 'password', 'email@verif.com', 'admin', true);
 INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (1, 'modgftdepasse', 'email2@verif.com', 'user', true);
 INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (2, 'motdepagdsse', 'emai2@verif.com', 'user', true);
 INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (3, 'modfgtdepasse', 'emil2@verif.com', 'user', true);
