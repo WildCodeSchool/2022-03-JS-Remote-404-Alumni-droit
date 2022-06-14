@@ -1,16 +1,60 @@
+// const { LogError } = require("concurrently");
 const models = require("../models");
 
 class ProfileController {
-  static browse = (req, res) => {
-    models.profile
-      .findAll(req.query)
-      .then(([rows]) => {
-        res.status(200).json(rows);
-      })
-      .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-      });
+  static browse = async (req, res) => {
+    try {
+      const profiles = await models.profile.findAll(req.query);
+      if (profiles[0]) {
+        for (let i = 0; i < profiles.length; i += 1) {
+          const diplomes = await models.diplome.find(profiles[i].id);
+          const diplo = diplomes[0];
+          profiles[i].diplome = diplo;
+        }
+        res.status(200).json(profiles);
+      } else {
+        // tableau vide, pas de profil
+      }
+    } catch {
+      res.status(500).send("erreur");
+    }
+    //   // ici
+    // promise all
+    // find by id
+    // rows.forEach(row =>{ model.diplome.find(row.id) })
+
+    // passer en async await, déclarer le profile controller en async
+
+    // try {
+    //   const objets = await db.query("SELECT * FROM objets WHERE id_pages = ?", [
+    //     id,
+    //   ]);
+    //   const objetsDetail = [];
+    //   for (let i = 0; i < objets[0].length; i++) {
+    //     const detailsProvisoire = await db.query(
+    //       "SELECT * FROM profession WHERE id_objets = ?",
+    //       [objets[0][i].id_objets]
+    //     );
+    //     const objetsProvisoire = {
+    //       component: "objets",
+    //       data: {
+    //         ...objets[0][i],
+    //         details: detailsProvisoire[0],
+    //       },
+    //     };
+    //     objetsDetail.push(objetsProvisoire);
+    //   }
+    //   return objetsDetail;
+    // } catch (error) {
+    //   console.error(error);
+    // }
+
+    //
+    // })
+    // .catch((err) => {
+    //   console.error(err);
+    //   res.sendStatus(500);
+    // });
   };
 
   static read = (req, res) => {
