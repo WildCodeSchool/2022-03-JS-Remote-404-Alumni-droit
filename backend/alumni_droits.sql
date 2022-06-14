@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `alumni_droits`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `password` VARCHAR(255) NOT NULL,
   `email` VARCHAR(80) NOT NULL,
-  `role` VARCHAR(5) NOT NULL DEFAULT 'user' COMMENT 'User, admin',
+  `role` VARCHAR(5) NOT NULL DEFAULT 'user',
   `is_valid` TINYINT NULL DEFAULT 0,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
   PRIMARY KEY (`id`),
@@ -41,7 +41,7 @@ DROP TABLE IF EXISTS `alumni_droits`.`profession` ;
 
 CREATE TABLE IF NOT EXISTS `alumni_droits`.`profession` (
   `id` INT NOT NULL,
-  `job` VARCHAR(100) NULL COMMENT 'Liste fermée fournie par le client',
+  `job` VARCHAR(100) NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `job_UNIQUE` (`job` ASC) VISIBLE)
 ENGINE = InnoDB;
@@ -240,7 +240,7 @@ INSERT INTO `alumni_droits`.`profile` ( `user_id`, `lastname`, `firstname`, `cre
 INSERT INTO `alumni_droits`.`profile` ( `user_id`, `lastname`, `firstname`, `creation_date`, `phone`, `emailpro`, `cv`, `profession_id1`, `employeur`, `poste`, `bio`, `siteweb`, `facebook`, `linkedin`, `twitter`, `instagram`, `photo`, `is_private`) VALUES (3, 'PARMENTIER', 'Sarah', '2022-05-31', '', 'sarah@alumni.com', 'http://dummyimage.com/177x100.png/ff4444/ffffff', 5, 'CNEN, DGCL, Ministère de l’Intérieur', 'Stagiaire', 'Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.', 'https://phpbb.com/nulla/tempus/vivamus/in/felis/eu.xml', 'http://t-online.de/turpis/nec.html', 'https://paginegialle.it/cum/sociis/natoque/penatibus/et/magnis.jpg', 'https://g.co/dui/maecenas.png', 'http://zdnet.com/morbi.html', '../src/assets/femme2.jpg', true);
 INSERT INTO `alumni_droits`.`profile` ( `user_id`, `lastname`, `firstname`, `creation_date`, `phone`, `emailpro`, `cv`, `profession_id1`, `employeur`, `poste`, `bio`, `siteweb`, `facebook`, `linkedin`, `twitter`, `instagram`, `photo`, `is_private`) VALUES (4, 'PETRILLO', 'Réan', '2022-05-31', '', 'rean@alumni.com', 'http://dummyimage.com/153x100.png/ff4444/ffffff', 8, 'ENM', 'Auditrice de Justice', 'Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lore(igula. Suspendisse ornare consequat lectus.', 'http://rediff.com/nunc/viverra/dapibus.xml', 'http://sfgate.com/hac/habitasse/platea/dictumst/aliquam.aspx', 'http://oaic.gov.au/justo/aliquam.js', 'https://parallels.com/interdum/mauris.aspx', 'https://wufoo.com/vestibulum/quam/sapien/varius.jsp', '../src/assets/femme1.jpg', false);
 INSERT INTO `alumni_droits`.`profile` ( `user_id`, `lastname`, `firstname`, `creation_date`, `phone`, `emailpro`, `cv`, `profession_id1`, `employeur`, `poste`, `bio`, `siteweb`, `facebook`, `linkedin`, `twitter`, `instagram`, `photo`, `is_private`) VALUES (5, 'PEROT', 'Pierre', '2022-05-31', '', 'pierre@alumni.com', 'http://dummyimage.com/237x100.png/dddddd/000000', 2, 'Cabinet Hoyng Rokh Monégier', 'Collaborateur', 'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.', 'null', 'https://elpais.com/convallis/duis/consequat/dui/nec/nisi.jpg', 'https://yellowpages.com/scelerisque.json', 'http://earthlink.net/vestibulum/ante/ipsum.js', 'http://4shared.com/pede/libero/quis.jpg', '../src/assets/homme3.jpg', true);
-INSERT INTO `alumni_droits`.`profile` ( `user_id`, `lastname`, `firstname`, `creation_date`, `phone`, `emailpro`, `cv`, `profession_id1`, `employeur`, `poste`, `bio`, `siteweb`, `facebook`, `linkedin`, `twitter`, `instagram`, `photo`, `is_private`) VALUES (6, 'CHARRiÈRE', 'Mathilde', '2022-05-31', '', 'mathilde@alumni.com', 'http://dummyimage.com/148x100.png/5fa2dd/ffffff',11, 'Université Paris Panthéon-Assas', 'Doctorante contractuelle', 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla.', 'http://google.es/pede.xml', 'https://clickbank.net/sem/sed/sagittis.js', 'http://sakura.ne.jp/molestie/hendrerit/at.png', 'http://google.ca/convallis/tortor/risus.jpg', 'https://foxnews.com/dui/proin/leo/odio.html', '../src/assets/femme3.jpg', false);
+INSERT INTO `alumni_droits`.`profile` ( `user_id`, `lastname`, `firstname`, `creation_date`, `phone`, `emailpro`, `cv`, `profession_id1`, `employeur`, `poste`, `bio`, `siteweb`, `facebook`, `linkedin`, `twitter`, `instagram`, `photo`, `is_private`) VALUES (6, 'CHARRIÈRE', 'Mathilde', '2022-05-31', '', 'mathilde@alumni.com', 'http://dummyimage.com/148x100.png/5fa2dd/ffffff',11, 'Université Paris Panthéon-Assas', 'Doctorante contractuelle', 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla.', 'http://google.es/pede.xml', 'https://clickbank.net/sem/sed/sagittis.js', 'http://sakura.ne.jp/molestie/hendrerit/at.png', 'http://google.ca/convallis/tortor/risus.jpg', 'https://foxnews.com/dui/proin/leo/odio.html', '../src/assets/femme3.jpg', false);
 COMMIT;
 
 -- -----------------------------------------------------
