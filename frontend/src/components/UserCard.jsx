@@ -9,7 +9,7 @@ function UserCard(props) {
       </div>
       <div className="flex justify-center flex-col text-center bg-red-800 text-slate-50 p-2 xl:p-4 leading-4">
         <p className="text-1xl lg:text-1xl xl:text-2xl">{firstname}</p>
-        <p className="font-bold text-xl lg:text-2xl xl:text-4xl">{lastname}</p>
+        <p className="font-bold text-xl lg:text-2xl xl:text-2xl">{lastname}</p>
       </div>
       <div className="flex flex-col justify-center w-full h-auto text-xs md:text-sm pt-2 leading-snug">
         <p className="">{job}</p>
