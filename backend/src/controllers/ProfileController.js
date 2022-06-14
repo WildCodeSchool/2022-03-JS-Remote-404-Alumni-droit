@@ -7,8 +7,12 @@ class ProfileController {
       const profiles = await models.profile.findAll(req.query);
       if (profiles[0]) {
         for (let i = 0; i < profiles.length; i += 1) {
+          // const diplomes = await models.diplome.find(profiles[i].id);
+          // const diplo = diplomes[0];
+          // profiles[i].diplome = diplo;
           const diplomes = await models.diplome.find(profiles[i].id);
-          profiles[i].diplome = diplomes[0];
+          const diplo = diplomes[0];
+          profiles[i].diplome = diplo;
         }
         res.status(200).json(profiles);
       } else {
