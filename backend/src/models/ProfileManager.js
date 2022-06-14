@@ -13,7 +13,7 @@ class ProfileManager extends AbstractManager {
     const sqlValue = [];
 
     if (job) {
-      sqlQuery += ` INNER JOIN profession ON profession_id1 = profession.id`;
+      sqlQuery += ` INNER JOIN profession ON profession_id = profession.id`;
     }
     if (diplome || promo) {
       sqlQuery += ` INNER JOIN profile_diplome ON profile_id = profile.user_id`;
@@ -29,7 +29,7 @@ class ProfileManager extends AbstractManager {
       sqlValue.push(`${promo}`);
     }
     if (job) {
-      sqlQuery += ` ${this.andOrWhere(sqlQuery)} profession_id1 = ?`;
+      sqlQuery += ` ${this.andOrWhere(sqlQuery)} profession_id = ?`;
       sqlValue.push(`${job}`);
     }
     if (nomPrenom) {
@@ -41,19 +41,19 @@ class ProfileManager extends AbstractManager {
     return this.connection.query(sqlQuery, sqlValue).then((res) => res[0]);
   }
 
-  insert(item) {
-    return this.connection.query(
-      `insert into ${ProfileManager.table} (title) values (?)`,
-      [item.title]
-    );
-  }
+  // insert(item) {
+  //   return this.connection.query(
+  //     `insert into ${ProfileManager.table} (title) values (?)`,
+  //     [item.title]
+  //   );
+  // }
 
-  update(item) {
-    return this.connection.query(
-      `update ${ProfileManager.table} set title = ? where id = ?`,
-      [item.title, item.id]
-    );
-  }
+  // update(item) {
+  //   return this.connection.query(
+  //     `update ${ProfileManager.table} set title = ? where id = ?`,
+  //     [item.title, item.id]
+  //   );
+  // }
 }
 
 module.exports = ProfileManager;

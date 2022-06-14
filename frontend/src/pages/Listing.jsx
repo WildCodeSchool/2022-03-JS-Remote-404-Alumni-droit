@@ -11,8 +11,8 @@ function Listing() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/annuaire`)
-      // .get(`http://localhost:5000/annuaire`)
+      // .get(`${import.meta.env.VITE_BACKEND_URL}/annuaire`)
+      .get(`http://localhost:5000/annuaire`)
       .then((res) => setRows(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -46,6 +46,7 @@ function Listing() {
             firstname={row.firstname}
             photo={row.photo}
             job={row.profession_id1}
+            key={row.user_id}
           />
         ))}
       </div>

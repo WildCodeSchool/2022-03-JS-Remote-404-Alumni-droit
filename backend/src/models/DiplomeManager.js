@@ -5,7 +5,9 @@ class ProfileManager extends AbstractManager {
 
   find(id) {
     return this.connection.query(
-      `select year, title from profile_diplome as PD INNER JOIN ${this.table} as TT ON PD.diplome_id = TT.id WHERE PD.profile_id = ?`,
+      `select year, title from profile_diplome as PD
+      INNER JOIN ${this.table} as TT
+      ON PD.diplome_id = TT.id WHERE PD.profile_id = ?`,
       [id]
     );
   }

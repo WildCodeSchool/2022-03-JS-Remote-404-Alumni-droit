@@ -6,12 +6,17 @@ class ProfileController {
     try {
       const profiles = await models.profile.findAll(req.query);
       if (profiles[0]) {
-        for (let i = 0; i < profiles.length; i += 1) {
-          const diplomes = await models.diplome.find(profiles[i].id);
-          const diplo = diplomes[0];
-          profiles[i].diplome = diplo;
-        }
-        res.status(200).json(profiles);
+        const diplomesArray = await Promise.all(
+          profiles.map((prof) => {
+            return models.diplome.find(prof.id);
+          })
+        );
+        const result = profiles.map((prof, index) => ({
+          ...prof,
+          diplomes: diplomesArray[index][0],
+        }));
+
+        res.status(200).json(result);
       } else {
         // tableau vide, pas de profil
       }
