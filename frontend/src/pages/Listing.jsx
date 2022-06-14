@@ -7,19 +7,7 @@ import UserCard from "@components/UserCard";
 import Footer from "@components/Footer";
 
 function Listing() {
-  // const [alumnis, setAlumnis] = useState([]);
   // const [filters, setFilters] = useState();
-
-  // const getAlumnis = () => {
-  //   axios
-  //     .get("")
-  //     .then((res) => {
-  //       setAlumnis(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // };
 
   // const getFilters = () => {
   //   axios

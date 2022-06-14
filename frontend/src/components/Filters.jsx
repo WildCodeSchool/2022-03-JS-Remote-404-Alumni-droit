@@ -1,5 +1,4 @@
-import React from "react";
-
+import { React } from "react";
 import { TextField, Autocomplete } from "@mui/material";
 
 const Diplome = [
@@ -30,8 +29,6 @@ const Profession = [
   { label: "Autres professions" },
 ];
 
-// ["640px", "768px", "1024px"];
-// ["40em", "52em", "64em"],
 function Filters() {
   return (
     <>
@@ -43,7 +40,7 @@ function Filters() {
           sx={{
             width: 300,
             mb: 1,
-            "@media screen and (min-width: 52em)": {
+            "@media screen and (min-width: 48em)": {
               mr: 1,
             },
           }}
@@ -60,7 +57,7 @@ function Filters() {
           sx={{
             width: 300,
             mb: 1,
-            "@media screen and (min-width: 52em)": {
+            "@media screen and (min-width: 48em)": {
               mr: 1,
             },
           }}
@@ -77,7 +74,7 @@ function Filters() {
           sx={{
             width: 300,
             mb: 1,
-            "@media screen and (min-width: 52em)": {
+            "@media screen and (min-width: 48em)": {
               mr: 1,
             },
           }}
@@ -86,6 +83,7 @@ function Filters() {
           renderInput={(params) => (
             <TextField
               type="number"
+              InputProps={{ inputProps: { step: 1, min: 0, max: 10 } }}
               {...params}
               label="Année"
               color="primary"
@@ -100,7 +98,7 @@ function Filters() {
           variant="filled"
           sx={{
             width: 300,
-            "@media screen and (min-width: 52em)": {
+            "@media screen and (min-width: 48em)": {
               width: 400,
             },
           }}
