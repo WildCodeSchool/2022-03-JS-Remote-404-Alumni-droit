@@ -12,7 +12,6 @@ function Listing() {
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/annuaire`)
-      // .get("http://localhost:5000/annuaire")
       .then((res) => setRows(res.data))
       .catch((err) => console.error(err));
   }, []);
