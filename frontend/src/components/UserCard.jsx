@@ -1,7 +1,6 @@
 import React from "react";
 
-function UserCard(props) {
-  const { lastname, firstname, photo, job } = props;
+function UserCard(lastname, firstname, photo, job) {
   return (
     <div className="w-[45%] md:w-[30%] lg:w-[23%] flex flex-col flex-wrap rounded-lg shadow-md m-2 p-3 border-2 h-auto">
       <div>
