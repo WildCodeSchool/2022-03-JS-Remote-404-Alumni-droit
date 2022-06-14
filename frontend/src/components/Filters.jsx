@@ -81,13 +81,7 @@ function Filters() {
           // value={filters.annees}
           // onChange={handleChange}
           renderInput={(params) => (
-            <TextField
-              type="number"
-              InputProps={{ inputProps: { step: 1, min: 0, max: 10 } }}
-              {...params}
-              label="Année"
-              color="primary"
-            />
+            <TextField {...params} label="Année" color="primary" />
           )}
         />
       </div>
