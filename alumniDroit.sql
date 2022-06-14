@@ -184,13 +184,13 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `alumni_droits`;
-INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (0, 'password', 'email@verif.com', 'admin', true);
-INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (1, 'modgftdepasse', 'email2@verif.com', 'user', true);
-INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (2, 'motdepagdsse', 'emai2@verif.com', 'user', true);
-INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (3, 'modfgtdepasse', 'emil2@verif.com', 'user', true);
-INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (4, 'motdergepasse', 'eail2@verif.com', 'user', true);
-INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (5, 'motdescpasse', 'mail2@verif.com', 'user', false);
-INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (6, 'motdepsdcasse', 'emaskdnfl2@verif.com', 'user', false);
+INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (1, 'password', 'email@verif.com', 'admin', true);
+INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (2, 'modgftdepasse', 'email2@verif.com', 'user', true);
+INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (3, 'motdepagdsse', 'emai2@verif.com', 'user', true);
+INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (4, 'modfgtdepasse', 'emil2@verif.com', 'user', true);
+INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (5, 'motdergepasse', 'eail2@verif.com', 'user', true);
+INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (6, 'motdescpasse', 'mail2@verif.com', 'user', false);
+INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (7, 'motdepsdcasse', 'emaskdnfl2@verif.com', 'user', false);
 
 COMMIT;
 
