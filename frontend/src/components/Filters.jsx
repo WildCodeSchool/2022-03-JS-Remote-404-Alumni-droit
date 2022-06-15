@@ -15,21 +15,21 @@ const Years = [
 ];
 
 const Profession = [
-  { label: "Administrateur judiciaire" },
-  { label: "Avocat" },
-  { label: "Avocat au Conseil d'Etat et à la Cour de cassation" },
-  { label: "Commissaire de justice" },
-  { label: "Etudiant" },
-  { label: "Juriste d’entreprise" },
-  { label: "Magistrat" },
-  { label: "Notaire" },
-  { label: "Officier" },
-  { label: "Universitaire" },
-  { label: "Autres professions juridiques" },
-  { label: "Autres professions" },
+  { label: "Administrateur judiciaire", id: 1 },
+  { label: "Avocat", id: 2 },
+  { label: "Avocat au Conseil d'Etat et à la Cour de cassation", id: 3 },
+  { label: "Commissaire de justice", id: 4 },
+  { label: "Etudiant", id: 5 },
+  { label: "Juriste d’entreprise", id: 6 },
+  { label: "Magistrat", id: 7 },
+  { label: "Notaire", id: 8 },
+  { label: "Officier", id: 9 },
+  { label: "Universitaire", id: 10 },
+  { label: "Autres professions juridiques", id: 11 },
+  { label: "Autres professions", id: 12 },
 ];
 
-function Filters({ setDiplome, setYears }) {
+function Filters({ setDiplome, setYears, setProfession }) {
   return (
     <>
       <div className="flex flex-col items-center mt-10 md:flex-row justify-center">
@@ -60,6 +60,7 @@ function Filters({ setDiplome, setYears }) {
               mr: 1,
             },
           }}
+          onChange={(e, profession) => setProfession(profession.id)}
           renderInput={(params) => (
             <TextField {...params} label="Profession" color="primary" />
           )}

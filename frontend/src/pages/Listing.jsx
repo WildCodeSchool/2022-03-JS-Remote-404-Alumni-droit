@@ -9,12 +9,16 @@ import axios from "axios";
 function Listing() {
   const [rows, setRows] = useState([]);
   const [diplome, setDiplome] = useState();
+  const [profession, setProfession] = useState();
   const [years, setYears] = useState();
 
   useEffect(() => {
     let url = `${import.meta.env.VITE_BACKEND_URL}/annuaire`;
     if (diplome) {
       url += `?diplome=${diplome}`;
+    }
+    if (profession) {
+      url += `?diplome=${profession}`;
     }
     if (years) {
       url += `?years=${years}`;
@@ -27,7 +31,11 @@ function Listing() {
 
   return (
     <>
-      <Filters setDiplome={setDiplome} setYears={setYears} />
+      <Filters
+        setDiplome={setDiplome}
+        setProfession={setProfession}
+        setYears={setYears}
+      />
       <div className="flex flex-wrap justify-center p-2">
         {rows.map((row) => (
           <UserCard
