@@ -17,7 +17,7 @@
   },
   "plugins": ["react", "import"],
   "rules": {
-    // "is missing in props validation react/prop-types"
+    "react/prop-types": 0,
     "no-console": "off",
     "react/jsx-props-no-spreading": "off",
     "no-restricted-syntax": [

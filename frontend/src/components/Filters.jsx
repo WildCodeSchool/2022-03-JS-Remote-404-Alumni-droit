@@ -2,9 +2,9 @@ import { React } from "react";
 import { TextField, Autocomplete } from "@mui/material";
 
 const Diplome = [
-  { label: "Diplôme du Collège de Droit" },
-  { label: "Certificat de l'École de Droit" },
-  { label: "Diplôme de l'École de Droit" },
+  { label: "Diplôme du Collège de Droit", id: 1 },
+  { label: "Certificat de l'École de Droit", id: 2 },
+  { label: "Diplôme de l'École de Droit", id: 3 },
 ];
 
 const Année = [
@@ -29,7 +29,7 @@ const Profession = [
   { label: "Autres professions" },
 ];
 
-function Filters() {
+function Filters({ setDiplome }) {
   return (
     <>
       <div className="flex flex-col items-center mt-10 md:flex-row justify-center">
@@ -44,8 +44,7 @@ function Filters() {
               mr: 1,
             },
           }}
-          // value={filters.diplome}
-          // onChange={handleChange}
+          onChange={(e, diplome) => setDiplome(diplome.id)}
           renderInput={(params) => (
             <TextField {...params} label="Diplôme" color="primary" />
           )}

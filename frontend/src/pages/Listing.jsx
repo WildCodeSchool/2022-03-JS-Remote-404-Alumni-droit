@@ -8,16 +8,25 @@ import axios from "axios";
 
 function Listing() {
   const [rows, setRows] = useState([]);
+  const [diplome, setDiplome] = useState();
 
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/annuaire`)
-      // .get(`http://localhost:5000/annuaire`)
       .then((res) => setRows(res.data))
       .catch((err) => console.error(err));
   }, []);
 
-  // const [filters, setFilters] = useState();
+  useEffect(() => {
+    let url = `${import.meta.env.VITE_BACKEND_URL}/annuaire`;
+    if (diplome) {
+      url += `?diplome=${diplome}`;
+    }
+    axios
+      .get(url)
+      .then((res) => setRows(res.data))
+      .catch((err) => console.error(err));
+  }, [diplome]);
 
   // const getFilters = () => {
   //   axios
@@ -37,7 +46,7 @@ function Listing() {
 
   return (
     <>
-      <Filters />
+      <Filters setDiplome={setDiplome} />
       {/* filters={filters} onChange={() => setFilters()}  */}
       <div className="flex flex-wrap justify-center p-2">
         {rows.map((row) => (
