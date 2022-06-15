@@ -1,4 +1,4 @@
-import { React } from "react";
+import React from "react";
 import { TextField, Autocomplete } from "@mui/material";
 
 const Diplome = [
@@ -7,11 +7,11 @@ const Diplome = [
   { label: "Diplôme de l'École de Droit", id: 3 },
 ];
 
-const Année = [
-  { label: "1990" },
-  { label: "1991" },
-  { label: "1992" },
-  { label: "1993" },
+const Years = [
+  { label: "1990", id: 1 },
+  { label: "1991", id: 2 },
+  { label: "1992", id: 3 },
+  { label: "1993", id: 4 },
 ];
 
 const Profession = [
@@ -29,7 +29,7 @@ const Profession = [
   { label: "Autres professions" },
 ];
 
-function Filters({ setDiplome }) {
+function Filters({ setDiplome, setYears }) {
   return (
     <>
       <div className="flex flex-col items-center mt-10 md:flex-row justify-center">
@@ -60,8 +60,6 @@ function Filters({ setDiplome }) {
               mr: 1,
             },
           }}
-          // value={filters.profession}
-          // onChange={handleChange}
           renderInput={(params) => (
             <TextField {...params} label="Profession" color="primary" />
           )}
@@ -69,7 +67,7 @@ function Filters({ setDiplome }) {
         <Autocomplete
           disablePortal
           id="combo-box-demo"
-          options={Année}
+          options={Years}
           sx={{
             width: 300,
             mb: 1,
@@ -77,8 +75,7 @@ function Filters({ setDiplome }) {
               mr: 1,
             },
           }}
-          // value={filters.annees}
-          // onChange={handleChange}
+          onChange={(e, years) => setYears(years.id)}
           renderInput={(params) => (
             <TextField {...params} label="Année" color="primary" />
           )}
@@ -95,8 +92,6 @@ function Filters({ setDiplome }) {
               width: 400,
             },
           }}
-          // value={filters.name}
-          // onChange={handleChange}
         />
       </div>
     </>
