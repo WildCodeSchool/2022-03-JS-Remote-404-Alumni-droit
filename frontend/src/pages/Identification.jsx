@@ -4,7 +4,8 @@ import Footer from "../components/Footer";
 function Identification() {
   return (
     <>
-      <div className="flex flex-col justify-center mb-10 md:m-20 lg:m-20 xl:m-20 lg:w-[50%] mx-auto text-center space-y-4 rounded-md shadow-md border-2 bg-zinc-100 m-3 mt-[2.5rem] p-3">
+      <div className="flex flex-col justify-center mb-10 w-[100%] md:w-[70%] lg:w-[50%]  mx-auto text-center space-y-4 rounded-md shadow-md border-2 bg-zinc-100 m-3 mt-[2.5rem] p-3">
+      {/* </div><div className="flex flex-col justify-center mb-10 md:m-20 lg:m-20 xl:m-20 lg:w-[50%] mx-auto text-center space-y-4 rounded-md shadow-md border-2 bg-zinc-100 m-3 mt-[2.5rem] p-3"> */}
         <p>Vous avez un compte</p>
         <label htmlFor="Email">
           <input type="text" placeholder="Email" className="p-3 w-[90%]" />
