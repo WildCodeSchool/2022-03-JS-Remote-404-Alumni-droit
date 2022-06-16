@@ -23,10 +23,10 @@ function Listing() {
       url += `${urlParams(url)}diplome=${diplome}`;
     }
     if (profession) {
-      url += `${urlParams(url)}profession=${profession}`;
+      url += `?profession=${profession}`;
     }
     if (years) {
-      url += `${urlParams(url)}years=${years}`;
+      url += `?years=${years}`;
     }
     axios
       .get(url)
@@ -44,7 +44,11 @@ function Listing() {
       />
       <div className="flex flex-wrap justify-center p-2">
         {rows
-          .filter((row) => search === "" || row.firstname || row.lastname)
+          .filter(
+            (row) =>
+              row.lastname.toLowerCase().includes(search.toLowerCase()) ||
+              row.firstname.toLowerCase().includes(search.toLowerCase())
+          )
           .map((row) => (
             <UserCard
               lastname={row.lastname}
