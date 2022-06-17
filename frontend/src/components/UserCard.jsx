@@ -2,15 +2,15 @@ import React from "react";
 
 function UserCard({ lastname, firstname, photo, job }) {
   return (
-    <div className="w-[45%] md:w-[30%] lg:w-[23%] flex flex-col flex-wrap rounded-lg shadow-md m-2 p-3 border-2 h-auto">
+    <div className="w-[45%] md:w-[22%] lg:w-[18%] xl:w-[15%] flex flex-col flex-wrap rounded-lg shadow-md m-2 p-3 border-2 h-auto">
       <div>
-        <img src={photo} alt="alumni girl" />
+        <img src={photo} alt="alumni" />
       </div>
-      <div className="flex justify-center flex-col text-center bg-red-800 text-slate-50 p-2 xl:p-4 leading-4">
-        <p className="text-1xl lg:text-1xl xl:text-2xl">{firstname}</p>
-        <p className="font-bold text-xl lg:text-2xl xl:text-2xl">{lastname}</p>
+      <div className="flex justify-center flex-col text-center bg-red-800 text-slate-50 p-2 xl:p-1 leading-4">
+        <p className="text-sm lg:text-1xl xl:text-[1rem]">{firstname}</p>
+        <p className="font-bold text-[.7rem] lg:text-[.9rem]">{lastname}</p>
       </div>
-      <div className="flex flex-col justify-center w-full h-auto text-xs md:text-sm pt-2 leading-snug">
+      <div className="flex flex-col justify-center w-full h-auto text-xs md:text-[.7rem] xl:text-[.8rem] pt-2 leading-snug">
         <p className="">{job}</p>
         <p className="">Collège de droit 2018</p>
         <p className="">Ecole de droit 2020</p>
@@ -18,7 +18,7 @@ function UserCard({ lastname, firstname, photo, job }) {
       <div className="flex justify-end">
         <button
           type="button"
-          className="text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-700 font-medium rounded-lg text-sm lg:text-base xl:text-lg mt-5 px-5 py-2.5 inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+          className="text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-700 font-medium rounded-lg text-sm lg:text-base xl:text-lg mt-5 px-5 py-2.5 inline-flex items-center dark:bg-red-800 dark:hover:bg-red-800 dark:focus:ring-red-800"
         >
           <p>Consulter</p>
           <svg
