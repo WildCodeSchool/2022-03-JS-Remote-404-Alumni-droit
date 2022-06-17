@@ -94,7 +94,6 @@ function Filters({ setDiplome, setProfession, setYears, setSearch }) {
               width: 400,
             },
           }}
-          // value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
