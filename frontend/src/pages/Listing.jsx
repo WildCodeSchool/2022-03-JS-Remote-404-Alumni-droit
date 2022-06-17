@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Filters from "@components/Filters";
 import UserCard from "@components/UserCard";
 import Footer from "@components/Footer";
+import RedBannerAlumni from "@components/RedBannerAlumni";
 
 import axios from "axios";
 
@@ -42,7 +43,8 @@ function Listing() {
         setYears={setYears}
         setSearch={setSearch}
       />
-      <div className="flex flex-wrap justify-center p-2">
+      <RedBannerAlumni />
+      <div className="flex flex-wrap justify-center p-2 md:px-[1rem] lg:px-[1.5rem] xl:px-[7rem]">
         {rows
           .filter(
             (row) =>
