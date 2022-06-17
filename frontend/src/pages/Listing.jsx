@@ -23,7 +23,7 @@ function Listing() {
         {rows.map((row) => (
           <UserCard
             key={row.id}
-            user_id={row.user_id}
+            userid={row.user_id}
             lastname={row.lastname}
             firstname={row.firstname}
             photo={row.photo}
