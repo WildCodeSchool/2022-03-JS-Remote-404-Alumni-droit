@@ -22,11 +22,12 @@ function Listing() {
       <div className="flex flex-wrap justify-center p-2">
         {rows.map((row) => (
           <UserCard
+            key={row.id}
+            user_id={row.user_id}
             lastname={row.lastname}
             firstname={row.firstname}
             photo={row.photo}
             job={row.profession_id1}
-            key={row.user_id}
           />
         ))}
       </div>

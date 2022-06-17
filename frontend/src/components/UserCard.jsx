@@ -1,6 +1,8 @@
 import React from "react";
 
-function UserCard({ lastname, firstname, photo, job }) {
+import { Link } from "react-router-dom";
+
+function UserCard({ userId, lastname, firstname, photo, job }) {
   return (
     <div className="w-[45%] md:w-[30%] lg:w-[23%] flex flex-col flex-wrap rounded-lg shadow-md m-2 p-3 border-2 h-auto">
       <div>
@@ -20,7 +22,9 @@ function UserCard({ lastname, firstname, photo, job }) {
           type="button"
           className="text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-700 font-medium rounded-lg text-sm lg:text-base xl:text-lg mt-5 px-5 py-2.5 inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
         >
-          <p>Consulter</p>
+          <Link to={`/profile/${userId}`}>
+            <p>Consulter</p>
+          </Link>
           <svg
             className="invisible w-0 h-0 ml-0 md:visible md:w-4 md:h-4 md:ml-2 -mr-1"
             fill="currentColor"

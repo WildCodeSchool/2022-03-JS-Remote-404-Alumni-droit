@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+import { useParams } from "react-router-dom";
+
+import axios from "axios";
 
 import Footer from "@components/Footer";
 
-import PortraitAlumni from "../assets/alumni-girl.jpg";
+// import PortraitAlumni from "../assets/alumni-girl.jpg";
 import linkedin from "../assets/linkedin.png";
 import twitter from "../assets/twitter.png";
 
@@ -52,22 +56,36 @@ import twitter from "../assets/twitter.png";
 //     })
 // }, [])
 
-function Profile() {
+function Profile({ userId, lastname, firstname }) {
+  // const { lastname, firstname } = props;
+  console.warn(lastname);
+  const { id } = useParams();
+  const [rows, setRows] = useState([]);
+  console.warn(id);
+  console.warn(rows[0]);
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/annuaire/${userId}`)
+      .then((res) => setRows(res.data))
+      .catch((err) => console.error(err));
+  }, []);
+
   return (
     <>
       <div className="md:flex md:flex-col md:justify-start bg-zinc-100 m-3 md:mt-10 md:mx-10 lg:mx-20 xl:mx-40 rounded-md shadow-md border-2">
         <div className="md:flex md:flex-row md:items-center">
           <img
-            src={PortraitAlumni}
+            // src={photo}
             alt="alumni girl"
             className="relative md:absolute md:flex md:justify-start z-10 w-[30%] md:w-[15%] lg:w-[13%] xl:w-[10%] mt-2 mx-auto top-2 md:top-[5rem] lg:top-[4rem] md:left-20 lg:left-[8rem] xl:left-60 md:mt-5 rounded-full"
           />
           <div className="flex justify-center items-center md:relative md:text-start bg-red-800 text-slate-50 h-[3rem] md:h-[3rem] w-full md:w-[100%] md:rounded-t-md">
             <p className="text-xl mr-2 md:pl-[8rem] lg:text-1xl xl:text-2xl">
-              Marie-Françoise
+              {firstname}
             </p>
             <p className="text-2xl font-bold lg:text-2xl xl:text-3xl">
-              Clara Dupont
+              {lastname}
             </p>
           </div>
         </div>
@@ -88,7 +106,7 @@ function Profile() {
               </span>
             </p>
             <p className="font-semibold">
-              Poste actuel :<span className="font-normal"> Juriste</span>
+              {/* Poste actuel :<span className="font-normal"> {job}</span> */}
             </p>
             <p className="font-semibold mt-2">
               Consulter CV :<span className="font-normal"> Cliquez-ici</span>

@@ -19,7 +19,6 @@ class ProfileManager extends AbstractManager {
       sqlQuery += ` INNER JOIN profile_diplome ON profile_id = profile.user_id`;
       sqlQuery += ` INNER JOIN diplome ON diplome_id = diplome.id`;
     }
-
     if (diplome) {
       sqlQuery += `${this.andOrWhere(sqlQuery)} diplome.id = ?`;
       sqlValue.push(`${diplome}`);
