@@ -38,6 +38,9 @@ class ProfileManager extends AbstractManager {
       )} firstname LIKE ? OR lastname LIKE ?`;
       sqlValue.push(`%${nomPrenom}%`, `%${nomPrenom}%`);
     }
+
+    sqlQuery += ` LIMIT 30`;
+
     return this.connection.query(sqlQuery, sqlValue).then((res) => res[0]);
   }
 
