@@ -29,7 +29,6 @@ function Listing() {
       url += `?years=${years}`;
     }
     axios
- filters-fetch
       .get(url)
       .then((res) => setRows(res.data))
       .catch((err) => console.error(err));
