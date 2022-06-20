@@ -10,18 +10,18 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema alumni_droits
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `alumni_droits` ;
 
--- -----------------------------------------------------
--- Schema alumni_droits
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `alumni_droits` DEFAULT CHARACTER SET utf8 ;
-USE `alumni_droits` ;
+DROP TABLE IF EXISTS `alumni_droits`.`user` ;
+DROP TABLE IF EXISTS `alumni_droits`.`profile_diplome` ;
+DROP TABLE IF EXISTS `alumni_droits`.`profile_profession` ;
+DROP TABLE IF EXISTS `alumni_droits`.`diplome` ;
+DROP TABLE IF EXISTS `alumni_droits`.`master` ;
+DROP TABLE IF EXISTS `alumni_droits`.`profile` ;
+DROP TABLE IF EXISTS `alumni_droits`.`profession` ;
 
 -- -----------------------------------------------------
 -- Table `alumni_droits`.`user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alumni_droits`.`user` ;
 
 CREATE TABLE IF NOT EXISTS `alumni_droits`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -29,50 +29,46 @@ CREATE TABLE IF NOT EXISTS `alumni_droits`.`user` (
   `email` VARCHAR(80) NOT NULL,
   `role` VARCHAR(5) NOT NULL DEFAULT 'user',
   `is_valid` TINYINT NULL DEFAULT 0,
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC),
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC));
 
 
 -- -----------------------------------------------------
 -- Table `alumni_droits`.`profession`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alumni_droits`.`profession` ;
+
 
 CREATE TABLE IF NOT EXISTS `alumni_droits`.`profession` (
   `id` INT NOT NULL,
   `job` VARCHAR(100) NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `job_UNIQUE` (`job` ASC) VISIBLE)
+  UNIQUE INDEX `job_UNIQUE` (`job` ASC))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `alumni_droits`.`diplome`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alumni_droits`.`diplome` ;
+
 
 CREATE TABLE IF NOT EXISTS `alumni_droits`.`diplome` (
   `id` INT NOT NULL,
   `title` VARCHAR(100) NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `title_UNIQUE` (`title` ASC) VISIBLE)
+  UNIQUE INDEX `title_UNIQUE` (`title` ASC))
 ENGINE = InnoDB;
-
-
-
 
 -- -----------------------------------------------------
 -- Table `alumni_droits`.`profile_diplome`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alumni_droits`.`profile_diplome` ;
 
 CREATE TABLE IF NOT EXISTS `alumni_droits`.`profile_diplome` (
   `profile_id` INT NOT NULL,
   `diplome_id` INT NOT NULL,
   `year` INT NOT NULL,
   PRIMARY KEY (`profile_id`, `diplome_id`),
-  INDEX `fk_user_diplome_profile1_idx` (`profile_id` ASC) VISIBLE,
+  INDEX `fk_user_diplome_profile1_idx` (`profile_id` ASC),
   CONSTRAINT `fk_user_diplome_diplome1`
     FOREIGN KEY (`diplome_id`)
     REFERENCES `alumni_droits`.`diplome` (`id`)
@@ -89,14 +85,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alumni_droits`.`profile_profession`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alumni_droits`.`profile_profession` ;
+
 
 CREATE TABLE IF NOT EXISTS `alumni_droits`.`profile_profession` (
   `profile_id` INT NOT NULL,
   `profession_id` INT NOT NULL,
   PRIMARY KEY (`profile_id`, `profession_id`),
-  INDEX `fk_user_profession_profession1_idx` (`profession_id` ASC) VISIBLE,
-  INDEX `fk_user_profession_profile1_idx` (`profile_id` ASC) VISIBLE,
+  INDEX `fk_user_profession_profession1_idx` (`profession_id` ASC),
+  INDEX `fk_user_profession_profile1_idx` (`profile_id` ASC),
   CONSTRAINT `fk_user_profession_profession1`
     FOREIGN KEY (`profession_id`)
     REFERENCES `alumni_droits`.`profession` (`id`)
@@ -122,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `alumni_droits`.`master` (
   `year` INT NOT NULL,
   `university` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_user_master_profile1_idx` (`profile_id` ASC) VISIBLE,
+  INDEX `fk_user_master_profile1_idx` (`profile_id` ASC),
   CONSTRAINT `fk_user_master_profile1`
     FOREIGN KEY (`profile_id`)
     REFERENCES `alumni_droits`.`profile` (`id`)
@@ -133,7 +129,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alumni_droits`.`profile`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alumni_droits`.`profile` ;
 
 CREATE TABLE IF NOT EXISTS `alumni_droits`.`profile` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -144,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `alumni_droits`.`profile` (
   `phone` VARCHAR(25) NULL,
   `emailpro` VARCHAR(80) NULL,
   `cv` VARCHAR(255) NULL,
-  `profession_id1` INT NOT NULL,
+  `profession_id1` INT NOT NULL, //////////
   `employeur` VARCHAR(255) NULL,
   `poste` VARCHAR(255) NULL,
   `bio` LONGTEXT NULL,
@@ -156,15 +151,15 @@ CREATE TABLE IF NOT EXISTS `alumni_droits`.`profile` (
   `photo` VARCHAR(255) NULL,
   `is_private` TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`, `user_id`, `profession_id1`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  INDEX `fk_profile_user1_idx` (`user_id` ASC) VISIBLE,
-  INDEX `fk_profile_profession1_idx` (`profession_id1` ASC) VISIBLE,
-  UNIQUE INDEX `facebook_UNIQUE` (`facebook` ASC) VISIBLE,
-  UNIQUE INDEX `linkedin_UNIQUE` (`linkedin` ASC) VISIBLE,
-  UNIQUE INDEX `twitter_UNIQUE` (`twitter` ASC) VISIBLE,
-  UNIQUE INDEX `instagram_UNIQUE` (`instagram` ASC) VISIBLE,
-  UNIQUE INDEX `photo_UNIQUE` (`photo` ASC) VISIBLE,
-  UNIQUE INDEX `cv_UNIQUE` (`cv` ASC) VISIBLE,
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  INDEX `fk_profile_user1_idx` (`user_id` ASC),
+  INDEX `fk_profile_profession1_idx` (`profession_id1` ASC),
+  UNIQUE INDEX `facebook_UNIQUE` (`facebook` ASC),
+  UNIQUE INDEX `linkedin_UNIQUE` (`linkedin` ASC),
+  UNIQUE INDEX `twitter_UNIQUE` (`twitter` ASC),
+  UNIQUE INDEX `instagram_UNIQUE` (`instagram` ASC),
+  UNIQUE INDEX `photo_UNIQUE` (`photo` ASC),
+  UNIQUE INDEX `cv_UNIQUE` (`cv` ASC),
   CONSTRAINT `fk_profile_user1`
     FOREIGN KEY (`user_id`)
     REFERENCES `alumni_droits`.`user` (`id`)
@@ -176,16 +171,11 @@ CREATE TABLE IF NOT EXISTS `alumni_droits`.`profile` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
 -- -----------------------------------------------------
 -- Data for table `alumni_droits`.`user`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `alumni_droits`;
-INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (100, 'password', 'email@verif.com', 'admin', true);
 INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (1, 'modgftdepasse', 'email2@verif.com', 'user', true);
 INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (2, 'motdepagdsse', 'emai2@verif.com', 'user', true);
 INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (3, 'modfgtdepasse', 'emil2@verif.com', 'user', true);
@@ -272,7 +262,7 @@ USE `alumni_droits`;
 INSERT INTO `alumni_droits`.`master` (`profile_id`, `title`, `year`, `university`) VALUES (1, 'Master 2 DPG', 2017, 'Université Paris Panthéon-Assas');
 INSERT INTO `alumni_droits`.`master` (`profile_id`, `title`, `year`, `university`) VALUES (2, 'Master 2 DPG', 2020, 'Université Paris Panthéon-Assas');
 INSERT INTO `alumni_droits`.`master` (`profile_id`, `title`, `year`, `university`) VALUES (3, 'Master 2 DPE', 2020, 'Université Paris Panthéon-Assas');
-INSERT INTO `alumni_droits`.`master` (`profile_id`, `title`, `year`, `university`) VALUES (3, 'Master 2 P', 2021, 'Université Paris Panthéon-Assas');
+INSERT INTO `alumni_droits`.`master` (`profile_id`, `title`, `year`, `university`) VALUES (3, 'Master 2 PLAI', 2021, 'Université Paris Panthéon-Assas');
 INSERT INTO `alumni_droits`.`master` (`profile_id`, `title`, `year`, `university`) VALUES (4, 'Master 2 Droit pénal et sciences pénales', 2020, 'Université Paris Panthéon-Assas');
 INSERT INTO `alumni_droits`.`master` (`profile_id`, `title`, `year`, `university`) VALUES (5, 'Master 2 PLAI', 2014, 'Université Paris Panthéon-Assas');
 INSERT INTO `alumni_droits`.`master` (`profile_id`, `title`, `year`, `university`) VALUES (6, 'Master 2 DPG', 2017, 'Université Paris Panthéon-Assas');
