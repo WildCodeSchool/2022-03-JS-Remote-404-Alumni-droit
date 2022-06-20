@@ -5,11 +5,10 @@ import Footer from "../components/Footer";
 function Identification() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+
   const navigate = useNavigate();
   const handleClick = (e) => {
-    e.preventDefault()
-    console.log(email,password)
+    e.preventDefault();
     navigate("/Profile");
   };
   return (
@@ -40,13 +39,13 @@ function Identification() {
         </label>
         <div className="px-5 mt-3 flex flex-row justify-between">
           <p>Mot de passe oublié ?</p>
-            <button
-              className="lg:m-2 xl:m-1 text-right text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-700 font-medium rounded-lg text-sm lg:text-base xl:text-lg px-5 py-2.5 inline-flex items-right dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
-              type="button"
-              onClick={(e)=>handleClick(e)}
-            >
-              <p>Se connecter</p>
-            </button>
+          <button
+            className="lg:m-2 xl:m-1 text-right text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-700 font-medium rounded-lg text-sm lg:text-base xl:text-lg px-5 py-2.5 inline-flex items-right dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+            type="button"
+            onClick={(e) => handleClick(e)}
+          >
+            <p>Se connecter</p>
+          </button>
         </div>
       </form>
       <p className="text-center mt-50">Vous n’avez pas de compte ?</p>
@@ -55,7 +54,7 @@ function Identification() {
           type="button"
           className="m-14 md:m-10 lg:m-14 xl:m-14 text-center mx-auto text-red-700 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm lg:text-base xl:text-lg mt-5 px-5 py-2.5 inline-flex items-center dark:bg-gray-200 dark:hover:bg-gray-200 dark:focus:ring-gray-200"
         >
-          <p>Creer votre compte</p>
+          <p>Créer votre compte</p>
         </button>
       </div>
       <Footer />
