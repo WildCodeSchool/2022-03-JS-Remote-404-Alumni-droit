@@ -56,36 +56,36 @@ import twitter from "../assets/twitter.png";
 //     })
 // }, [])
 
-function Profile({ userId, lastname, firstname }) {
+function Profile() {
   // const { lastname, firstname } = props;
-  console.warn(lastname);
-  const { id } = useParams();
-  const [rows, setRows] = useState([]);
-  console.warn(id);
-  console.warn(rows[0]);
+  // console.warn(lastname);
+  const { userId } = useParams();
+  const [rows, setRows] = useState(null);
+  // console.warn(id);
+  // console.warn(rows[0]);
 
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/annuaire/${userId}`)
       .then((res) => setRows(res.data))
       .catch((err) => console.error(err));
-  }, []);
+  }, [userId]);
 
   return (
     <>
       <div className="md:flex md:flex-col md:justify-start bg-zinc-100 m-3 md:mt-10 md:mx-10 lg:mx-20 xl:mx-40 rounded-md shadow-md border-2">
         <div className="md:flex md:flex-row md:items-center">
           <img
-            // src={photo}
+            src={rows != null && rows.photo}
             alt="alumni girl"
             className="relative md:absolute md:flex md:justify-start z-10 w-[30%] md:w-[15%] lg:w-[13%] xl:w-[10%] mt-2 mx-auto top-2 md:top-[5rem] lg:top-[4rem] md:left-20 lg:left-[8rem] xl:left-60 md:mt-5 rounded-full"
           />
           <div className="flex justify-center items-center md:relative md:text-start bg-red-800 text-slate-50 h-[3rem] md:h-[3rem] w-full md:w-[100%] md:rounded-t-md">
             <p className="text-xl mr-2 md:pl-[8rem] lg:text-1xl xl:text-2xl">
-              {firstname}
+              {rows != null && rows.firstname}
             </p>
             <p className="text-2xl font-bold lg:text-2xl xl:text-3xl">
-              {lastname}
+              {rows != null && rows.lastname}
             </p>
           </div>
         </div>
@@ -97,7 +97,7 @@ function Profile({ userId, lastname, firstname }) {
           <div className="md:w-[45%]">
             {/* PROFESSION ACTUELLE */}
             <h2 className="mt-0 mb-1 text-2xl font-bold my-5 text-red-800">
-              Profession actuelle :
+              Profession actuelle : {rows != null && rows.profession_id}
             </h2>
             <p className="font-semibold">
               Employeur :

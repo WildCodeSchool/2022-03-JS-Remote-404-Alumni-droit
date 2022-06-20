@@ -28,7 +28,7 @@ class ProfileManager extends AbstractManager {
       sqlValue.push(`${promo}`);
     }
     if (job) {
-      sqlQuery += ` ${this.andOrWhere(sqlQuery)} profession_id1 = ?`;
+      sqlQuery += ` ${this.andOrWhere(sqlQuery)} profession_id = ?`;
       sqlValue.push(`${job}`);
     }
     if (nomPrenom) {
