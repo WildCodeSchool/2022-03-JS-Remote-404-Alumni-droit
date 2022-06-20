@@ -5,14 +5,14 @@ import Identification from "@pages/Identification";
 import SignUp from "@pages/SignUp";
 import Profile from "@pages/Profile";
 import RGPD from "@pages/RGPD";
-import Header from "@components/Header";
+import Navbar from "@components/Navbar";
 
 import "./App.css";
 
 function App() {
   return (
-    <>
-      <Header />
+    <div>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Listing />} />
         <Route path="/identification/" element={<Identification />} />
@@ -20,7 +20,7 @@ function App() {
         <Route path="/profile/" element={<Profile />} />
         <Route path="/rgpd/" element={<RGPD />} />
       </Routes>
-    </>
+    </div>
   );
 }
 

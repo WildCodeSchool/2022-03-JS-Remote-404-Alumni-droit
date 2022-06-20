@@ -9,7 +9,9 @@
     "sourceType": "module"
   },
   "rules": {
+    "no-await-in-loop": "off",
     "no-console": "off",
+    "class-methods-use-this": "off",
     "no-restricted-syntax": [
       "error",
       {
