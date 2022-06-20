@@ -55,26 +55,24 @@ import twitter from "../assets/twitter.png";
 function Profile() {
   return (
     <>
-      <div className="md:flex md:flex-col md:justify-start bg-zinc-100 m-3 md:mt-10 md:mx-10 lg:mx-20 xl:mx-40 rounded-md shadow-md border-2">
-        <div className="md:flex md:flex-row md:items-center">
-          <img
-            src={PortraitAlumni}
-            alt="alumni girl"
-            className="relative md:absolute md:flex md:justify-start z-10 w-[30%] md:w-[15%] lg:w-[13%] xl:w-[10%] mt-2 mx-auto top-2 md:top-[5rem] lg:top-[4rem] md:left-20 lg:left-[8rem] xl:left-60 md:mt-5 rounded-full"
-          />
-          <div className="flex justify-center items-center md:relative md:text-start bg-red-800 text-slate-50 h-[3rem] md:h-[3rem] w-full md:w-[100%] md:rounded-t-md">
-            <p className="text-xl mr-2 md:pl-[8rem] lg:text-1xl xl:text-2xl">
-              Marie-Françoise
-            </p>
-            <p className="text-2xl font-bold lg:text-2xl xl:text-3xl">
-              Clara Dupont
-            </p>
+      <div className="md:flex md:flex-col md:justify-start bg-zinc-100 m-3 mt-8 md:mt-10 md:mx-10 lg:mx-20 xl:mx-40 rounded-md shadow-md border-2">
+        <div className="md:flex md:flex-row md:items-center mb-2">
+          <div className="flex justify-between items-center px-5 md:px-7 lg:px-9 xl:px-12 md:text-start bg-red-800 text-slate-50 h-[2.5rem] lg:h-[3rem] w-full md:w-[100%] rounded-t-md">
+            <img
+              src={PortraitAlumni}
+              alt="alumni girl"
+              className="md:flex md:justify-start z-10 w-[22%] md:w-[13%] lg:w-[12%] xl:w-[10%] md:left-20 lg:left-[8rem] xl:left-60 rounded-full"
+            />
+            <div className="flex items-center">
+              <p className="text-sm mr-2 lg:text-[1.3rem]">Marie-Françoise</p>
+              <p className="text-base font-bold lg:text-2xl">Clara Dupont</p>
+            </div>
           </div>
         </div>
 
         {/* INFORMATIONS */}
 
-        <div className="flex flex-col md:flex-row justify-center md:justify-around w-[90%] md:w-[95%] h-auto text-base md:text-sm pt-4 md:pt-0 mx-auto md:mt-10 xl:mt-[4rem] xl:mb-[2rem] leading-snug">
+        <div className="flex flex-col md:flex-row justify-center md:justify-around w-[90%] md:w-[95%] h-auto text-base md:text-sm pt-4 md:pt-0 mx-auto md:mt-5 xl:mt-[2rem] xl:mb-[2rem] leading-snug">
           {/* COLONNE 1 */}
           <div className="md:w-[45%]">
             {/* PROFESSION ACTUELLE */}
