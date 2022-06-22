@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 import { TextField, Autocomplete } from "@mui/material";
+import axios from "axios";
 
 const Diplome = [
   { label: "Diplôme du Collège de Droit", id: 1 },
@@ -31,6 +33,49 @@ const Profession = [
 ];
 
 function Filters({ setDiplome, setProfession, setYears, setSearch }) {
+  const [diplomeData, setDiplomeData] = useState([]);
+  const [professionData, setProfessionData] = useState([]);
+  const [promotionData, setPromotionData] = useState([]);
+
+  const getDiplome = () => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/diplome`)
+      .then((res) => {
+        setDiplomeData(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const getProfession = () => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/profession`)
+      .then((res) => {
+        setProfessionData(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const getPromotion = () => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/promotion`)
+      .then((res) => {
+        setPromotionData(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  useEffect(() => {
+    getDiplome();
+    getProfession();
+    getPromotion();
+  }, []);
+
   return (
     <>
       <div className="flex flex-col items-center mt-10 md:flex-row justify-center">
@@ -45,6 +90,7 @@ function Filters({ setDiplome, setProfession, setYears, setSearch }) {
               mr: 1,
             },
           }}
+          value={diplomeData}
           onChange={(e, diplome) => setDiplome(diplome.id)}
           renderInput={(params) => (
             <TextField {...params} label="Diplôme" color="primary" />
@@ -61,6 +107,7 @@ function Filters({ setDiplome, setProfession, setYears, setSearch }) {
               mr: 1,
             },
           }}
+          value={professionData}
           onChange={(e, profession) => setProfession(profession.id)}
           renderInput={(params) => (
             <TextField {...params} label="Profession" color="primary" />
@@ -77,6 +124,7 @@ function Filters({ setDiplome, setProfession, setYears, setSearch }) {
               mr: 1,
             },
           }}
+          value={promotionData}
           onChange={(e, years) => setYears(years.id)}
           renderInput={(params) => (
             <TextField {...params} label="Année" color="primary" />
