@@ -54,9 +54,7 @@ function Profile() {
             </h2>
             <p className="font-semibold">
               Profession :{" "}
-              <span className="font-normal">
-                {rows != null && rows.profession_id}
-              </span>
+              <span className="font-normal">{rows != null && rows.job}</span>
             </p>
             <p className="font-semibold">
               Poste actuel :{" "}
