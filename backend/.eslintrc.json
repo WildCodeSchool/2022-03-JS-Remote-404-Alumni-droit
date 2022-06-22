@@ -12,6 +12,7 @@
     "no-await-in-loop": "off",
     "no-console": "off",
     "class-methods-use-this": "off",
+    "no-param-reassign": ["error", { "props": false }],
     "no-restricted-syntax": [
       "error",
       {

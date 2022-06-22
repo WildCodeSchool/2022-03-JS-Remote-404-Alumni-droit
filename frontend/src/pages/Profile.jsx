@@ -20,13 +20,12 @@ function Profile() {
       .catch((err) => console.error(err));
   }, [userId]);
 
-  // métier ?
   return (
     <div>
       <div className="md:flex md:flex-col md:justify-start bg-zinc-100 m-3 md:mt-10 md:mx-10 lg:mx-20 xl:mx-40 rounded-md shadow-md border-2">
         <div className="md:flex md:flex-row md:items-center">
           <img
-            src={rows != null && rows.photo} /// /
+            src={rows != null && rows.photo}
             alt={
               rows != null && rows.firstname
                 ? `Portrait de ${rows.firstname} ${rows.lastname}`

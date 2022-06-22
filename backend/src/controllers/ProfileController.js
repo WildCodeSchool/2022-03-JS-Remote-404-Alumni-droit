@@ -9,8 +9,7 @@ class ProfileController {
       if (profiles[0]) {
         const diplomes = await models.diplome.multipleFind(profiles);
         profiles.forEach((pers, index) => {
-          let aa = diplomes[index];
-          pers.diplome = aa;
+          pers.diplome = diplomes[index];
         });
       }
       res.status(200).json(profiles);
@@ -34,7 +33,7 @@ class ProfileController {
           pers.masters = masters[index];
         });
       }
-      res.status(200).json(profiles[0]);
+      res.status(200).json(profiles[0][0]);
     } catch {
       res.status(500).send("erreur");
     }
