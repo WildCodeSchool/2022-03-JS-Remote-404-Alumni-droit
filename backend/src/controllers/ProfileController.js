@@ -25,6 +25,8 @@ class ProfileController {
       if (profiles[0][0]) {
         const diplomes = await models.diplome.multipleFind(profiles[0]);
         const masters = await models.master.multipleFind(profiles[0]);
+        const job = await models.profession.jobFind(profiles[0]);
+        profiles[0][0].job = job[0][0].job;
         // const masters = await Promise.all(
         //   profiles[0].map((pers) => models.master.find(pers.id))
         // );
