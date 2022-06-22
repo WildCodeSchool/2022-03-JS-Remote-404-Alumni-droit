@@ -6,63 +6,12 @@ import axios from "axios";
 
 import Footer from "@components/Footer";
 
-// import PortraitAlumni from "../assets/alumni-girl.jpg";
 import linkedin from "../assets/linkedin.png";
 import twitter from "../assets/twitter.png";
 
-// const updateTag = ({ name, content }) => {
-//   const meta = document.createElement('meta');
-//   meta.content = content;
-//   meta.name = name;
-//   document.getElementsByTagName('head')[0].appendChild(meta);
-// }
-
-// const updateMetaData = (data) => {
-//   if (data.description) {
-//     updateTag({ name: 'description', content: data.description })
-//   }
-
-//   if (data.title) {
-//     updateTag({ name: 'title', content: data.title })
-//   }
-
-//   if (data.ogUrl) {
-//     updateTag({ property: 'og:url', content: data.ogUrl })
-//   }
-
-//   if (data.ogType) {
-//     updateTag({ property: 'og:type', content: data.ogType })
-//   }
-
-//   if (data.ogTitle) {
-//     updateTag({ property: 'og:title', content: data.ogTitle })
-//   }
-
-//   if (data.ogDescription) {
-//     updateTag({ property: 'og:description', content: data.ogDescription })
-//   }
-
-//   if (data.ogImage) {
-//     updateTag({ property: 'og:image', content: data.ogImage })
-//   }
-// }
-
-// useEffect(() => {
-//   fetch('')
-//     .then(res => res.json())
-//     .then(data => {
-//       setProfile(data);
-//       updateMetaData(data);
-//     })
-// }, [])
-
 function Profile() {
-  // const { lastname, firstname } = props;
-  // console.warn(lastname);
   const { userId } = useParams();
   const [rows, setRows] = useState(null);
-  // console.warn(id);
-  // console.warn(rows[0]);
 
   useEffect(() => {
     axios
@@ -71,13 +20,18 @@ function Profile() {
       .catch((err) => console.error(err));
   }, [userId]);
 
+  // métier ?
   return (
-    <>
+    <div>
       <div className="md:flex md:flex-col md:justify-start bg-zinc-100 m-3 md:mt-10 md:mx-10 lg:mx-20 xl:mx-40 rounded-md shadow-md border-2">
         <div className="md:flex md:flex-row md:items-center">
           <img
-            src={rows != null && rows.photo}
-            alt="alumni girl"
+            src={rows != null && rows.photo} /// /
+            alt={
+              rows != null && rows.firstname
+                ? `Portrait de ${rows.firstname} ${rows.lastname}`
+                : ""
+            }
             className="relative md:absolute md:flex md:justify-start z-10 w-[30%] md:w-[15%] lg:w-[13%] xl:w-[10%] mt-2 mx-auto top-2 md:top-[5rem] lg:top-[4rem] md:left-20 lg:left-[8rem] xl:left-60 md:mt-5 rounded-full"
           />
           <div className="flex justify-center items-center md:relative md:text-start bg-red-800 text-slate-50 h-[3rem] md:h-[3rem] w-full md:w-[100%] md:rounded-t-md">
@@ -97,19 +51,33 @@ function Profile() {
           <div className="md:w-[45%]">
             {/* PROFESSION ACTUELLE */}
             <h2 className="mt-0 mb-1 text-2xl font-bold my-5 text-red-800">
-              Profession actuelle : {rows != null && rows.profession_id}
+              Profession :
             </h2>
             <p className="font-semibold">
-              Employeur :
+              Profession :{" "}
               <span className="font-normal">
-                Tribunal de Grande Instance Paris
+                {rows != null && rows.profession_id}
+              </span>
+            </p>
+            <p className="font-semibold">
+              Poste actuel :{" "}
+              <span className="font-normal">{rows != null && rows.poste}</span>
+            </p>
+            <p className="font-semibold">
+              Employeur :{" "}
+              <span className="font-normal">
+                {rows != null && rows.employeur}
               </span>
             </p>
             <p className="font-semibold">
               {/* Poste actuel :<span className="font-normal"> {job}</span> */}
             </p>
             <p className="font-semibold mt-2">
-              Consulter CV :<span className="font-normal"> Cliquez-ici</span>
+              Consulter CV :
+              <span className="font-normal" src={rows != null && rows.cv}>
+                {" "}
+                Cliquez-ici
+              </span>
             </p>
 
             {/* COORDONNEES */}
@@ -119,11 +87,12 @@ function Profile() {
             <p className="font-semibold">
               Email :{" "}
               <span className="font-normal">
-                mariefrancoise.cd@tdgi-paris.fr
+                {rows != null && rows.emailpro}
               </span>
             </p>
             <p className="font-semibold mb-5">
-              Téléphone : <span className="font-normal">06 62 48 25 69</span>
+              Téléphone :{" "}
+              <span className="font-normal"> {rows != null && rows.phone}</span>
             </p>
 
             {/* DIPLOMES OBTENUS */}
@@ -167,14 +136,10 @@ function Profile() {
               Parcours professionnel :
             </h2>
             <p className="w-full md:w-[90%]">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus
-              temporibus at adipisci ad nihil odio tempore saepe reiciendis
-              harum maxime amet, numquam veniam et, ipsum laborum praesentium.
-              In, ullam asperiores. Laborum distinctio similique veniam
-              voluptatum asperiores facere perferendis, doloremque quasi vel
-              sint, non aspernatur architecto laudantium. Voluptates explicabo
-              beatae quos magnam accusamus cupiditate, iusto, excepturi unde
-              possimus aut dolore ipsum rum praes.
+              {rows != null && rows.bio
+                ? rows.bio
+                : ` n'a pas encore rempli cette partie de son profil`}
+              {/* `${rows.firstname} ${rows.lastname} */}
             </p>
 
             {/* RESEAUX SOCIAUX */}
@@ -184,20 +149,20 @@ function Profile() {
             </h2>
 
             <div className="flex items-center mt-2">
-              <img
-                src={linkedin}
-                alt="alumni girl"
-                className="z-10 w-[6%] mr-2"
-              />
-              <p>www.linkedIn.com/MarieFrancoise</p>
+              <img src={linkedin} alt="LinkedIn" className="z-10 w-[6%] mr-2" />
+              <p>{rows != null && rows.linkedin}</p>
             </div>
             <div className="flex items-center mt-2 mb-5">
-              <img
-                src={twitter}
-                alt="alumni girl"
-                className="z-10 w-[6%] mr-2"
-              />
-              <p>www.twitter.com/MarieFrancoise</p>
+              <img src={twitter} alt="Twitter" className="z-10 w-[6%] mr-2" />
+              <p>{rows != null && rows.twitter}</p>
+              {/* <div className="flex items-center mt-2 mb-5">
+                <img
+                  src={instagram}
+                  alt="Instagram"
+                  className="z-10 w-[6%] mr-2"
+                />
+                <p>{rows != null && rows.instagram}</p>
+              </div> */}
             </div>
           </div>
         </div>
@@ -211,7 +176,7 @@ function Profile() {
         </button>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 

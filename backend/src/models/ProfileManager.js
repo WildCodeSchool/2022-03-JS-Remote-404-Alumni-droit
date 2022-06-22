@@ -13,7 +13,7 @@ class ProfileManager extends AbstractManager {
     const sqlValue = [];
 
     if (job) {
-      sqlQuery += ` INNER JOIN profession ON profession_id1 = profession.id`;
+      sqlQuery += ` INNER JOIN profession ON profession_id = profession.id`;
     }
     if (diplome || promo) {
       sqlQuery += ` INNER JOIN profile_diplome ON profile_id = profile.user_id`;
