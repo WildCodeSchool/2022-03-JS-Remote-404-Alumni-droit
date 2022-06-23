@@ -1,35 +1,36 @@
-import { React } from "react";
+import React from "react";
 import { TextField, Autocomplete } from "@mui/material";
 
 const Diplome = [
-  { label: "Diplôme du Collège de Droit" },
-  { label: "Certificat de l'École de Droit" },
-  { label: "Diplôme de l'École de Droit" },
+  { label: "Diplôme du Collège de Droit", id: 1 },
+  { label: "Certificat de l'École de Droit", id: 2 },
+  { label: "Diplôme de l'École de Droit", id: 3 },
 ];
 
-const Année = [
-  { label: "1990" },
-  { label: "1991" },
-  { label: "1992" },
-  { label: "1993" },
+const Years = [
+  { label: "1990", id: 1 },
+  { label: "1991", id: 2 },
+  { label: "1992", id: 3 },
+  { label: "1993", id: 4 },
 ];
 
 const Profession = [
-  { label: "Administrateur judiciaire" },
-  { label: "Avocat" },
-  { label: "Avocat au Conseil d'Etat et à la Cour de cassation" },
-  { label: "Commissaire de justice" },
-  { label: "Etudiant" },
-  { label: "Juriste d’entreprise" },
-  { label: "Magistrat" },
-  { label: "Notaire" },
-  { label: "Officier" },
-  { label: "Universitaire" },
-  { label: "Autres professions juridiques" },
-  { label: "Autres professions" },
+  { label: "Administrateur judiciaire", id: 1 },
+  { label: "Avocat", id: 2 },
+  { label: "Avocat au Conseil d'Etat et à la Cour de cassation", id: 3 },
+  { label: "Commissaire de justice", id: 4 },
+  { label: "Etudiant", id: 5 },
+  { label: "Fonctionnaire", id: 6 },
+  { label: "Juriste d’entreprise", id: 7 },
+  { label: "Magistrat", id: 8 },
+  { label: "Notaire", id: 9 },
+  { label: "Officier", id: 10 },
+  { label: "Universitaire", id: 11 },
+  { label: "Autres professions juridiques", id: 12 },
+  { label: "Autres professions", id: 13 },
 ];
 
-function Filters() {
+function Filters({ setDiplome, setProfession, setYears, setSearch }) {
   return (
     <>
       <div className="flex flex-col items-center mt-10 md:flex-row justify-center">
@@ -44,8 +45,7 @@ function Filters() {
               mr: 1,
             },
           }}
-          // value={filters.diplome}
-          // onChange={handleChange}
+          onChange={(e, diplome) => setDiplome(diplome.id)}
           renderInput={(params) => (
             <TextField {...params} label="Diplôme" color="primary" />
           )}
@@ -61,8 +61,7 @@ function Filters() {
               mr: 1,
             },
           }}
-          // value={filters.profession}
-          // onChange={handleChange}
+          onChange={(e, profession) => setProfession(profession.id)}
           renderInput={(params) => (
             <TextField {...params} label="Profession" color="primary" />
           )}
@@ -70,7 +69,7 @@ function Filters() {
         <Autocomplete
           disablePortal
           id="combo-box-demo"
-          options={Année}
+          options={Years}
           sx={{
             width: 300,
             mb: 1,
@@ -78,8 +77,7 @@ function Filters() {
               mr: 1,
             },
           }}
-          // value={filters.annees}
-          // onChange={handleChange}
+          onChange={(e, years) => setYears(years.id)}
           renderInput={(params) => (
             <TextField {...params} label="Année" color="primary" />
           )}
@@ -96,8 +94,7 @@ function Filters() {
               width: 400,
             },
           }}
-          // value={filters.name}
-          // onChange={handleChange}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
     </>

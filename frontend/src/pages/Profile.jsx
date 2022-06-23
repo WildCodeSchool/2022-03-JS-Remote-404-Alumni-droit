@@ -45,7 +45,7 @@ function Profile() {
 
         {/* INFORMATIONS */}
 
-        <div className="flex flex-col md:flex-row justify-center md:justify-around w-[90%] md:w-[95%] h-auto text-base md:text-sm pt-4 md:pt-0 mx-auto md:mt-10 xl:mt-[4rem] xl:mb-[2rem] leading-snug">
+        <div className="flex flex-col md:flex-row justify-center md:justify-around w-[90%] md:w-[95%] h-auto text-base md:text-sm pt-4 md:pt-0 mx-auto md:mt-5 xl:mt-[2rem] xl:mb-[2rem] leading-snug">
           {/* COLONNE 1 */}
           <div className="md:w-[45%]">
             {/* PROFESSION ACTUELLE */}

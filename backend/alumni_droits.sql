@@ -10,18 +10,18 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema alumni_droits
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `alumni_droits` ;
 
--- -----------------------------------------------------
--- Schema alumni_droits
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `alumni_droits` DEFAULT CHARACTER SET utf8 ;
-USE `alumni_droits` ;
+DROP TABLE IF EXISTS `alumni_droits`.`user` ;
+DROP TABLE IF EXISTS `alumni_droits`.`profile_diplome` ;
+DROP TABLE IF EXISTS `alumni_droits`.`profile_profession` ;
+DROP TABLE IF EXISTS `alumni_droits`.`diplome` ;
+DROP TABLE IF EXISTS `alumni_droits`.`master` ;
+DROP TABLE IF EXISTS `alumni_droits`.`profile` ;
+DROP TABLE IF EXISTS `alumni_droits`.`profession` ;
 
 -- -----------------------------------------------------
 -- Table `alumni_droits`.`user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alumni_droits`.`user` ;
 
 CREATE TABLE IF NOT EXISTS `alumni_droits`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -29,50 +29,46 @@ CREATE TABLE IF NOT EXISTS `alumni_droits`.`user` (
   `email` VARCHAR(80) NOT NULL,
   `role` VARCHAR(5) NOT NULL DEFAULT 'user',
   `is_valid` TINYINT NULL DEFAULT 0,
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC),
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC));
 
 
 -- -----------------------------------------------------
 -- Table `alumni_droits`.`profession`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alumni_droits`.`profession` ;
+
 
 CREATE TABLE IF NOT EXISTS `alumni_droits`.`profession` (
   `id` INT NOT NULL,
   `job` VARCHAR(100) NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `job_UNIQUE` (`job` ASC) VISIBLE)
+  UNIQUE INDEX `job_UNIQUE` (`job` ASC))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `alumni_droits`.`diplome`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alumni_droits`.`diplome` ;
+
 
 CREATE TABLE IF NOT EXISTS `alumni_droits`.`diplome` (
   `id` INT NOT NULL,
   `title` VARCHAR(100) NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `title_UNIQUE` (`title` ASC) VISIBLE)
+  UNIQUE INDEX `title_UNIQUE` (`title` ASC))
 ENGINE = InnoDB;
-
-
-
 
 -- -----------------------------------------------------
 -- Table `alumni_droits`.`profile_diplome`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alumni_droits`.`profile_diplome` ;
 
 CREATE TABLE IF NOT EXISTS `alumni_droits`.`profile_diplome` (
   `profile_id` INT NOT NULL,
   `diplome_id` INT NOT NULL,
   `year` INT NOT NULL,
   PRIMARY KEY (`profile_id`, `diplome_id`),
-  INDEX `fk_user_diplome_profile1_idx` (`profile_id` ASC) VISIBLE,
+  INDEX `fk_user_diplome_profile1_idx` (`profile_id` ASC),
   CONSTRAINT `fk_user_diplome_diplome1`
     FOREIGN KEY (`diplome_id`)
     REFERENCES `alumni_droits`.`diplome` (`id`)
@@ -89,14 +85,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alumni_droits`.`profile_profession`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alumni_droits`.`profile_profession` ;
+
 
 CREATE TABLE IF NOT EXISTS `alumni_droits`.`profile_profession` (
   `profile_id` INT NOT NULL,
   `profession_id` INT NOT NULL,
   PRIMARY KEY (`profile_id`, `profession_id`),
-  INDEX `fk_user_profession_profession1_idx` (`profession_id` ASC) VISIBLE,
-  INDEX `fk_user_profession_profile1_idx` (`profile_id` ASC) VISIBLE,
+  INDEX `fk_user_profession_profession1_idx` (`profession_id` ASC),
+  INDEX `fk_user_profession_profile1_idx` (`profile_id` ASC),
   CONSTRAINT `fk_user_profession_profession1`
     FOREIGN KEY (`profession_id`)
     REFERENCES `alumni_droits`.`profession` (`id`)
@@ -122,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `alumni_droits`.`master` (
   `year` INT NOT NULL,
   `university` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_user_master_profile1_idx` (`profile_id` ASC) VISIBLE,
+  INDEX `fk_user_master_profile1_idx` (`profile_id` ASC),
   CONSTRAINT `fk_user_master_profile1`
     FOREIGN KEY (`profile_id`)
     REFERENCES `alumni_droits`.`profile` (`id`)
@@ -133,7 +129,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alumni_droits`.`profile`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alumni_droits`.`profile` ;
 
 CREATE TABLE IF NOT EXISTS `alumni_droits`.`profile` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -156,36 +151,33 @@ CREATE TABLE IF NOT EXISTS `alumni_droits`.`profile` (
   `photo` VARCHAR(255) NULL,
   `is_private` TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`, `user_id`, `profession_id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  INDEX `fk_profile_user1_idx` (`user_id` ASC) VISIBLE,
-  INDEX `fk_profile_profession1_idx` (`profession_id1` ASC) VISIBLE,
-  UNIQUE INDEX `facebook_UNIQUE` (`facebook` ASC) VISIBLE,
-  UNIQUE INDEX `linkedin_UNIQUE` (`linkedin` ASC) VISIBLE,
-  UNIQUE INDEX `twitter_UNIQUE` (`twitter` ASC) VISIBLE,
-  UNIQUE INDEX `instagram_UNIQUE` (`instagram` ASC) VISIBLE,
-  UNIQUE INDEX `photo_UNIQUE` (`photo` ASC) VISIBLE,
-  UNIQUE INDEX `cv_UNIQUE` (`cv` ASC) VISIBLE,
+
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  INDEX `fk_profile_user1_idx` (`user_id` ASC),
+  INDEX `fk_profile_profession1_idx` (`profession_id` ASC),
+  UNIQUE INDEX `facebook_UNIQUE` (`facebook` ASC),
+  UNIQUE INDEX `linkedin_UNIQUE` (`linkedin` ASC),
+  UNIQUE INDEX `twitter_UNIQUE` (`twitter` ASC),
+  UNIQUE INDEX `instagram_UNIQUE` (`instagram` ASC),
+  UNIQUE INDEX `photo_UNIQUE` (`photo` ASC),
+  UNIQUE INDEX `cv_UNIQUE` (`cv` ASC),
+
   CONSTRAINT `fk_profile_user1`
     FOREIGN KEY (`user_id`)
     REFERENCES `alumni_droits`.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_profile_profession1`
-    FOREIGN KEY (`profession_id1`)
+    FOREIGN KEY (`profession_id`)
     REFERENCES `alumni_droits`.`profession` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
 -- Data for table `alumni_droits`.`user`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `alumni_droits`;
-INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (100, 'password', 'email@verif.com', 'admin', true);
 INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (1, 'modgftdepasse', 'email2@verif.com', 'user', true);
 INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (2, 'motdepagdsse', 'emai2@verif.com', 'user', true);
 INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (3, 'modfgtdepasse', 'emil2@verif.com', 'user', true);
@@ -235,12 +227,12 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `alumni_droits`;
-INSERT INTO `alumni_droits`.`profile` ( `user_id`, `lastname`, `firstname`, `creation_date`, `phone`, `emailpro`, `cv`, `profession_id1`, `employeur`, `poste`, `bio`, `siteweb`, `facebook`, `linkedin`, `twitter`, `instagram`, `photo`, `is_private`) VALUES (1, 'CHAKRI','Emilien','2022-05-31', '', 'emilien@alumni.com', 'http://dummyimage.com/165x100.png/dddddd/000000', 11, 'Université Paris Panthéon-Assas', 'A.T.E.R.', 'In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin interdum mauris non ligula pellentesque ultrices.', 'https://odnoklassniki.ru/posuere/cubilia/curae/duis/faucibus/accumsan.jpg', 'https://java.com/lacus/purus.xml', 'https://senate.gov/in/faucibus/orci/luctus/et/ultrices/posuere.aspx', 'http://bbc.co.uk/nunc/vestibulum/ante/ipsum/primis/in/faucibus.aspx', 'http://vistaprint.com/ut/nulla/sed/accumsan/felis.xml', '../src/assets/homme1.jpg', false);
-INSERT INTO `alumni_droits`.`profile` ( `user_id`, `lastname`, `firstname`, `creation_date`, `phone`, `emailpro`, `cv`, `profession_id1`, `employeur`, `poste`, `bio`, `siteweb`, `facebook`, `linkedin`, `twitter`, `instagram`, `photo`, `is_private`) VALUES (2, 'LE PAPE-GARDEUX', 'Alexandre', '2022-05-31', '', 'alexandre@alumni.com', 'http://dummyimage.com/202x100.png/5fa2dd/ffffff', 11, 'Université Paris Panthéon-Assas', 'Doctorant contractuel', 'Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.', 'http://macromedia.com/mattis/nibh/ligula/nec/sem.jpg', 'http://dot.gov/augue/luctus.png', 'https://google.ca/et/ultrices/posuere/cubilia/curae/mauris/viverra.js', 'http://zdnet.com/dapibus/at/diam/nam.aspx', 'https://ox.ac.uk/quam/nec.json', '../src/assets/homme2.jpg', false);
-INSERT INTO `alumni_droits`.`profile` ( `user_id`, `lastname`, `firstname`, `creation_date`, `phone`, `emailpro`, `cv`, `profession_id1`, `employeur`, `poste`, `bio`, `siteweb`, `facebook`, `linkedin`, `twitter`, `instagram`, `photo`, `is_private`) VALUES (3, 'PARMENTIER', 'Sarah', '2022-05-31', '', 'sarah@alumni.com', 'http://dummyimage.com/177x100.png/ff4444/ffffff', 5, 'CNEN, DGCL, Ministère de l’Intérieur', 'Stagiaire', 'Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.', 'https://phpbb.com/nulla/tempus/vivamus/in/felis/eu.xml', 'http://t-online.de/turpis/nec.html', 'https://paginegialle.it/cum/sociis/natoque/penatibus/et/magnis.jpg', 'https://g.co/dui/maecenas.png', 'http://zdnet.com/morbi.html', '../src/assets/femme2.jpg', true);
-INSERT INTO `alumni_droits`.`profile` ( `user_id`, `lastname`, `firstname`, `creation_date`, `phone`, `emailpro`, `cv`, `profession_id1`, `employeur`, `poste`, `bio`, `siteweb`, `facebook`, `linkedin`, `twitter`, `instagram`, `photo`, `is_private`) VALUES (4, 'PETRILLO', 'Réan', '2022-05-31', '', 'rean@alumni.com', 'http://dummyimage.com/153x100.png/ff4444/ffffff', 8, 'ENM', 'Auditrice de Justice', 'Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lore(igula. Suspendisse ornare consequat lectus.', 'http://rediff.com/nunc/viverra/dapibus.xml', 'http://sfgate.com/hac/habitasse/platea/dictumst/aliquam.aspx', 'http://oaic.gov.au/justo/aliquam.js', 'https://parallels.com/interdum/mauris.aspx', 'https://wufoo.com/vestibulum/quam/sapien/varius.jsp', '../src/assets/femme1.jpg', false);
-INSERT INTO `alumni_droits`.`profile` ( `user_id`, `lastname`, `firstname`, `creation_date`, `phone`, `emailpro`, `cv`, `profession_id1`, `employeur`, `poste`, `bio`, `siteweb`, `facebook`, `linkedin`, `twitter`, `instagram`, `photo`, `is_private`) VALUES (5, 'PEROT', 'Pierre', '2022-05-31', '', 'pierre@alumni.com', 'http://dummyimage.com/237x100.png/dddddd/000000', 2, 'Cabinet Hoyng Rokh Monégier', 'Collaborateur', 'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.', 'null', 'https://elpais.com/convallis/duis/consequat/dui/nec/nisi.jpg', 'https://yellowpages.com/scelerisque.json', 'http://earthlink.net/vestibulum/ante/ipsum.js', 'http://4shared.com/pede/libero/quis.jpg', '../src/assets/homme3.jpg', true);
-INSERT INTO `alumni_droits`.`profile` ( `user_id`, `lastname`, `firstname`, `creation_date`, `phone`, `emailpro`, `cv`, `profession_id1`, `employeur`, `poste`, `bio`, `siteweb`, `facebook`, `linkedin`, `twitter`, `instagram`, `photo`, `is_private`) VALUES (6, 'CHARRIÈRE', 'Mathilde', '2022-05-31', '', 'mathilde@alumni.com', 'http://dummyimage.com/148x100.png/5fa2dd/ffffff',11, 'Université Paris Panthéon-Assas', 'Doctorante contractuelle', 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla.', 'http://google.es/pede.xml', 'https://clickbank.net/sem/sed/sagittis.js', 'http://sakura.ne.jp/molestie/hendrerit/at.png', 'http://google.ca/convallis/tortor/risus.jpg', 'https://foxnews.com/dui/proin/leo/odio.html', '../src/assets/femme3.jpg', false);
+INSERT INTO `alumni_droits`.`profile` ( `user_id`, `lastname`, `firstname`, `creation_date`, `phone`, `emailpro`, `cv`, `profession_id`, `employeur`, `poste`, `bio`, `siteweb`, `facebook`, `linkedin`, `twitter`, `instagram`, `photo`, `is_private`) VALUES (1, 'CHAKRI','Emilien','2022-05-31', '', 'emilien@alumni.com', 'http://dummyimage.com/165x100.png/dddddd/000000', 11, 'Université Paris Panthéon-Assas', 'A.T.E.R.', 'In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin interdum mauris non ligula pellentesque ultrices.', 'https://odnoklassniki.ru/posuere/cubilia/curae/duis/faucibus/accumsan.jpg', 'https://java.com/lacus/purus.xml', 'https://senate.gov/in/faucibus/orci/luctus/et/ultrices/posuere.aspx', 'http://bbc.co.uk/nunc/vestibulum/ante/ipsum/primis/in/faucibus.aspx', 'http://vistaprint.com/ut/nulla/sed/accumsan/felis.xml', '../src/assets/homme1.jpg', false);
+INSERT INTO `alumni_droits`.`profile` ( `user_id`, `lastname`, `firstname`, `creation_date`, `phone`, `emailpro`, `cv`, `profession_id`, `employeur`, `poste`, `bio`, `siteweb`, `facebook`, `linkedin`, `twitter`, `instagram`, `photo`, `is_private`) VALUES (2, 'LE PAPE-GARDEUX', 'Alexandre', '2022-05-31', '', 'alexandre@alumni.com', 'http://dummyimage.com/202x100.png/5fa2dd/ffffff', 11, 'Université Paris Panthéon-Assas', 'Doctorant contractuel', 'Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.', 'http://macromedia.com/mattis/nibh/ligula/nec/sem.jpg', 'http://dot.gov/augue/luctus.png', 'https://google.ca/et/ultrices/posuere/cubilia/curae/mauris/viverra.js', 'http://zdnet.com/dapibus/at/diam/nam.aspx', 'https://ox.ac.uk/quam/nec.json', '../src/assets/homme2.jpg', false);
+INSERT INTO `alumni_droits`.`profile` ( `user_id`, `lastname`, `firstname`, `creation_date`, `phone`, `emailpro`, `cv`, `profession_id`, `employeur`, `poste`, `bio`, `siteweb`, `facebook`, `linkedin`, `twitter`, `instagram`, `photo`, `is_private`) VALUES (3, 'PARMENTIER', 'Sarah', '2022-05-31', '', 'sarah@alumni.com', 'http://dummyimage.com/177x100.png/ff4444/ffffff', 5, 'CNEN, DGCL, Ministère de l’Intérieur', 'Stagiaire', 'Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.', 'https://phpbb.com/nulla/tempus/vivamus/in/felis/eu.xml', 'http://t-online.de/turpis/nec.html', 'https://paginegialle.it/cum/sociis/natoque/penatibus/et/magnis.jpg', 'https://g.co/dui/maecenas.png', 'http://zdnet.com/morbi.html', '../src/assets/femme2.jpg', true);
+INSERT INTO `alumni_droits`.`profile` ( `user_id`, `lastname`, `firstname`, `creation_date`, `phone`, `emailpro`, `cv`, `profession_id`, `employeur`, `poste`, `bio`, `siteweb`, `facebook`, `linkedin`, `twitter`, `instagram`, `photo`, `is_private`) VALUES (4, 'PETRILLO', 'Réan', '2022-05-31', '', 'rean@alumni.com', 'http://dummyimage.com/153x100.png/ff4444/ffffff', 8, 'ENM', 'Auditrice de Justice', 'Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lore(igula. Suspendisse ornare consequat lectus.', 'http://rediff.com/nunc/viverra/dapibus.xml', 'http://sfgate.com/hac/habitasse/platea/dictumst/aliquam.aspx', 'http://oaic.gov.au/justo/aliquam.js', 'https://parallels.com/interdum/mauris.aspx', 'https://wufoo.com/vestibulum/quam/sapien/varius.jsp', '../src/assets/femme1.jpg', false);
+INSERT INTO `alumni_droits`.`profile` ( `user_id`, `lastname`, `firstname`, `creation_date`, `phone`, `emailpro`, `cv`, `profession_id`, `employeur`, `poste`, `bio`, `siteweb`, `facebook`, `linkedin`, `twitter`, `instagram`, `photo`, `is_private`) VALUES (5, 'PEROT', 'Pierre', '2022-05-31', '', 'pierre@alumni.com', 'http://dummyimage.com/237x100.png/dddddd/000000', 2, 'Cabinet Hoyng Rokh Monégier', 'Collaborateur', 'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.', 'null', 'https://elpais.com/convallis/duis/consequat/dui/nec/nisi.jpg', 'https://yellowpages.com/scelerisque.json', 'http://earthlink.net/vestibulum/ante/ipsum.js', 'http://4shared.com/pede/libero/quis.jpg', '../src/assets/homme3.jpg', true);
+INSERT INTO `alumni_droits`.`profile` ( `user_id`, `lastname`, `firstname`, `creation_date`, `phone`, `emailpro`, `cv`, `profession_id`, `employeur`, `poste`, `bio`, `siteweb`, `facebook`, `linkedin`, `twitter`, `instagram`, `photo`, `is_private`) VALUES (6, 'CHARRIÈRE', 'Mathilde', '2022-05-31', '', 'mathilde@alumni.com', 'http://dummyimage.com/148x100.png/5fa2dd/ffffff',11, 'Université Paris Panthéon-Assas', 'Doctorante contractuelle', 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla.', 'http://google.es/pede.xml', 'https://clickbank.net/sem/sed/sagittis.js', 'http://sakura.ne.jp/molestie/hendrerit/at.png', 'http://google.ca/convallis/tortor/risus.jpg', 'https://foxnews.com/dui/proin/leo/odio.html', '../src/assets/femme3.jpg', false);
 COMMIT;
 
 -- -----------------------------------------------------
@@ -272,7 +264,7 @@ USE `alumni_droits`;
 INSERT INTO `alumni_droits`.`master` (`profile_id`, `title`, `year`, `university`) VALUES (1, 'Master 2 DPG', 2017, 'Université Paris Panthéon-Assas');
 INSERT INTO `alumni_droits`.`master` (`profile_id`, `title`, `year`, `university`) VALUES (2, 'Master 2 DPG', 2020, 'Université Paris Panthéon-Assas');
 INSERT INTO `alumni_droits`.`master` (`profile_id`, `title`, `year`, `university`) VALUES (3, 'Master 2 DPE', 2020, 'Université Paris Panthéon-Assas');
-INSERT INTO `alumni_droits`.`master` (`profile_id`, `title`, `year`, `university`) VALUES (3, 'Master 2 P', 2021, 'Université Paris Panthéon-Assas');
+INSERT INTO `alumni_droits`.`master` (`profile_id`, `title`, `year`, `university`) VALUES (3, 'Master 2 PLAI', 2021, 'Université Paris Panthéon-Assas');
 INSERT INTO `alumni_droits`.`master` (`profile_id`, `title`, `year`, `university`) VALUES (4, 'Master 2 Droit pénal et sciences pénales', 2020, 'Université Paris Panthéon-Assas');
 INSERT INTO `alumni_droits`.`master` (`profile_id`, `title`, `year`, `university`) VALUES (5, 'Master 2 PLAI', 2014, 'Université Paris Panthéon-Assas');
 INSERT INTO `alumni_droits`.`master` (`profile_id`, `title`, `year`, `university`) VALUES (6, 'Master 2 DPG', 2017, 'Université Paris Panthéon-Assas');
