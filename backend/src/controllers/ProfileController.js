@@ -9,8 +9,7 @@ class ProfileController {
       if (profiles[0]) {
         const diplomes = await models.diplome.multipleFind(profiles);
         profiles.forEach((pers, index) => {
-          let aa = diplomes[index];
-          pers.diplome = aa;
+          pers.diplome = diplomes[index];
         });
       }
       res.status(200).json(profiles);
@@ -26,6 +25,8 @@ class ProfileController {
       if (profiles[0][0]) {
         const diplomes = await models.diplome.multipleFind(profiles[0]);
         const masters = await models.master.multipleFind(profiles[0]);
+        const job = await models.profession.jobFind(profiles[0]);
+        profiles[0][0].job = job[0][0].job;
         // const masters = await Promise.all(
         //   profiles[0].map((pers) => models.master.find(pers.id))
         // );
@@ -34,7 +35,7 @@ class ProfileController {
           pers.masters = masters[index];
         });
       }
-      res.status(200).json(profiles[0]);
+      res.status(200).json(profiles[0][0]);
     } catch {
       res.status(500).send("erreur");
     }
