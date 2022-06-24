@@ -22,24 +22,26 @@ function Profile() {
 
   return (
     <div>
-      <div className="md:flex md:flex-col md:justify-start bg-zinc-100 m-3 md:mt-10 md:mx-10 lg:mx-20 xl:mx-40 rounded-md shadow-md border-2">
-        <div className="md:flex md:flex-row md:items-center">
-          <img
-            src={rows != null && rows.photo}
-            alt={
-              rows != null && rows.firstname
-                ? `Portrait de ${rows.firstname} ${rows.lastname}`
-                : ""
-            }
-            className="relative md:absolute md:flex md:justify-start z-10 w-[30%] md:w-[15%] lg:w-[13%] xl:w-[10%] mt-2 mx-auto top-2 md:top-[5rem] lg:top-[4rem] md:left-20 lg:left-[8rem] xl:left-60 md:mt-5 rounded-full"
-          />
-          <div className="flex justify-center items-center md:relative md:text-start bg-red-800 text-slate-50 h-[3rem] md:h-[3rem] w-full md:w-[100%] md:rounded-t-md">
-            <p className="text-xl mr-2 md:pl-[8rem] lg:text-1xl xl:text-2xl">
-              {rows != null && rows.firstname}
-            </p>
-            <p className="text-2xl font-bold lg:text-2xl xl:text-3xl">
-              {rows != null && rows.lastname}
-            </p>
+      <div className="md:flex md:flex-col md:justify-start bg-zinc-100 m-3 mt-8 md:mt-10 md:mx-10 md:pb-6 lg:mx-20 xl:mx-40 rounded-md shadow-md border-2">
+        <div className="md:flex md:flex-row md:items-center mb-2 ">
+          <div className="flex justify-between items-center px-5 md:px-7 lg:px-9 xl:px-12 md:text-start bg-red-800 text-slate-50 h-[2.5rem] lg:h-[3rem] w-full md:w-[100%] rounded-t-md">
+            <img
+              src={rows != null && rows.photo}
+              alt={
+                rows != null && rows.firstname
+                  ? `Portrait de ${rows.firstname} ${rows.lastname}`
+                  : ""
+              }
+              className="md:flex md:justify-start z-10 w-[22%] md:w-[13%] lg:w-[12%] xl:w-[10%] md:left-20 lg:left-[8rem] xl:left-60 rounded-full"
+            />
+            <div className="flex items-center">
+              <p className="text-sm mr-2 lg:text-[1.3rem]">
+                {rows != null && rows.firstname}
+              </p>
+              <p className="text-base font-bold lg:text-2xl">
+                {rows != null && rows.lastname}
+              </p>
+            </div>
           </div>
         </div>
 
