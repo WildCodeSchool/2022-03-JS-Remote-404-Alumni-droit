@@ -1,6 +1,8 @@
 const { v4: uuidv4 } = require("uuid");
 const models = require("../models");
 const { passwordHash } = require("../services/password");
+// passwordVerify
+// const { jwtSign } = require("../services/jwt");
 
 class UserController {
   static browse = (req, res) => {
@@ -53,39 +55,6 @@ class UserController {
       });
   };
 
-  /// /
-  // static register = async (req, res) => {
-  //   const { email, password } = req.body;
-
-  //   if (!email || !password) {
-  //     return res
-  //       .status(400)
-  //       .send({ error: "Please specify both email and password" });
-  //   }
-
-  //   try {
-  //     const hash = await passwordHash(password);
-
-  //     models.user
-  //       .insert({ email, password: hash })
-  //       .then(([result]) => {
-  //         res.status(201).send({ id: result.insertId, email });
-  //       })
-  //       .catch((err) => {
-  //         console.error(err);
-  //         res.status(500).send({
-  //           error: err.message,
-  //         });
-  //       });
-  //   } catch (err) {
-  //     console.error(err);
-  //     res.status(500).send({
-  //       error: err.message,
-  //     });
-  //   }
-  // };
-
-  /// //
   static add = async (req, res) => {
     const user = req.body;
     try {
@@ -100,6 +69,52 @@ class UserController {
       res.status(500).send(error);
     }
   };
+
+  // static login = (req, res) => {
+  //   const { email, password } = req.body;
+
+  //   if (!email || !password) {
+  //     return res
+  //       .status(400)
+  //       .send({ error: "Please specify both email and password" });
+  //   }
+
+  //   models.user
+  //     .findByMail(email)
+  //     .then(async ([rows]) => {
+  //       if (rows[0] == null) {
+  //         return res.status(401).send({
+  //           error: "Invalid email",
+  //         });
+  //       }
+  //       const { id, registeredEmail, password: hash, role } = rows[0];
+
+  //       if (await passwordVerify(hash, password)) {
+  //         const token = jwtSign({ id, role }, { expiresIn: "1h" });
+
+  //         return res
+  //           .cookie("access_token", token, {
+  //             httpOnly: true,
+  //             secure: process.env.NODE_ENV === "production",
+  //           })
+  //           .status(200)
+  //           .send({
+  //             id,
+  //             registeredEmail,
+  //             role,
+  //           });
+  //       }
+  //       return res.status(401).send({
+  //         error: "Invalid password",
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //       return res.status(500).send({
+  //         error: err.message,
+  //       });
+  //     });
+  // };
 
   static delete = (req, res) => {
     models.user
