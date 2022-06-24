@@ -13,13 +13,12 @@ class ProfileManager extends AbstractManager {
     const sqlValue = [];
 
     if (job) {
-      sqlQuery += ` INNER JOIN profession ON profession_id1 = profession.id`;
+      sqlQuery += ` INNER JOIN profession ON profession_id = profession.id`;
     }
     if (diplome || promo) {
       sqlQuery += ` INNER JOIN profile_diplome ON profile_id = profile.user_id`;
       sqlQuery += ` INNER JOIN diplome ON diplome_id = diplome.id`;
     }
-
     if (diplome) {
       sqlQuery += `${this.andOrWhere(sqlQuery)} diplome.id = ?`;
       sqlValue.push(`${diplome}`);
@@ -29,7 +28,7 @@ class ProfileManager extends AbstractManager {
       sqlValue.push(`${promo}`);
     }
     if (job) {
-      sqlQuery += ` ${this.andOrWhere(sqlQuery)} profession_id1 = ?`;
+      sqlQuery += ` ${this.andOrWhere(sqlQuery)} profession_id = ?`;
       sqlValue.push(`${job}`);
     }
     if (nomPrenom) {

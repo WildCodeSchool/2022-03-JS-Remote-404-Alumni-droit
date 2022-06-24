@@ -1,12 +1,12 @@
 const AbstractManager = require("./AbstractManager");
 
-class ProfileManager extends AbstractManager {
-  static table = "diplome";
+class MasterManager extends AbstractManager {
+  static table = "master";
 
   find(id) {
     return this.connection
       .query(
-        `select year, title from profile_diplome as PD INNER JOIN ${this.table} as TT ON PD.diplome_id = TT.id WHERE PD.profile_id = ?`,
+        `select year, title, university from profile as P INNER JOIN ${this.table} as M ON P.id = M.profile_id WHERE P.id = ?`,
         [id]
       )
       .then((res) => res[0]);
@@ -17,4 +17,4 @@ class ProfileManager extends AbstractManager {
   }
 }
 
-module.exports = ProfileManager;
+module.exports = MasterManager;

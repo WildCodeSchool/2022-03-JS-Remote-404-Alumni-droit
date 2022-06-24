@@ -1,72 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+import { useParams } from "react-router-dom";
+
+import axios from "axios";
 
 import Footer from "@components/Footer";
 
-import PortraitAlumni from "../assets/alumni-girl.jpg";
 import linkedin from "../assets/linkedin.png";
 import twitter from "../assets/twitter.png";
 
-// const updateTag = ({ name, content }) => {
-//   const meta = document.createElement('meta');
-//   meta.content = content;
-//   meta.name = name;
-//   document.getElementsByTagName('head')[0].appendChild(meta);
-// }
-
-// const updateMetaData = (data) => {
-//   if (data.description) {
-//     updateTag({ name: 'description', content: data.description })
-//   }
-
-//   if (data.title) {
-//     updateTag({ name: 'title', content: data.title })
-//   }
-
-//   if (data.ogUrl) {
-//     updateTag({ property: 'og:url', content: data.ogUrl })
-//   }
-
-//   if (data.ogType) {
-//     updateTag({ property: 'og:type', content: data.ogType })
-//   }
-
-//   if (data.ogTitle) {
-//     updateTag({ property: 'og:title', content: data.ogTitle })
-//   }
-
-//   if (data.ogDescription) {
-//     updateTag({ property: 'og:description', content: data.ogDescription })
-//   }
-
-//   if (data.ogImage) {
-//     updateTag({ property: 'og:image', content: data.ogImage })
-//   }
-// }
-
-// useEffect(() => {
-//   fetch('')
-//     .then(res => res.json())
-//     .then(data => {
-//       setProfile(data);
-//       updateMetaData(data);
-//     })
-// }, [])
-
 function Profile() {
+  const { userId } = useParams();
+  const [rows, setRows] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/annuaire/${userId}`)
+      .then((res) => setRows(res.data))
+      .catch((err) => console.error(err));
+  }, [userId]);
+
   return (
-    <>
-      <div className="md:flex md:flex-col md:justify-start bg-zinc-100 m-3 mt-8 md:mt-10 md:mx-10 lg:mx-20 xl:mx-40 rounded-md shadow-md border-2">
-        <div className="md:flex md:flex-row md:items-center mb-2">
-          <div className="flex justify-between items-center px-5 md:px-7 lg:px-9 xl:px-12 md:text-start bg-red-800 text-slate-50 h-[2.5rem] lg:h-[3rem] w-full md:w-[100%] rounded-t-md">
-            <img
-              src={PortraitAlumni}
-              alt="alumni girl"
-              className="md:flex md:justify-start z-10 w-[22%] md:w-[13%] lg:w-[12%] xl:w-[10%] md:left-20 lg:left-[8rem] xl:left-60 rounded-full"
-            />
-            <div className="flex items-center">
-              <p className="text-sm mr-2 lg:text-[1.3rem]">Marie-Françoise</p>
-              <p className="text-base font-bold lg:text-2xl">Clara Dupont</p>
-            </div>
+    <div>
+      <div className="md:flex md:flex-col md:justify-start bg-zinc-100 m-3 md:mt-10 md:mx-10 lg:mx-20 xl:mx-40 rounded-md shadow-md border-2">
+        <div className="md:flex md:flex-row md:items-center">
+          <img
+            src={rows != null && rows.photo}
+            alt={
+              rows != null && rows.firstname
+                ? `Portrait de ${rows.firstname} ${rows.lastname}`
+                : ""
+            }
+            className="relative md:absolute md:flex md:justify-start z-10 w-[30%] md:w-[15%] lg:w-[13%] xl:w-[10%] mt-2 mx-auto top-2 md:top-[5rem] lg:top-[4rem] md:left-20 lg:left-[8rem] xl:left-60 md:mt-5 rounded-full"
+          />
+          <div className="flex justify-center items-center md:relative md:text-start bg-red-800 text-slate-50 h-[3rem] md:h-[3rem] w-full md:w-[100%] md:rounded-t-md">
+            <p className="text-xl mr-2 md:pl-[8rem] lg:text-1xl xl:text-2xl">
+              {rows != null && rows.firstname}
+            </p>
+            <p className="text-2xl font-bold lg:text-2xl xl:text-3xl">
+              {rows != null && rows.lastname}
+            </p>
           </div>
         </div>
 
@@ -77,19 +50,31 @@ function Profile() {
           <div className="md:w-[45%]">
             {/* PROFESSION ACTUELLE */}
             <h2 className="mt-0 mb-1 text-2xl font-bold my-5 text-red-800">
-              Profession actuelle :
+              Profession :
             </h2>
             <p className="font-semibold">
-              Employeur :
+              Profession :{" "}
+              <span className="font-normal">{rows != null && rows.job}</span>
+            </p>
+            <p className="font-semibold">
+              Poste actuel :{" "}
+              <span className="font-normal">{rows != null && rows.poste}</span>
+            </p>
+            <p className="font-semibold">
+              Employeur :{" "}
               <span className="font-normal">
-                Tribunal de Grande Instance Paris
+                {rows != null && rows.employeur}
               </span>
             </p>
             <p className="font-semibold">
-              Poste actuel :<span className="font-normal"> Juriste</span>
+              {/* Poste actuel :<span className="font-normal"> {job}</span> */}
             </p>
             <p className="font-semibold mt-2">
-              Consulter CV :<span className="font-normal"> Cliquez-ici</span>
+              Consulter CV :
+              <span className="font-normal" src={rows != null && rows.cv}>
+                {" "}
+                Cliquez-ici
+              </span>
             </p>
 
             {/* COORDONNEES */}
@@ -99,11 +84,12 @@ function Profile() {
             <p className="font-semibold">
               Email :{" "}
               <span className="font-normal">
-                mariefrancoise.cd@tdgi-paris.fr
+                {rows != null && rows.emailpro}
               </span>
             </p>
             <p className="font-semibold mb-5">
-              Téléphone : <span className="font-normal">06 62 48 25 69</span>
+              Téléphone :{" "}
+              <span className="font-normal"> {rows != null && rows.phone}</span>
             </p>
 
             {/* DIPLOMES OBTENUS */}
@@ -147,14 +133,10 @@ function Profile() {
               Parcours professionnel :
             </h2>
             <p className="w-full md:w-[90%]">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus
-              temporibus at adipisci ad nihil odio tempore saepe reiciendis
-              harum maxime amet, numquam veniam et, ipsum laborum praesentium.
-              In, ullam asperiores. Laborum distinctio similique veniam
-              voluptatum asperiores facere perferendis, doloremque quasi vel
-              sint, non aspernatur architecto laudantium. Voluptates explicabo
-              beatae quos magnam accusamus cupiditate, iusto, excepturi unde
-              possimus aut dolore ipsum rum praes.
+              {rows != null && rows.bio
+                ? rows.bio
+                : ` n'a pas encore rempli cette partie de son profil`}
+              {/* `${rows.firstname} ${rows.lastname} */}
             </p>
 
             {/* RESEAUX SOCIAUX */}
@@ -164,20 +146,20 @@ function Profile() {
             </h2>
 
             <div className="flex items-center mt-2">
-              <img
-                src={linkedin}
-                alt="alumni girl"
-                className="z-10 w-[6%] mr-2"
-              />
-              <p>www.linkedIn.com/MarieFrancoise</p>
+              <img src={linkedin} alt="LinkedIn" className="z-10 w-[6%] mr-2" />
+              <p>{rows != null && rows.linkedin}</p>
             </div>
             <div className="flex items-center mt-2 mb-5">
-              <img
-                src={twitter}
-                alt="alumni girl"
-                className="z-10 w-[6%] mr-2"
-              />
-              <p>www.twitter.com/MarieFrancoise</p>
+              <img src={twitter} alt="Twitter" className="z-10 w-[6%] mr-2" />
+              <p>{rows != null && rows.twitter}</p>
+              {/* <div className="flex items-center mt-2 mb-5">
+                <img
+                  src={instagram}
+                  alt="Instagram"
+                  className="z-10 w-[6%] mr-2"
+                />
+                <p>{rows != null && rows.instagram}</p>
+              </div> */}
             </div>
           </div>
         </div>
@@ -191,7 +173,7 @@ function Profile() {
         </button>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 

@@ -17,7 +17,7 @@ function App() {
         <Route path="/" element={<Listing />} />
         <Route path="/identification/" element={<Identification />} />
         <Route path="/signup/" element={<SignUp />} />
-        <Route path="/profile/" element={<Profile />} />
+        <Route path="/profile/:userId" element={<Profile />} />
         <Route path="/rgpd/" element={<RGPD />} />
       </Routes>
     </div>
