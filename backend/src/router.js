@@ -1,11 +1,14 @@
 const express = require("express");
+const { validateUser } = require("./middlewares/userMiddleware");
 
-const { ProfileController } = require("./controllers");
+const { ProfileController, UserController } = require("./controllers");
 
 const router = express.Router();
 
 router.get("/annuaire", ProfileController.browse);
 router.get("/annuaire/:id", ProfileController.read);
+
+router.post("/signIn", validateUser, UserController.add);
 
 // router.put("/items/:id", ItemController.edit);
 // router.post("/items", ItemController.add);
