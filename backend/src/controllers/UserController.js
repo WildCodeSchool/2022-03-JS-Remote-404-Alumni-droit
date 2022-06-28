@@ -1,8 +1,8 @@
-const { v4: uuidv4 } = require("uuid");
 const models = require("../models");
-const { passwordHash } = require("../services/password");
-// passwordVerify
-// const { jwtSign } = require("../services/jwt");
+
+const { v4: uuidv4 } = require("uuid");
+const { passwordHash, passwordVerify } = require("../services/password");
+const { jwtSign } = require("../services/jwt");
 
 class UserController {
   static browse = (req, res) => {
@@ -70,51 +70,48 @@ class UserController {
     }
   };
 
-  // static login = (req, res) => {
-  //   const { email, password } = req.body;
+  static login = (req, res) => {
+    models.user
+      .findByMail(req.body.email)
+      .then(async (rows) => {
+        if (rows[0] == null) {
+          return res.status(401).send({
+            error: "Mot de passe ou email erroné",
+          });
+        }
 
-  //   if (!email || !password) {
-  //     return res
-  //       .status(400)
-  //       .send({ error: "Please specify both email and password" });
-  //   }
+        if (rows[0].is_valid) {
+          if (await passwordVerify(rows[0].password, req.body.password)) {
+            const profile = await models.profile.findMyProfile(rows[0].id);
+            const token = jwtSign(
+              { email: rows[0].email, role: rows[0].role },
+              { expiresIn: "1h" }
+            );
+            delete rows[0].password;
 
-  //   models.user
-  //     .findByMail(email)
-  //     .then(async ([rows]) => {
-  //       if (rows[0] == null) {
-  //         return res.status(401).send({
-  //           error: "Invalid email",
-  //         });
-  //       }
-  //       const { id, registeredEmail, password: hash, role } = rows[0];
-
-  //       if (await passwordVerify(hash, password)) {
-  //         const token = jwtSign({ id, role }, { expiresIn: "1h" });
-
-  //         return res
-  //           .cookie("access_token", token, {
-  //             httpOnly: true,
-  //             secure: process.env.NODE_ENV === "production",
-  //           })
-  //           .status(200)
-  //           .send({
-  //             id,
-  //             registeredEmail,
-  //             role,
-  //           });
-  //       }
-  //       return res.status(401).send({
-  //         error: "Invalid password",
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //       return res.status(500).send({
-  //         error: err.message,
-  //       });
-  //     });
-  // };
+            return res
+              .cookie("access_token", token, {
+                httpOnly: true,
+                expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+              })
+              .status(200)
+              .json({ ...rows[0], ...profile[0] });
+          }
+          return res.status(401).send({
+            error: "Mot de passe ou email erroné",
+          });
+        }
+        return res.status(401).send({
+          error: "Votre compte est en cours de validation",
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+        return res.status(500).send({
+          error: err.message,
+        });
+      });
+  };
 
   static delete = (req, res) => {
     models.user
