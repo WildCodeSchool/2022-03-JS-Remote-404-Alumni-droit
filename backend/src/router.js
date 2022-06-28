@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.get("/annuaire", ProfileController.browse);
 router.get("/annuaire/:id", ProfileController.read);
+router.get("/count", ProfileController.count);
 
 router.post("/signIn", validateUser, UserController.add);
 
