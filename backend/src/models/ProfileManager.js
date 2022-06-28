@@ -12,6 +12,8 @@ class ProfileManager extends AbstractManager {
     let sqlQuery = `SELECT * FROM ${ProfileManager.table}`;
     const sqlValue = [];
 
+    sqlQuery += ` INNER JOIN user ON user_id = user.id`;
+
     if (job) {
       sqlQuery += ` INNER JOIN profession ON profession_id = profession.id`;
     }
@@ -19,6 +21,9 @@ class ProfileManager extends AbstractManager {
       sqlQuery += ` INNER JOIN profile_diplome ON profile_id = profile.user_id`;
       sqlQuery += ` INNER JOIN diplome ON diplome_id = diplome.id`;
     }
+
+    sqlQuery += ` ${this.andOrWhere(sqlQuery)} is_valid = 1`;
+
     if (diplome) {
       sqlQuery += `${this.andOrWhere(sqlQuery)} diplome.id = ?`;
       sqlValue.push(`${diplome}`);
