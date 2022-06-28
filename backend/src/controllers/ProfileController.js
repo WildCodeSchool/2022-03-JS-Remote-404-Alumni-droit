@@ -2,6 +2,16 @@
 const models = require("../models");
 
 class ProfileController {
+  static count = async (req, res) => {
+    // count how many alumni
+    try {
+      const countAlumni = await models.profile.countAll(req.query);
+      res.status(200).json(countAlumni);
+    } catch {
+      res.status(500).send("erreur");
+    }
+  };
+
   static browse = async (req, res) => {
     // "annuaire" listing
     try {

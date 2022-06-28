@@ -73,6 +73,14 @@ class ProfileManager extends AbstractManager {
     );
   }
 
+  countAll() {
+    return this.connection
+      .query(
+        `SELECT COUNT(*) as n FROM ${ProfileManager.table} INNER JOIN user ON user.id = ${ProfileManager.table}.user_id WHERE is_valid = true`
+      )
+      .then((res) => res[0][0].n);
+  }
+
   update(item) {
     return this.connection.query(
       `update ${ProfileManager.table} set title = ? where id = ?`,
