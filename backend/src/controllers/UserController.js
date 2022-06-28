@@ -1,6 +1,8 @@
-const { v4: uuidv4 } = require("uuid");
 const models = require("../models");
-const { passwordHash } = require("../services/password");
+
+const { v4: uuidv4 } = require("uuid");
+const { passwordHash, passwordVerify } = require("../services/password");
+const { jwtSign } = require("../services/jwt");
 
 class UserController {
   static browse = (req, res) => {
@@ -53,39 +55,6 @@ class UserController {
       });
   };
 
-  /// /
-  // static register = async (req, res) => {
-  //   const { email, password } = req.body;
-
-  //   if (!email || !password) {
-  //     return res
-  //       .status(400)
-  //       .send({ error: "Please specify both email and password" });
-  //   }
-
-  //   try {
-  //     const hash = await passwordHash(password);
-
-  //     models.user
-  //       .insert({ email, password: hash })
-  //       .then(([result]) => {
-  //         res.status(201).send({ id: result.insertId, email });
-  //       })
-  //       .catch((err) => {
-  //         console.error(err);
-  //         res.status(500).send({
-  //           error: err.message,
-  //         });
-  //       });
-  //   } catch (err) {
-  //     console.error(err);
-  //     res.status(500).send({
-  //       error: err.message,
-  //     });
-  //   }
-  // };
-
-  /// //
   static add = async (req, res) => {
     const user = req.body;
     try {
@@ -99,6 +68,49 @@ class UserController {
     } catch (error) {
       res.status(500).send(error);
     }
+  };
+
+  static login = (req, res) => {
+    models.user
+      .findByMail(req.body.email)
+      .then(async (rows) => {
+        if (rows[0] == null) {
+          return res.status(401).send({
+            error: "Mot de passe ou email erroné",
+          });
+        }
+
+        if (rows[0].is_valid) {
+          if (await passwordVerify(rows[0].password, req.body.password)) {
+            const profile = await models.profile.findMyProfile(rows[0].id);
+            const token = jwtSign(
+              { email: rows[0].email, role: rows[0].role },
+              { expiresIn: "1h" }
+            );
+            delete rows[0].password;
+
+            return res
+              .cookie("access_token", token, {
+                httpOnly: true,
+                expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+              })
+              .status(200)
+              .json({ ...rows[0], ...profile[0] });
+          }
+          return res.status(401).send({
+            error: "Mot de passe ou email erroné",
+          });
+        }
+        return res.status(401).send({
+          error: "Votre compte est en cours de validation",
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+        return res.status(500).send({
+          error: err.message,
+        });
+      });
   };
 
   static delete = (req, res) => {

@@ -43,6 +43,12 @@ class ProfileManager extends AbstractManager {
     return this.connection.query(sqlQuery, sqlValue).then((res) => res[0]);
   }
 
+  findMyProfile(id) {
+    return this.connection
+      .query(`select * from  ${ProfileManager.table} where user_id = ?`, [id])
+      .then((res) => res[0]);
+  }
+
   insert(user, id) {
     const date = new Date();
     return this.connection.query(

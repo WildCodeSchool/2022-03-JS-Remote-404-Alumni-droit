@@ -1,5 +1,5 @@
 const express = require("express");
-const { validateUser } = require("./middlewares/userMiddleware");
+const { validateUser, validateLogin } = require("./middlewares/userMiddleware");
 
 const { ProfileController, UserController } = require("./controllers");
 
@@ -9,6 +9,7 @@ router.get("/annuaire", ProfileController.browse);
 router.get("/annuaire/:id", ProfileController.read);
 
 router.post("/signIn", validateUser, UserController.add);
+router.post("/login", validateLogin, UserController.login);
 
 // router.put("/items/:id", ItemController.edit);
 // router.post("/items", ItemController.add);

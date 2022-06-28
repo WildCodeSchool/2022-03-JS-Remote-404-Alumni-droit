@@ -26,4 +26,17 @@ const validateUser = (req, res, next) => {
   }
 };
 
-module.exports = { validateUser };
+const validateLogin = (req, res, next) => {
+  const { error } = Joi.object({
+    email: Joi.string().max(255).presence("required"),
+    password: Joi.string().max(30).presence("required"),
+  }).validate(req.body, { abortEarly: false });
+
+  if (!error) {
+    next();
+  } else {
+    res.status(400).json("Les champs saisis sont incorrects");
+  }
+};
+
+module.exports = { validateUser, validateLogin };
