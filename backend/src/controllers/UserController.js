@@ -1,6 +1,5 @@
-const models = require("../models");
-
 const { v4: uuidv4 } = require("uuid");
+const models = require("../models");
 const { passwordHash, passwordVerify } = require("../services/password");
 const { jwtSign } = require("../services/jwt");
 
