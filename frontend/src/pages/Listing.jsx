@@ -9,9 +9,9 @@ import axios from "axios";
 
 function Listing() {
   const [rows, setRows] = useState([]);
-  const [diplome, setDiplome] = useState();
-  const [profession, setProfession] = useState();
-  const [years, setYears] = useState();
+  const [diplome, setDiplome] = useState("");
+  const [profession, setProfession] = useState("");
+  const [years, setYears] = useState("");
   const [search, setSearch] = useState("");
 
   function urlParams(url) {
@@ -24,10 +24,10 @@ function Listing() {
       url += `${urlParams(url)}diplome=${diplome}`;
     }
     if (profession) {
-      url += `?profession=${profession}`;
+      url += `${urlParams(url)}profession=${profession}`;
     }
     if (years) {
-      url += `?years=${years}`;
+      url += `${urlParams(url)}years=${years}`;
     }
     axios
       .get(url)
