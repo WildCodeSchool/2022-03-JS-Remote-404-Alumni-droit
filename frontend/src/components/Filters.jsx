@@ -3,35 +3,6 @@ import React, { useState, useEffect } from "react";
 import { TextField, Autocomplete } from "@mui/material";
 import axios from "axios";
 
-// const Diplome = [
-//   { label: "Diplôme du Collège de Droit", id: 1 },
-//   { label: "Certificat de l'École de Droit", id: 2 },
-//   { label: "Diplôme de l'École de Droit", id: 3 },
-// ];
-
-// const Years = [
-//   { label: "1990", id: 1 },
-//   { label: "1991", id: 2 },
-//   { label: "1992", id: 3 },
-//   { label: "1993", id: 4 },
-// ];
-
-// const Profession = [
-//   { label: "Administrateur judiciaire", id: 1 },
-//   { label: "Avocat", id: 2 },
-//   { label: "Avocat au Conseil d'Etat et à la Cour de cassation", id: 3 },
-//   { label: "Commissaire de justice", id: 4 },
-//   { label: "Etudiant", id: 5 },
-//   { label: "Fonctionnaire", id: 6 },
-//   { label: "Juriste d’entreprise", id: 7 },
-//   { label: "Magistrat", id: 8 },
-//   { label: "Notaire", id: 9 },
-//   { label: "Officier", id: 10 },
-//   { label: "Universitaire", id: 11 },
-//   { label: "Autres professions juridiques", id: 12 },
-//   { label: "Autres professions", id: 13 },
-// ];
-
 function Filters({ setDiplome, setProfession, setYears, setSearch }) {
   const [diplomeData, setDiplomeData] = useState([]);
   const [professionData, setProfessionData] = useState([]);
