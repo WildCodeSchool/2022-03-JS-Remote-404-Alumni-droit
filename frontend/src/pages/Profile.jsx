@@ -76,9 +76,18 @@ function Profile() {
 
               <p className="font-semibold mt-2">
                 Consulter CV :
-                <span className="font-normal" src={rows != null && rows.cv}>
+                <span
+                  className="font-normal hover:text-red-800 visited:text-red-700"
+                  src={rows != null && rows.cv}
+                >
                   {" "}
-                  Cliquez-ici
+                  <a
+                    href={rows != null && rows.cv}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    {rows.cv ? "Cliquez-ici" : "Non Renseigné"}
+                  </a>
                 </span>
               </p>
               {/* COORDONNEES */}
@@ -95,7 +104,7 @@ function Profile() {
                 Téléphone :{" "}
                 <span className="font-normal">
                   {" "}
-                  {rows != null && rows.phone}
+                  {rows.phone ? rows.phone : "Non Renseigné"}
                 </span>
               </p>
               {/* DIPLOMES OBTENUS */}
@@ -159,6 +168,7 @@ function Profile() {
                     className="z-10 w-[6%] mr-2"
                   />
                   <a
+                    className="font-normal hover:text-red-800 visited:text-red-700"
                     href={rows != null && rows.linkedin}
                     rel="noreferrer"
                     target="_blank"
@@ -177,6 +187,7 @@ function Profile() {
                     className="z-10 w-[6%] mr-2"
                   />
                   <a
+                    className="font-normal hover:text-red-800 visited:text-red-700"
                     href={rows != null && rows.twitter}
                     rel="noreferrer"
                     target="_blank"
@@ -195,6 +206,7 @@ function Profile() {
                     className="z-10 w-[6%] mr-2"
                   />
                   <a
+                    className="font-normal hover:text-red-800 visited:text-red-700"
                     href={rows != null && rows.instagram}
                     rel="noreferrer"
                     target="_blank"
@@ -213,6 +225,7 @@ function Profile() {
                     className="z-10 w-[6%] mr-2"
                   />
                   <a
+                    className="font-normal hover:text-red-800 visited:text-red-700"
                     href={rows != null && rows.facebook}
                     rel="noreferrer"
                     target="_blank"
