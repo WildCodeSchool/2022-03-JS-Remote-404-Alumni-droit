@@ -59,7 +59,7 @@ function Listing() {
               job={row.job}
               key={row.id}
               userId={row.user_id}
-              diplom={row.diplome}
+              diplome={row.diplome}
             />
           ))}
       </div>
