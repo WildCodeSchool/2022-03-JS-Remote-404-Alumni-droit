@@ -76,12 +76,10 @@ function Profile() {
 
               <p className="font-semibold mt-2">
                 Consulter CV :
-                <span
-                  className="font-normal hover:text-red-800 visited:text-red-700"
-                  src={rows != null && rows.cv}
-                >
+                <span src={rows != null && rows.cv}>
                   {" "}
                   <a
+                    className="font-normal hover:text-red-800 visited:text-red-700"
                     href={rows != null && rows.cv}
                     rel="noreferrer"
                     target="_blank"
@@ -97,7 +95,13 @@ function Profile() {
               <p className="font-semibold">
                 Email :{" "}
                 <span className="font-normal">
-                  {rows != null && rows.emailpro}
+                  <a
+                    className="font-normal hover:text-red-800
+                  visited:text-red-700"
+                    href={rows.emailpro ? `mailto:${rows.emailpro}` : ""}
+                  >
+                    {rows.emailpro ? rows.emailpro : "Non Renseigné"}
+                  </a>
                 </span>
               </p>
               <p className="font-semibold mb-5">
