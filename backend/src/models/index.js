@@ -51,4 +51,3 @@ const handler = {
 };
 
 module.exports = new Proxy(models, handler);
-// module.exports = pool;

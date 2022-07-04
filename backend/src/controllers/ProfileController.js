@@ -2,75 +2,53 @@
 const models = require("../models");
 
 class ProfileController {
-  static browse = async (req, res) => {
+  static count = async (req, res) => {
+    // count how many alumni
     try {
-      const profiles = await models.profile.findAll(req.query);
-      if (profiles[0]) {
-        for (let i = 0; i < profiles.length; i += 1) {
-          const diplomes = await models.diplome.find(profiles[i].id);
-          const diplo = diplomes[0];
-          profiles[i].diplome = diplo;
-        }
-        res.status(200).json(profiles);
-      } else {
-        // tableau vide, pas de profil
-      }
+      const countAlumni = await models.profile.countAll(req.query);
+      res.status(200).json(countAlumni);
     } catch {
       res.status(500).send("erreur");
     }
-    //   // ici
-    // promise all
-    // find by id
-    // rows.forEach(row =>{ model.diplome.find(row.id) })
-
-    // passer en async await, déclarer le profile controller en async
-
-    // try {
-    //   const objets = await db.query("SELECT * FROM objets WHERE id_pages = ?", [
-    //     id,
-    //   ]);
-    //   const objetsDetail = [];
-    //   for (let i = 0; i < objets[0].length; i++) {
-    //     const detailsProvisoire = await db.query(
-    //       "SELECT * FROM profession WHERE id_objets = ?",
-    //       [objets[0][i].id_objets]
-    //     );
-    //     const objetsProvisoire = {
-    //       component: "objets",
-    //       data: {
-    //         ...objets[0][i],
-    //         details: detailsProvisoire[0],
-    //       },
-    //     };
-    //     objetsDetail.push(objetsProvisoire);
-    //   }
-    //   return objetsDetail;
-    // } catch (error) {
-    //   console.error(error);
-    // }
-
-    //
-    // })
-    // .catch((err) => {
-    //   console.error(err);
-    //   res.sendStatus(500);
-    // });
   };
 
-  static read = (req, res) => {
-    models.profile
-      .find(req.params.id)
-      .then(([rows]) => {
-        if (rows[0] == null) {
-          res.sendStatus(404);
-        } else {
-          res.send(rows[0]);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-      });
+  static browse = async (req, res) => {
+    // "annuaire" listing
+    try {
+      const profiles = await models.profile.findAll(req.query);
+      if (profiles[0]) {
+        const diplomes = await models.diplome.multipleFind(profiles);
+        profiles.forEach((pers, index) => {
+          pers.diplome = diplomes[index];
+        });
+      }
+      res.status(200).json(profiles);
+    } catch {
+      res.status(500).send("erreur");
+    }
+  };
+
+  static read = async (req, res) => {
+    // fiche profile
+    try {
+      const profiles = await models.profile.find(req.params.id);
+      if (profiles[0][0]) {
+        const diplomes = await models.diplome.multipleFind(profiles[0]);
+        const masters = await models.master.multipleFind(profiles[0]);
+        const job = await models.profession.jobFind(profiles[0]);
+        profiles[0][0].job = job[0][0].job;
+        // const masters = await Promise.all(
+        //   profiles[0].map((pers) => models.master.find(pers.id))
+        // );
+        profiles[0].forEach((pers, index) => {
+          pers.diplome = diplomes[index];
+          pers.masters = masters[index];
+        });
+      }
+      res.status(200).json(profiles[0][0]);
+    } catch {
+      res.status(500).send("erreur");
+    }
   };
 
   static edit = (req, res) => {

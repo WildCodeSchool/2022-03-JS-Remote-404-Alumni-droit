@@ -151,6 +151,7 @@ CREATE TABLE IF NOT EXISTS `alumni_droits`.`profile` (
   `photo` VARCHAR(255) NULL,
   `is_private` TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`, `user_id`, `profession_id`),
+
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   INDEX `fk_profile_user1_idx` (`user_id` ASC),
   INDEX `fk_profile_profession1_idx` (`profession_id` ASC),
@@ -160,6 +161,7 @@ CREATE TABLE IF NOT EXISTS `alumni_droits`.`profile` (
   UNIQUE INDEX `instagram_UNIQUE` (`instagram` ASC),
   UNIQUE INDEX `photo_UNIQUE` (`photo` ASC),
   UNIQUE INDEX `cv_UNIQUE` (`cv` ASC),
+
   CONSTRAINT `fk_profile_user1`
     FOREIGN KEY (`user_id`)
     REFERENCES `alumni_droits`.`user` (`id`)

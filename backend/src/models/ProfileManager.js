@@ -12,13 +12,16 @@ class ProfileManager extends AbstractManager {
     let sqlQuery = `SELECT * FROM ${ProfileManager.table}`;
     const sqlValue = [];
 
-    if (job) {
-      sqlQuery += ` INNER JOIN profession ON profession_id1 = profession.id`;
-    }
+    sqlQuery += ` INNER JOIN user ON user_id = user.id`;
+
+    sqlQuery += ` INNER JOIN profession ON profession_id = profession.id`;
+
     if (diplome || promo) {
       sqlQuery += ` INNER JOIN profile_diplome ON profile_id = profile.user_id`;
       sqlQuery += ` INNER JOIN diplome ON diplome_id = diplome.id`;
     }
+
+    sqlQuery += ` ${this.andOrWhere(sqlQuery)} is_valid = 1`;
 
     if (diplome) {
       sqlQuery += `${this.andOrWhere(sqlQuery)} diplome.id = ?`;
@@ -29,7 +32,7 @@ class ProfileManager extends AbstractManager {
       sqlValue.push(`${promo}`);
     }
     if (job) {
-      sqlQuery += ` ${this.andOrWhere(sqlQuery)} profession_id1 = ?`;
+      sqlQuery += ` ${this.andOrWhere(sqlQuery)} profession_id = ?`;
       sqlValue.push(`${job}`);
     }
     if (nomPrenom) {
@@ -44,11 +47,42 @@ class ProfileManager extends AbstractManager {
     return this.connection.query(sqlQuery, sqlValue).then((res) => res[0]);
   }
 
-  insert(item) {
+  findMyProfile(id) {
+    return this.connection
+      .query(`select * from  ${ProfileManager.table} where user_id = ?`, [id])
+      .then((res) => res[0]);
+  }
+
+  insert(user, id) {
+    const date = new Date();
     return this.connection.query(
-      `insert into ${ProfileManager.table} (title) values (?)`,
-      [item.title]
+      `insert into ${ProfileManager.table} (user_id, lastname, firstname, creation_date, emailpro, phone, profession_id, employeur, poste, bio, siteweb, facebook, linkedin, twitter, instagram) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        id,
+        user.lastname,
+        user.firstname,
+        `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
+        user.emailpro,
+        user.phone,
+        user.profession_id,
+        user.employeur,
+        user.poste,
+        user.bio,
+        user.siteweb,
+        user.facebook,
+        user.linkedin,
+        user.twitter,
+        user.instagram,
+      ]
     );
+  }
+
+  countAll() {
+    return this.connection
+      .query(
+        `SELECT COUNT(*) as n FROM ${ProfileManager.table} INNER JOIN user ON user.id = ${ProfileManager.table}.user_id WHERE is_valid = true`
+      )
+      .then((res) => res[0][0].n);
   }
 
   update(item) {
