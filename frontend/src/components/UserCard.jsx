@@ -2,7 +2,7 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-function UserCard({ userId, lastname, firstname, photo, job }) {
+function UserCard({ userId, lastname, firstname, photo, job, diplom }) {
   return (
     <div className="w-[45%] md:w-[22%] lg:w-[18%] xl:w-[15%] flex flex-col flex-wrap rounded-lg shadow-md m-2 p-3 border-2 h-auto">
       <div>
@@ -13,9 +13,15 @@ function UserCard({ userId, lastname, firstname, photo, job }) {
         <p className="font-bold text-[.7rem] lg:text-[.9rem]">{lastname}</p>
       </div>
       <div className="flex flex-col justify-center w-full h-auto text-xs md:text-[.7rem] xl:text-[.8rem] pt-2 leading-snug">
-        <p className="">{job}</p>
-        <p className="">Collège de droit 2018</p>
-        <p className="">Ecole de droit 2020</p>
+        <p className="font-bold">{job}</p>
+        {diplom &&
+          diplom
+            .sort((a, b) => b.year - a.year)
+            .map((dip) => (
+              <p className="text-xs">
+                {dip.title.replace("&apos;E", "'É")} {dip.year}
+              </p>
+            ))}
       </div>
       <div className="flex justify-end">
         <button
