@@ -24,10 +24,10 @@ function Listing() {
       url += `${urlParams(url)}diplome=${diplome}`;
     }
     if (profession) {
-      url += `?profession=${profession}`;
+      url += `${urlParams(url)}profession=${profession}`;
     }
     if (years) {
-      url += `?years=${years}`;
+      url += `${urlParams(url)}years=${years}`;
     }
     axios
       .get(url)
@@ -56,7 +56,7 @@ function Listing() {
               lastname={row.lastname}
               firstname={row.firstname}
               photo={row.photo}
-              job={row.profession_id}
+              job={row.job}
               key={row.id}
             />
           ))}
