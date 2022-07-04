@@ -24,7 +24,7 @@ function Profile() {
   return (
     <div>
       <div className="md:flex md:flex-col md:justify-start bg-zinc-100 m-3 mt-8 md:mt-10 md:mx-10 md:pb-6 lg:mx-20 xl:mx-40 rounded-md shadow-md border-2">
-        <div className="md:flex md:flex-row md:items-center mb-2 ">
+        <div className="md:flex md:flex-row md:items-center mb-2">
           <div className="flex justify-between items-center px-5 md:px-7 lg:px-9 xl:px-12 md:text-start bg-red-800 text-slate-50 h-[2.5rem] lg:h-[3rem] w-full md:w-[100%] rounded-t-md">
             <img
               src={rows != null && rows.photo}
