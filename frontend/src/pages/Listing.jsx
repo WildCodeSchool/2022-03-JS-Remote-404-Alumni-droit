@@ -35,8 +35,6 @@ function Listing() {
       .catch((err) => console.error(err));
   }, [diplome, profession, years]);
 
-  console.warn(rows);
-
   return (
     <>
       <Filters

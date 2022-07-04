@@ -5,6 +5,7 @@ import Listing from "@pages/Listing";
 import Identification from "@pages/Identification";
 import SignUp from "@pages/SignUp";
 import Profile from "@pages/Profile";
+import ProfileUpdate from "@pages/ProfileUpdate";
 import RGPD from "@pages/RGPD";
 import Navbar from "@components/Navbar";
 import ProtectedRoute from "@components/Layout/ProtectedRoute";
@@ -25,14 +26,16 @@ function App() {
         <Route path="/signup/" element={<SignUp />} />
         <Route path="/profile/:userId" element={<Profile />} />
         <Route
-          path="/rgpd/"
+          path="/profile/:userId/update"
           element={
             <ProtectedRoute user={user}>
-              <RGPD />
+              <ProfileUpdate />
             </ProtectedRoute>
           }
         />
+        <Route path="/rgpd/" element={<RGPD />} />
       </Routes>
+      {/* créer protected route pour Admin */}
     </div>
   );
 }
