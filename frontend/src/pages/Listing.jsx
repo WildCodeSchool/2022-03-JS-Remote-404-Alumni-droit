@@ -9,9 +9,9 @@ import axios from "axios";
 
 function Listing() {
   const [rows, setRows] = useState([]);
-  const [diplome, setDiplome] = useState();
-  const [profession, setProfession] = useState();
-  const [years, setYears] = useState();
+  const [diplome, setDiplome] = useState("");
+  const [profession, setProfession] = useState("");
+  const [years, setYears] = useState("");
   const [search, setSearch] = useState("");
 
   function urlParams(url) {
