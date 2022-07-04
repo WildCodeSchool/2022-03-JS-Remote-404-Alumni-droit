@@ -7,6 +7,8 @@ import axios from "axios";
 import Footer from "@components/Footer";
 
 import linkedin from "../assets/linkedin.png";
+import facebook from "../assets/facebook.png";
+import instagram from "../assets/instagram.png";
 import twitter from "../assets/twitter.png";
 
 function Profile() {
@@ -19,7 +21,7 @@ function Profile() {
       .then((res) => setRows(res.data))
       .catch((err) => console.error(err));
   }, [userId]);
-
+  console.warn(userId);
   console.warn(rows);
   return (
     <div>
@@ -137,8 +139,7 @@ function Profile() {
             <p className="w-full md:w-[90%]">
               {rows != null && rows.bio
                 ? rows.bio
-                : ` n'a pas encore rempli cette partie de son profil`}
-              {/* `${rows.firstname} ${rows.lastname} */}
+                : `${rows.firstname} ${rows.lastname} n'a pas encore rempli cette partie de son profil`}
             </p>
 
             {/* RESEAUX SOCIAUX */}
@@ -147,21 +148,25 @@ function Profile() {
               Réseaux Sociaux :
             </h2>
 
-            <div className="flex items-center mt-2">
+            <div className="flex items-center mt-2 mb-3">
               <img src={linkedin} alt="LinkedIn" className="z-10 w-[6%] mr-2" />
               <p>{rows != null && rows.linkedin}</p>
             </div>
-            <div className="flex items-center mt-2 mb-5">
+            <div className="flex items-center mt-2 mb-3">
               <img src={twitter} alt="Twitter" className="z-10 w-[6%] mr-2" />
               <p>{rows != null && rows.twitter}</p>
-              {/* <div className="flex items-center mt-2 mb-5">
-                <img
-                  src={instagram}
-                  alt="Instagram"
-                  className="z-10 w-[6%] mr-2"
-                />
-                <p>{rows != null && rows.instagram}</p>
-              </div> */}
+            </div>
+            <div className="flex items-center mt-2 mb-3">
+              <img
+                src={instagram}
+                alt="Instagram"
+                className="z-10 w-[6%] mr-2"
+              />
+              <p>{rows != null && rows.instagram}</p>
+            </div>
+            <div className="flex items-center mt-2 mb-3">
+              <img src={facebook} alt="facebook" className="z-10 w-[6%] mr-2" />
+              <p>{rows != null && rows.facebook}</p>
             </div>
           </div>
         </div>
