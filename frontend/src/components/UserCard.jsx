@@ -2,11 +2,14 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-function UserCard({ userId, lastname, firstname, photo, job, diplom }) {
+function UserCard({ lastname, firstname, photo, job, userId, diplome }) {
   return (
     <div className="w-[45%] md:w-[22%] lg:w-[18%] xl:w-[15%] flex flex-col flex-wrap rounded-lg shadow-md m-2 p-3 border-2 h-auto">
       <div>
-        <img src={photo} alt="alumni" />
+        <img
+          src={photo != null ? photo : ""}
+          alt={`Portrait de ${firstname} ${lastname}`}
+        />
       </div>
       <div className="flex justify-center flex-col text-center bg-red-800 text-slate-50 p-2 xl:p-1 leading-4">
         <p className="text-sm lg:text-1xl xl:text-[1rem]">{firstname}</p>
@@ -14,11 +17,11 @@ function UserCard({ userId, lastname, firstname, photo, job, diplom }) {
       </div>
       <div className="flex flex-col justify-center w-full h-auto text-xs md:text-[.7rem] xl:text-[.8rem] pt-2 leading-snug">
         <p className="font-bold">{job}</p>
-        {diplom &&
-          diplom
+        {diplome != null &&
+          diplome
             .sort((a, b) => b.year - a.year)
             .map((dip) => (
-              <p className="text-xs">
+              <p>
                 {dip.title.replace("&apos;E", "'É")} {dip.year}
               </p>
             ))}

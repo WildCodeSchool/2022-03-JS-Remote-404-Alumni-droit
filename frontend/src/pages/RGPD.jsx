@@ -6,7 +6,7 @@ function RGPD() {
   return (
     <div>
       <div className="flex justify-center align-center px-5 md:px-7 lg:px-8 xl:px-12 md:text-start bg-red-800 text-center text-slate-50 h-[1.5rem] lg:h-[3rem] w-full md:w-[100%] rounded-t-md">
-      <p>Mentions Légales</p>
+        <p>Mentions Légales</p>
       </div>
       <p className="w-[90%] text-gray-400 text-xs mx-auto my-4">
         RGPD : Les utilisateurs de l’annuaire des anciens sont seuls

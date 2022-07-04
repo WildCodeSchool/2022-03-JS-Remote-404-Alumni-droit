@@ -61,6 +61,7 @@ function Identification() {
           >
             {msg && <p>{msg}</p>}
             <p>Se connecter</p>
+            {/* se connecter à rendre propre */}
           </button>
         </div>
       </form>
