@@ -3,34 +3,34 @@ import React, { useState, useEffect } from "react";
 import { TextField, Autocomplete } from "@mui/material";
 import axios from "axios";
 
-const Diplome = [
-  { label: "Diplôme du Collège de Droit", id: 1 },
-  { label: "Certificat de l'École de Droit", id: 2 },
-  { label: "Diplôme de l'École de Droit", id: 3 },
-];
+// const Diplome = [
+//   { label: "Diplôme du Collège de Droit", id: 1 },
+//   { label: "Certificat de l'École de Droit", id: 2 },
+//   { label: "Diplôme de l'École de Droit", id: 3 },
+// ];
 
-const Years = [
-  { label: "1990", id: 1 },
-  { label: "1991", id: 2 },
-  { label: "1992", id: 3 },
-  { label: "1993", id: 4 },
-];
+// const Years = [
+//   { label: "1990", id: 1 },
+//   { label: "1991", id: 2 },
+//   { label: "1992", id: 3 },
+//   { label: "1993", id: 4 },
+// ];
 
-const Profession = [
-  { label: "Administrateur judiciaire", id: 1 },
-  { label: "Avocat", id: 2 },
-  { label: "Avocat au Conseil d'Etat et à la Cour de cassation", id: 3 },
-  { label: "Commissaire de justice", id: 4 },
-  { label: "Etudiant", id: 5 },
-  { label: "Fonctionnaire", id: 6 },
-  { label: "Juriste d’entreprise", id: 7 },
-  { label: "Magistrat", id: 8 },
-  { label: "Notaire", id: 9 },
-  { label: "Officier", id: 10 },
-  { label: "Universitaire", id: 11 },
-  { label: "Autres professions juridiques", id: 12 },
-  { label: "Autres professions", id: 13 },
-];
+// const Profession = [
+//   { label: "Administrateur judiciaire", id: 1 },
+//   { label: "Avocat", id: 2 },
+//   { label: "Avocat au Conseil d'Etat et à la Cour de cassation", id: 3 },
+//   { label: "Commissaire de justice", id: 4 },
+//   { label: "Etudiant", id: 5 },
+//   { label: "Fonctionnaire", id: 6 },
+//   { label: "Juriste d’entreprise", id: 7 },
+//   { label: "Magistrat", id: 8 },
+//   { label: "Notaire", id: 9 },
+//   { label: "Officier", id: 10 },
+//   { label: "Universitaire", id: 11 },
+//   { label: "Autres professions juridiques", id: 12 },
+//   { label: "Autres professions", id: 13 },
+// ];
 
 function Filters({ setDiplome, setProfession, setYears, setSearch }) {
   const [diplomeData, setDiplomeData] = useState([]);
@@ -63,7 +63,11 @@ function Filters({ setDiplome, setProfession, setYears, setSearch }) {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/promotion`)
       .then((res) => {
-        setPromotionData(res.data);
+        const years = res.data.map((el) => ({
+          year: el.year.toString(),
+          id: el.year,
+        }));
+        setPromotionData(years);
       })
       .catch((err) => {
         console.error(err);
@@ -82,7 +86,8 @@ function Filters({ setDiplome, setProfession, setYears, setSearch }) {
         <Autocomplete
           disablePortal
           id="combo-box-demo"
-          options={Diplome}
+          options={diplomeData}
+          getOptionLabel={(option) => option.title.replace("&apos;E", "'É")}
           sx={{
             width: 300,
             mb: 1,
@@ -90,7 +95,6 @@ function Filters({ setDiplome, setProfession, setYears, setSearch }) {
               mr: 1,
             },
           }}
-          value={diplomeData}
           onChange={(e, diplome) => setDiplome(diplome.id)}
           renderInput={(params) => (
             <TextField {...params} label="Diplôme" color="primary" />
@@ -99,7 +103,8 @@ function Filters({ setDiplome, setProfession, setYears, setSearch }) {
         <Autocomplete
           disablePortal
           id="combo-box-demo"
-          options={Profession}
+          options={professionData}
+          getOptionLabel={(option) => option.job.replace("&apos;E", "'É")}
           sx={{
             width: 300,
             mb: 1,
@@ -107,7 +112,6 @@ function Filters({ setDiplome, setProfession, setYears, setSearch }) {
               mr: 1,
             },
           }}
-          value={professionData}
           onChange={(e, profession) => setProfession(profession.id)}
           renderInput={(params) => (
             <TextField {...params} label="Profession" color="primary" />
@@ -116,7 +120,8 @@ function Filters({ setDiplome, setProfession, setYears, setSearch }) {
         <Autocomplete
           disablePortal
           id="combo-box-demo"
-          options={Years}
+          options={promotionData}
+          getOptionLabel={(option) => option.year}
           sx={{
             width: 300,
             mb: 1,
@@ -124,7 +129,6 @@ function Filters({ setDiplome, setProfession, setYears, setSearch }) {
               mr: 1,
             },
           }}
-          value={promotionData}
           onChange={(e, years) => setYears(years.id)}
           renderInput={(params) => (
             <TextField {...params} label="Année" color="primary" />
