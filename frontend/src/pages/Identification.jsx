@@ -1,15 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import Footer from "../components/Footer";
+
+import ExportContextUser from "../contexts/UserContext";
 
 function Identification() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [msg, setMsg] = useState();
+  const { setUser } = useContext(ExportContextUser.UserContext);
 
   const navigate = useNavigate();
   const handleClick = (e) => {
     e.preventDefault();
-    navigate("/Profile");
+    if (!email || !password) {
+      setMsg("Veuillez renseigner vos identifiants");
+      return;
+    }
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/login`, { email, password })
+      .then((res) => {
+        setUser(res.data);
+        navigate("/RGPD");
+      })
+      .catch((err) => console.error(err));
   };
   return (
     <>
@@ -44,6 +59,7 @@ function Identification() {
             type="button"
             onClick={(e) => handleClick(e)}
           >
+            {msg && <p>{msg}</p>}
             <p>Se connecter</p>
           </button>
         </div>
