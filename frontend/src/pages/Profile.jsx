@@ -20,6 +20,7 @@ function Profile() {
       .catch((err) => console.error(err));
   }, [userId]);
 
+  console.warn(rows);
   return (
     <div>
       <div className="md:flex md:flex-col md:justify-start bg-zinc-100 m-3 mt-8 md:mt-10 md:mx-10 md:pb-6 lg:mx-20 xl:mx-40 rounded-md shadow-md border-2">
@@ -78,7 +79,6 @@ function Profile() {
                 Cliquez-ici
               </span>
             </p>
-
             {/* COORDONNEES */}
             <h2 className="mt-3 mb-1 text-2xl font-bold text-red-800">
               Coordonnées :
@@ -93,38 +93,38 @@ function Profile() {
               Téléphone :{" "}
               <span className="font-normal"> {rows != null && rows.phone}</span>
             </p>
-
             {/* DIPLOMES OBTENUS */}
             <h2 className="mt-3 mb-1 text-2xl font-bold text-red-800">
               Diplômes obtenus :
             </h2>
-            <p className="font-semibold">
-              Diplôme :{" "}
-              <span className="font-normal ml-1">
-                2019 - Diplôme du Collège de Droit
-              </span>
-            </p>
-            <p className="font-semibold">
-              Diplôme :
-              <span className="font-normal ml-1">
-                2016 - Certificat de l&apos;École de Droit
-              </span>
-            </p>
-            <p className="font-semibold">
-              Diplôme :
-              <span className="font-normal ml-1">
-                2013 - Diplôme de l&apos;École de Droit
-              </span>
-              <p className="font-semibold mt-2">
-                Master 2 :
-                <span className="font-normal ml-1">
-                  2011 - Droit pénal et sciences pénales
-                  <span className="italic ml-1">
-                    Université Paris Panthéon-Assas
-                  </span>
-                </span>
-              </p>
-            </p>
+            {/* {rows.diplome != null &&
+              rows.diplome
+                .sort((a, b) => b.year - a.year)
+                .map((dip) => (
+                  <p className="font-semibold">
+                    {dip.year}
+                    <span className="font-normal ml-1">
+                      {" "}
+                      {dip.title.replace("&apos;E", "'É")}
+                      <br />
+                    </span>
+                  </p>
+                ))} */}
+
+            {rows.masters != null &&
+              rows.masters
+                .sort((a, b) => b.year - a.year)
+                .map((dip) => (
+                  <p className="font-semibold">
+                    {dip.year}
+                    <span className="font-normal ml-1">
+                      {" "}
+                      {dip.title.replace("&apos;", "'")}{" "}
+                      <span className="italic">{dip.university}</span>
+                      <br />
+                    </span>
+                  </p>
+                ))}
           </div>
 
           {/* COLONNE 2 */}

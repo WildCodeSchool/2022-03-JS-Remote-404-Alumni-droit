@@ -35,6 +35,8 @@ function Listing() {
       .catch((err) => console.error(err));
   }, [diplome, profession, years]);
 
+  console.warn(rows);
+
   return (
     <>
       <Filters
@@ -58,6 +60,7 @@ function Listing() {
               photo={row.photo}
               job={row.job}
               key={row.id}
+              userId={row.user_id}
               diplom={row.diplome}
             />
           ))}

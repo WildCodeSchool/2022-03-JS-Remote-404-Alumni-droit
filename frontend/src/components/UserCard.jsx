@@ -14,7 +14,7 @@ function UserCard({ userId, lastname, firstname, photo, job, diplom }) {
       </div>
       <div className="flex flex-col justify-center w-full h-auto text-xs md:text-[.7rem] xl:text-[.8rem] pt-2 leading-snug">
         <p className="font-bold">{job}</p>
-        {diplom &&
+        {diplom != null &&
           diplom
             .sort((a, b) => b.year - a.year)
             .map((dip) => (
