@@ -132,13 +132,13 @@ function Profile() {
               {rows.masters != null &&
                 rows.masters
                   .sort((a, b) => b.year - a.year)
-                  .map((dip) => (
+                  .map((mast) => (
                     <p className="font-semibold">
-                      {dip.year}
+                      {mast.year}
                       <span className="font-normal ml-1">
                         {" "}
-                        {dip.title.replace("&apos;", "'")}{" "}
-                        <span className="italic">{dip.university}</span>
+                        {mast.title.replace("&apos;", "'")}{" "}
+                        <span className="italic">{mast.university}</span>
                         <br />
                       </span>
                     </p>
