@@ -97,7 +97,7 @@ function Profile() {
             <h2 className="mt-3 mb-1 text-2xl font-bold text-red-800">
               Diplômes obtenus :
             </h2>
-            {/* {rows.diplome != null &&
+            {rows.diplome != null &&
               rows.diplome
                 .sort((a, b) => b.year - a.year)
                 .map((dip) => (
@@ -109,8 +109,8 @@ function Profile() {
                       <br />
                     </span>
                   </p>
-                ))} */}
-
+                ))}
+            <br />
             {rows.masters != null &&
               rows.masters
                 .sort((a, b) => b.year - a.year)
