@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import axios from "axios";
 
@@ -73,9 +73,7 @@ function Profile() {
                   {rows != null && rows.employeur}
                 </span>
               </p>
-              <p className="font-semibold">
-                {/* Poste actuel :<span className="font-normal"> {job}</span> */}
-              </p>
+
               <p className="font-semibold mt-2">
                 Consulter CV :
                 <span className="font-normal" src={rows != null && rows.cv}>
@@ -153,58 +151,78 @@ function Profile() {
                 Réseaux Sociaux :
               </h2>
 
-              <div className="flex items-center mt-2 mb-3">
-                <img
-                  src={linkedin}
-                  alt="LinkedIn"
-                  className="z-10 w-[6%] mr-2"
-                />
-                <a
-                  href={rows != null && rows.linkedin}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  <p>{rows != null && rows.linkedin}</p>
-                </a>
-              </div>
-              <div className="flex items-center mt-2 mb-3">
-                <img src={twitter} alt="Twitter" className="z-10 w-[6%] mr-2" />
-                <a
-                  href={rows != null && rows.twitter}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  <p>{rows != null && rows.twitter}</p>
-                </a>
-              </div>
-              <div className="flex items-center mt-2 mb-3">
-                <img
-                  src={instagram}
-                  alt="Instagram"
-                  className="z-10 w-[6%] mr-2"
-                />
-                <a
-                  href={rows != null && rows.instagram}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  <p>{rows != null && rows.instagram}</p>
-                </a>
-              </div>
-              <div className="flex items-center mt-2 mb-3">
-                <img
-                  src={facebook}
-                  alt="facebook"
-                  className="z-10 w-[6%] mr-2"
-                />
-                <a
-                  href={rows != null && rows.facebook}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  <p>{rows != null && rows.facebook}</p>
-                </a>
-              </div>
+              {rows.linkedin ? (
+                <div className="flex items-center mt-2 mb-3">
+                  <img
+                    src={linkedin}
+                    alt="LinkedIn"
+                    className="z-10 w-[6%] mr-2"
+                  />
+                  <a
+                    href={rows != null && rows.linkedin}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <p>{rows != null && rows.linkedin}</p>
+                  </a>
+                </div>
+              ) : (
+                ""
+              )}
+              {rows.twitter ? (
+                <div className="flex items-center mt-2 mb-3">
+                  <img
+                    src={twitter}
+                    alt="Twitter"
+                    className="z-10 w-[6%] mr-2"
+                  />
+                  <a
+                    href={rows != null && rows.twitter}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <p>{rows != null && rows.twitter}</p>
+                  </a>
+                </div>
+              ) : (
+                ""
+              )}
+              {rows.instagram ? (
+                <div className="flex items-center mt-2 mb-3">
+                  <img
+                    src={instagram}
+                    alt="Instagram"
+                    className="z-10 w-[6%] mr-2"
+                  />
+                  <a
+                    href={rows != null && rows.instagram}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <p>{rows != null && rows.instagram}</p>
+                  </a>
+                </div>
+              ) : (
+                ""
+              )}
+              {rows.twitter ? (
+                <div className="flex items-center mt-2 mb-3">
+                  <img
+                    src={facebook}
+                    alt="facebook"
+                    className="z-10 w-[6%] mr-2"
+                  />
+                  <a
+                    href={rows != null && rows.facebook}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <p>{rows != null && rows.facebook}</p>
+                  </a>
+                </div>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>
