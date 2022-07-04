@@ -58,6 +58,7 @@ function Listing() {
               photo={row.photo}
               job={row.job}
               key={row.id}
+              diplom={row.diplome}
             />
           ))}
       </div>
