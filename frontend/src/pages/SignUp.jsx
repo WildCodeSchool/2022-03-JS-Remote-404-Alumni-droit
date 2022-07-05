@@ -7,6 +7,7 @@ import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import { HiPlus, HiMinus } from "react-icons/hi";
 
 function SignUp() {
   const {
@@ -14,6 +15,18 @@ function SignUp() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const [diplomeInput, setDiplomeInput] = useState([true, false, false]);
+
+  const handleDiplomeInput = (index, type) => {
+    const provDiplomeInput = [...diplomeInput];
+    if (index < 2 && type === "plus") {
+      provDiplomeInput[index + 1] = true;
+    } else if (index > 0 && type === "minus") {
+      provDiplomeInput[index] = false;
+    }
+    setDiplomeInput(provDiplomeInput);
+  };
 
   const onSubmit = (data) => console.warn(data);
   console.warn(errors);
@@ -141,103 +154,76 @@ function SignUp() {
                 <p className="text-xs text-center mb-2">
                   Votre cursus au sein du Collège et de l’Ecole de droit :
                 </p>
-                <div className="flex justify-between flex-wrap">
-                  <Autocomplete
-                    disablePortal
-                    id="combo-box-1"
-                    options={diplomeData}
-                    getOptionLabel={(option) =>
-                      option.title.replace("&apos;E", "'É")
-                    }
-                    sx={{
-                      width: "70%",
-                      mb: 1.5,
-                    }}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Diplôme 1"
-                        color="primary"
-                      />
-                    )}
-                  />
-                  <Autocomplete
-                    disablePortal
-                    id="combo-box-2"
-                    options={promotionData}
-                    getOptionLabel={(option) => option.year}
-                    sx={{
-                      width: "28%",
-                      mb: 1,
-                    }}
-                    renderInput={(params) => (
-                      <TextField {...params} label="Année" color="primary" />
-                    )}
-                  />
-                </div>
-                {/* DIPLOME 2 */}
-                {/* <div className="flex justify-between">
-                  <Autocomplete
-                    disablePortal
-                    id="combo-box-demo"
-                    options={Diplome}
-                    sx={{
-                      width: "70%",
-                      mb: 1.5,
-                    }}
-                    onChange={(e, diplome) => setDiplome(diplome.id)}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Diplôme 2"
-                        color="primary"
-                      />
-                    )}
-                  />
-                  <Autocomplete
-                    disablePortal
-                    id="combo-box-demo"
-                    options={Years}
-                    sx={{
-                      width: "28%",
-                    }}
-                    onChange={(e, years) => setYears(years.id)}
-                    renderInput={(params) => (
-                      <TextField {...params} label="Année" color="primary" />
-                    )}
-                  />
-                </div> */}
-                {/* DIPLOME 3 */}
-                {/* <div className="flex justify-between">
-                  <Autocomplete
-                    disablePortal
-                    id="combo-box-demo"
-                    options={Diplome}
-                    sx={{
-                      width: "70%",
-                    }}
-                    onChange={(e, diplome) => setDiplome(diplome.id)}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Diplôme 3"
-                        color="primary"
-                      />
-                    )}
-                  />
-                  <Autocomplete
-                    disablePortal
-                    id="combo-box-demo"
-                    options={Years}
-                    sx={{
-                      width: "28%",
-                    }}
-                    onChange={(e, years) => setYears(years.id)}
-                    renderInput={(params) => (
-                      <TextField {...params} label="Année" color="primary" />
-                    )}
-                  />
-                </div> */}
+                {diplomeInput.map((diplomeIn, index) => {
+                  if (diplomeIn) {
+                    return (
+                      <div className="flex justify-between flex-wrap">
+                        <Autocomplete
+                          disablePortal
+                          id="combo-box-1"
+                          options={diplomeData}
+                          getOptionLabel={(option) =>
+                            option.title.replace("&apos;E", "'É")
+                          }
+                          sx={{
+                            width: "55%",
+                            mb: 1.5,
+                          }}
+                          renderInput={(params) => (
+                            <TextField
+                              {...params}
+                              label={`Diplôme ${index + 1}`}
+                              color="primary"
+                            />
+                          )}
+                        />
+                        <Autocomplete
+                          disablePortal
+                          id="combo-box-2"
+                          options={promotionData}
+                          getOptionLabel={(option) => option.year}
+                          sx={{
+                            width: "30%",
+                            mb: 1,
+                          }}
+                          renderInput={(params) => (
+                            <TextField
+                              {...params}
+                              label="Année"
+                              color="primary"
+                            />
+                          )}
+                        />
+                        {/* {index < 2 && ( */}
+                        <button
+                          type="button"
+                          disabled={index === 2}
+                          className="pt-4 flex-col"
+                          onClick={() => handleDiplomeInput(index, "plus")}
+                        >
+                          <HiPlus
+                            size={20}
+                            color={index === 2 ? "#d3d3d3" : "black"}
+                          />
+                        </button>
+                        {/* )} */}
+
+                        <button
+                          type="button"
+                          disabled={index === 0}
+                          className="pt-4 flex-col"
+                          onClick={() => handleDiplomeInput(index, "minus")}
+                        >
+                          <HiMinus
+                            size={20}
+                            color={index === 0 ? "#d3d3d3" : "black"}
+                          />
+                        </button>
+                      </div>
+                    );
+                  }
+                  return null;
+                })}
               </div>
               <Autocomplete
                 disablePortal
