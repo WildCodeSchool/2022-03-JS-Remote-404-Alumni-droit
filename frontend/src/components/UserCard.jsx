@@ -2,7 +2,7 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-function UserCard({ lastname, firstname, photo, job, userId, diplome }) {
+function UserCard({ lastname, firstname, photo, job, userId, diplomes }) {
   return (
     <div className="w-[45%] md:w-[22%] lg:w-[18%] xl:w-[15%] flex flex-col flex-wrap rounded-lg shadow-md m-2 p-3 border-2 h-auto">
       <div>
@@ -17,8 +17,8 @@ function UserCard({ lastname, firstname, photo, job, userId, diplome }) {
       </div>
       <div className="flex flex-col justify-center w-full h-auto text-xs md:text-[.7rem] xl:text-[.8rem] pt-2 leading-snug">
         <p className="font-bold">{job}</p>
-        {diplome != null &&
-          diplome
+        {diplomes != null &&
+          diplomes
             .sort((a, b) => b.year - a.year)
             .map((dip) => (
               <p>

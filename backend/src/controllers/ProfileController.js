@@ -18,12 +18,15 @@ class ProfileController {
       const profiles = await models.profile.findAll(req.query);
 
       if (profiles) {
-        const diplomes = await models.diplome.find(profiles[0].id);
-        const job = await models.profession.find(profiles[0].id);
+        const diplomes = await Promise.all(
+          profiles.map((profile) => models.diplome.find(profile.id))
+        );
 
-        profiles[0].job = job[0].job;
-        profiles[0].diplome = diplomes;
+        profiles.forEach((profile, index) => {
+          profile.diplomes = diplomes[index];
+        });
       }
+
       res.status(200).json(profiles);
     } catch (erreur) {
       console.error(erreur);

@@ -8,14 +8,11 @@ class ProfileManager extends AbstractManager {
   }
 
   findAll(query) {
-    // SELECT lastname, firstname, P.id, U.is_valid, photo FROM profile as P        INNER JOIN user as U ON P.id = U.id  INNER JOIN profession as W ON P.profession_id = W.id INNER JOIN profile_diplome as PD ON PD.profile_id = P.id INNER JOIN diplome as D ON PD.diplome_id = D.id WHERE U.is_valid = 1 AND PD.diplome_id > 1 AND year > 1900 AND P.profession_id >1 LIMIT 30;
-
     const { diplome, promo, job, nomPrenom } = query;
-    let sqlQuery = `SELECT lastname, firstname, P.id, U.is_valid, photo FROM ${ProfileManager.table} as P`;
+    let sqlQuery = `SELECT lastname, firstname, P.id, W.job, photo FROM ${ProfileManager.table} as P`;
     const sqlValue = [];
 
     sqlQuery += ` INNER JOIN user as U ON P.id = U.id`;
-
     sqlQuery += ` INNER JOIN profession as W ON P.profession_id = W.id`;
 
     if (diplome || promo) {
