@@ -8,23 +8,25 @@ class ProfileManager extends AbstractManager {
   }
 
   findAll(query) {
+    // SELECT lastname, firstname, P.id, U.is_valid, photo FROM profile as P        INNER JOIN user as U ON P.id = U.id  INNER JOIN profession as W ON P.profession_id = W.id INNER JOIN profile_diplome as PD ON PD.profile_id = P.id INNER JOIN diplome as D ON PD.diplome_id = D.id WHERE U.is_valid = 1 AND PD.diplome_id > 1 AND year > 1900 AND P.profession_id >1 LIMIT 30;
+
     const { diplome, promo, job, nomPrenom } = query;
-    let sqlQuery = `SELECT * FROM ${ProfileManager.table}`;
+    let sqlQuery = `SELECT lastname, firstname, P.id, U.is_valid, photo FROM ${ProfileManager.table} as P`;
     const sqlValue = [];
 
-    sqlQuery += ` INNER JOIN user ON user_id = user.id`;
+    sqlQuery += ` INNER JOIN user as U ON P.id = U.id`;
 
-    sqlQuery += ` INNER JOIN profession ON profession_id = profession.id`;
+    sqlQuery += ` INNER JOIN profession as W ON P.profession_id = W.id`;
 
     if (diplome || promo) {
-      sqlQuery += ` INNER JOIN profile_diplome ON profile_id = profile.user_id`;
-      sqlQuery += ` INNER JOIN diplome ON diplome_id = diplome.id`;
+      sqlQuery += ` INNER JOIN profile_diplome as PD ON PD.profile_id = P.id`;
+      sqlQuery += ` INNER JOIN diplome as D ON PD.diplome_id = D.id`;
     }
 
-    sqlQuery += ` ${this.andOrWhere(sqlQuery)} is_valid = 1`;
+    sqlQuery += ` ${this.andOrWhere(sqlQuery)} U.is_valid = 1`;
 
     if (diplome) {
-      sqlQuery += `${this.andOrWhere(sqlQuery)} diplome.id = ?`;
+      sqlQuery += `${this.andOrWhere(sqlQuery)} PD.diplome_id = ?`;
       sqlValue.push(`${diplome}`);
     }
     if (promo) {
@@ -32,13 +34,13 @@ class ProfileManager extends AbstractManager {
       sqlValue.push(`${promo}`);
     }
     if (job) {
-      sqlQuery += ` ${this.andOrWhere(sqlQuery)} profession_id = ?`;
+      sqlQuery += ` ${this.andOrWhere(sqlQuery)} P.profession_id = ?`;
       sqlValue.push(`${job}`);
     }
     if (nomPrenom) {
       sqlQuery += `${this.andOrWhere(
         sqlQuery
-      )} firstname LIKE ? OR lastname LIKE ?`;
+      )} P.firstname LIKE ? OR P.lastname LIKE ?`;
       sqlValue.push(`%${nomPrenom}%`, `%${nomPrenom}%`);
     }
 

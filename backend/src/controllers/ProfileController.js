@@ -16,14 +16,17 @@ class ProfileController {
     // "annuaire" listing
     try {
       const profiles = await models.profile.findAll(req.query);
-      if (profiles[0]) {
-        const diplomes = await models.diplome.multipleFind(profiles);
-        profiles.forEach((pers, index) => {
-          pers.diplome = diplomes[index];
-        });
+
+      if (profiles) {
+        const diplomes = await models.diplome.find(profiles[0].id);
+        const job = await models.profession.find(profiles[0].id);
+
+        profiles[0].job = job[0].job;
+        profiles[0].diplome = diplomes;
       }
       res.status(200).json(profiles);
-    } catch {
+    } catch (erreur) {
+      console.error(erreur);
       res.status(500).send("erreur");
     }
   };
@@ -33,21 +36,18 @@ class ProfileController {
     try {
       const profiles = await models.profile.find(req.params.id);
       if (profiles[0][0]) {
-        const diplomes = await models.diplome.multipleFind(profiles[0]);
-        const masters = await models.master.multipleFind(profiles[0]);
-        const job = await models.profession.jobFind(profiles[0]);
-        profiles[0][0].job = job[0][0].job;
-        // const masters = await Promise.all(
-        //   profiles[0].map((pers) => models.master.find(pers.id))
-        // );
-        profiles[0].forEach((pers, index) => {
-          pers.diplome = diplomes[index];
-          pers.masters = masters[index];
-        });
+        const diplomes = await models.diplome.find(profiles[0][0].id);
+        const masters = await models.master.find(profiles[0][0].id);
+        const job = await models.profession.find(profiles[0][0].id);
+
+        profiles[0][0].job = job[0].job;
+        profiles[0][0].diplome = diplomes;
+        profiles[0][0].masters = masters;
       }
       res.status(200).json(profiles[0][0]);
-    } catch {
-      res.status(500).send("erreur");
+    } catch (err) {
+      console.error(err);
+      res.status(500).send(`erreur fiche profil`);
     }
   };
 

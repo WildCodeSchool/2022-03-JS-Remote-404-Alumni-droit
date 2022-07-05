@@ -119,29 +119,31 @@ function Profile() {
                 rows.diplome
                   .sort((a, b) => b.year - a.year)
                   .map((dip) => (
-                    <p className="font-semibold">
-                      {dip.year}
-                      <span className="font-normal ml-1">
-                        {" "}
+                    <div className="flex align-items">
+                      <div className="w-12">
+                        <p className="font-semibold">{dip.year}</p>
+                      </div>
+                      <p className="font-normal">
                         {dip.title.replace("&apos;E", "'É")}
                         <br />
-                      </span>
-                    </p>
+                      </p>
+                    </div>
                   ))}
               <br />
               {rows.masters != null &&
                 rows.masters
                   .sort((a, b) => b.year - a.year)
                   .map((mast) => (
-                    <p className="font-semibold">
-                      {mast.year}
-                      <span className="font-normal ml-1">
-                        {" "}
-                        {mast.title.replace("&apos;", "'")}{" "}
-                        <span className="italic">{mast.university}</span>
+                    <div className="flex align-items">
+                      <div className="w-12">
+                        <p className="font-semibold">{mast.year}</p>
+                      </div>
+                      <p className="font-normal">
+                        {mast.title.replace("&apos;", "'")}
                         <br />
-                      </span>
-                    </p>
+                        <span className="italic">{mast.university}</span>
+                      </p>
+                    </div>
                   ))}
             </div>
 
