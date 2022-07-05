@@ -16,14 +16,28 @@ function UserCard({ lastname, firstname, photo, job, userId, diplomes }) {
         <p className="font-bold text-[.7rem] lg:text-[.9rem]">{lastname}</p>
       </div>
       <div className="flex flex-col justify-center w-full h-auto text-xs md:text-[.7rem] xl:text-[.8rem] pt-2 leading-snug">
-        <p className="font-bold">{job}</p>
+        <p className="font-bold mb-1">{job}</p>
+        {/* {diplomes != null &&
+          diplomes
+            .sort((a, b) => b.year - a.year)
+            .map((dip) => (
+              <span>
+                {dip.year} {dip.title.replace("&apos;E", "'É")}
+              </span>
+            ))} */}
         {diplomes != null &&
           diplomes
             .sort((a, b) => b.year - a.year)
             .map((dip) => (
-              <p>
-                {dip.title.replace("&apos;E", "'É")} {dip.year}
-              </p>
+              <div className="flex align-items">
+                <div className="w-12">
+                  <p className="font-semibold">{dip.year}</p>
+                </div>
+                <p className="font-normal">
+                  {dip.title.replace("&apos;E", "'É")}
+                  <br />
+                </p>
+              </div>
             ))}
       </div>
       <div className="flex justify-end">
