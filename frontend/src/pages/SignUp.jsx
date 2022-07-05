@@ -157,7 +157,7 @@ function SignUp() {
                 {diplomeInput.map((diplomeIn, index) => {
                   if (diplomeIn) {
                     return (
-                      <div className="flex justify-between flex-wrap">
+                      <div className="flex justify-between">
                         <Autocomplete
                           disablePortal
                           id="combo-box-1"
@@ -194,11 +194,11 @@ function SignUp() {
                             />
                           )}
                         />
-                        {/* {index < 2 && ( */}
                         <button
                           type="button"
                           disabled={index === 2}
-                          className="pt-4 flex-col"
+                          // className="flex items-center content-center"
+                          className="pb-3"
                           onClick={() => handleDiplomeInput(index, "plus")}
                         >
                           <HiPlus
@@ -207,11 +207,10 @@ function SignUp() {
                           />
                         </button>
                         {/* )} */}
-
                         <button
                           type="button"
                           disabled={index === 0}
-                          className="pt-4 flex-col"
+                          className="pb-3"
                           onClick={() => handleDiplomeInput(index, "minus")}
                         >
                           <HiMinus
