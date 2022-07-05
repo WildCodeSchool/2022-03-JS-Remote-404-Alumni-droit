@@ -17,7 +17,11 @@ function RGPD() {
         tiers. Les utilisateurs peuvent à tout moment supprimer leur profil et
         ainsi effacer toutes leurs données. Ils peuvent aussi contacter le
         secrétaire général de l’Association ou son adjoint à l’adresse
-        <a href="mailto:cdd.edd.paris2@gmail.com" target="_blank">
+        <a
+          href="mailto:cdd.edd.paris2@gmail.com"
+          target="_blank"
+          rel="noreferrer"
+        >
           cdd.edd.paris2@gmail.com
         </a>{" "}
         pour faire supprimer leur profil.
@@ -43,7 +47,7 @@ function RGPD() {
         leur effacement ou exercer votre droit à la limitation du traitement de
         vos données. Vous pouvez également vous opposer au traitement de vos
         données. Consultez le site{" "}
-        <a href="http://www.cnil.fr" target="_blank">
+        <a href="http://www.cnil.fr" target="_blank" rel="noreferrer">
           www.cnil.fr
         </a>{" "}
         pour plus d’informations sur vos droits.
@@ -53,7 +57,11 @@ function RGPD() {
         Pour exercer ces droits ou pour toute question sur le traitement de vos
         données dans ce dispositif, vous pouvez contacter le secrétaire général
         de l’Association ou son adjoint à l’adresse{" "}
-        <a href="mailto:cdd.edd.paris2@gmail.com" target="_blank">
+        <a
+          href="mailto:cdd.edd.paris2@gmail.com"
+          target="_blank"
+          rel="noreferrer"
+        >
           cdd.edd.paris2@gmail.com
         </a>
         . Si vous estimez, après nous avoir contactés, que vos droits «
