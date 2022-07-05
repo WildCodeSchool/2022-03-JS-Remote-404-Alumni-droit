@@ -1,41 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+
 import { TextField, Autocomplete } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-const Diplome = [
-  { label: "Diplôme du Collège de Droit", id: 1 },
-  { label: "Certificat de l'École de Droit", id: 2 },
-  { label: "Diplôme de l'École de Droit", id: 3 },
-];
-
-const Years = [
-  { label: "1990", id: 1 },
-  { label: "1991", id: 2 },
-  { label: "1992", id: 3 },
-  { label: "1993", id: 4 },
-];
-
-const Profession = [
-  { label: "Administrateur judiciaire", id: 1 },
-  { label: "Avocat", id: 2 },
-  { label: "Avocat au Conseil d'Etat et à la Cour de cassation", id: 3 },
-  { label: "Commissaire de justice", id: 4 },
-  { label: "Etudiant", id: 5 },
-  { label: "Fonctionnaire", id: 6 },
-  { label: "Juriste d’entreprise", id: 7 },
-  { label: "Magistrat", id: 8 },
-  { label: "Notaire", id: 9 },
-  { label: "Officier", id: 10 },
-  { label: "Universitaire", id: 11 },
-  { label: "Autres professions juridiques", id: 12 },
-  { label: "Autres professions", id: 13 },
-];
-
-function SignUp({ setDiplome, setProfession, setYears }) {
+function SignUp() {
   const {
     // register,
     handleSubmit,
@@ -90,6 +63,53 @@ function SignUp({ setDiplome, setProfession, setYears }) {
     },
   }));
 
+  const [diplomeData, setDiplomeData] = useState([]);
+  const [professionData, setProfessionData] = useState([]);
+  const [promotionData, setPromotionData] = useState([]);
+
+  const getDiplome = () => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/diplome`)
+      .then((res) => {
+        setDiplomeData(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const getProfession = () => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/profession`)
+      .then((res) => {
+        setProfessionData(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const getPromotion = () => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/promotion`)
+      .then((res) => {
+        const years = res.data.map((el) => ({
+          year: el.year.toString(),
+          id: el.year,
+        }));
+        setPromotionData(years);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  useEffect(() => {
+    getDiplome();
+    getProfession();
+    getPromotion();
+  }, []);
+
   return (
     <>
       <div className="w-[90%] md:w-[80%] lg:w-[80%] flex flex-col flex-wrap bg-zinc-100 rounded-lg shadow-md mx-auto p-4 mt-5 md:mt-10 border-2 h-auto">
@@ -124,13 +144,15 @@ function SignUp({ setDiplome, setProfession, setYears }) {
                 <div className="flex justify-between flex-wrap">
                   <Autocomplete
                     disablePortal
-                    id="combo-box-demo"
-                    options={Diplome}
+                    id="combo-box-1"
+                    options={diplomeData}
+                    getOptionLabel={(option) =>
+                      option.title.replace("&apos;E", "'É")
+                    }
                     sx={{
                       width: "70%",
                       mb: 1.5,
                     }}
-                    onChange={(e, diplome) => setDiplome(diplome.id)}
                     renderInput={(params) => (
                       <TextField
                         {...params}
@@ -141,20 +163,20 @@ function SignUp({ setDiplome, setProfession, setYears }) {
                   />
                   <Autocomplete
                     disablePortal
-                    id="combo-box-demo"
-                    options={Years}
+                    id="combo-box-2"
+                    options={promotionData}
+                    getOptionLabel={(option) => option.year}
                     sx={{
                       width: "28%",
                       mb: 1,
                     }}
-                    onChange={(e, years) => setYears(years.id)}
                     renderInput={(params) => (
                       <TextField {...params} label="Année" color="primary" />
                     )}
                   />
                 </div>
                 {/* DIPLOME 2 */}
-                <div className="flex justify-between">
+                {/* <div className="flex justify-between">
                   <Autocomplete
                     disablePortal
                     id="combo-box-demo"
@@ -184,9 +206,9 @@ function SignUp({ setDiplome, setProfession, setYears }) {
                       <TextField {...params} label="Année" color="primary" />
                     )}
                   />
-                </div>
+                </div> */}
                 {/* DIPLOME 3 */}
-                <div className="flex justify-between">
+                {/* <div className="flex justify-between">
                   <Autocomplete
                     disablePortal
                     id="combo-box-demo"
@@ -215,13 +237,13 @@ function SignUp({ setDiplome, setProfession, setYears }) {
                       <TextField {...params} label="Année" color="primary" />
                     )}
                   />
-                </div>
+                </div> */}
               </div>
               <Autocomplete
                 disablePortal
-                id="combo-box-demo"
-                options={Profession}
-                onChange={(e, profession) => setProfession(profession.id)}
+                id="combo-box-3"
+                options={professionData}
+                getOptionLabel={(option) => option.job.replace("&apos;E", "'É")}
                 renderInput={(params) => (
                   <TextField
                     {...params}
@@ -239,13 +261,13 @@ function SignUp({ setDiplome, setProfession, setYears }) {
                 size="medium"
               >
                 <Typography size="medium">
-                  Etat de votre profile : privé
+                  Etat de votre profil : Privé
                 </Typography>
                 <AntSwitch
                   defaultChecked
                   inputProps={{ "aria-label": "ant design" }}
                 />
-                <Typography>publique</Typography>
+                <Typography>Public</Typography>
               </Stack>
             </div>
             {/* COLONNE 2 */}
