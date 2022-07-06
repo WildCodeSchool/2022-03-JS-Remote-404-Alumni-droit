@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { TextField, Autocomplete } from "@mui/material";
@@ -302,7 +303,6 @@ function SignUp() {
                       <button
                         type="button"
                         disabled={index === 2}
-                        // className="flex items-center content-center"
                         className="pb-3"
                         onClick={() => handleDiplomeInput(index, "plus")}
                       >
@@ -311,7 +311,6 @@ function SignUp() {
                           color={index === 2 ? "#d3d3d3" : "black"}
                         />
                       </button>
-                      {/* )} */}
                       <button
                         type="button"
                         disabled={index === 0}
@@ -359,13 +358,16 @@ function SignUp() {
         </form>
       </div>
       <p className="w-[70%] text-gray-400 text-sm mx-auto my-4">
-        « L’Association du Collège et de l’Ecole de droit
+        « L’Association du Collège et de l’École de droit
         (cdd.edd.paris2@gmail.com) n’est pas responsable de l’utilisation par
         des tiers des données rendues publiquement accessibles sur ce site par
         les utilisateurs. L’Association est susceptible de traiter ces données
         pour tenir à jour ses registres et établir des statistiques. Pour en
-        savoir plus sur la gestion de vos données et pour exercer vos droits,
-        cliquez ici.
+        savoir plus sur la gestion de vos données et pour exercer vos droits,{" "}
+        <Link to="/RGPD" className="underline">
+          cliquez ici
+        </Link>
+        .
       </p>
     </>
   );
