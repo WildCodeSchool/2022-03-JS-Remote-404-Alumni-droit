@@ -1,6 +1,6 @@
 const AbstractManager = require("./AbstractManager");
 
-class ProfileManager extends AbstractManager {
+class DiplomeManager extends AbstractManager {
   static table = "diplome";
 
   find(id) {
@@ -17,4 +17,4 @@ class ProfileManager extends AbstractManager {
   }
 }
 
-module.exports = ProfileManager;
+module.exports = DiplomeManager;
