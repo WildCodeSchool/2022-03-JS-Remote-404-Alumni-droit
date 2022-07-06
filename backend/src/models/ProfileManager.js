@@ -9,7 +9,7 @@ class ProfileManager extends AbstractManager {
 
   findAll(query) {
     const { diplome, promo, job, nomPrenom } = query;
-    let sqlQuery = `SELECT lastname, firstname, P.id, W.job, photo FROM ${ProfileManager.table} as P`;
+    let sqlQuery = `SELECT lastname, firstname, P.id, W.job, U.is_valid, photo FROM ${ProfileManager.table} as P`;
     const sqlValue = [];
 
     sqlQuery += ` INNER JOIN user as U ON P.id = U.id`;
