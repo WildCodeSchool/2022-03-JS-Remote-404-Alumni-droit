@@ -150,7 +150,6 @@ function SignUp() {
               />
               {/* BLOC DIPLOME ANNEE */}
               <div className="flex flex-col">
-                {/* DIPLOME 1 */}
                 <p className="text-xs text-center mb-2">
                   Votre cursus au sein du Collège et de l’Ecole de droit :
                 </p>
@@ -260,6 +259,75 @@ function SignUp() {
               <h3 className="text-center font-bold text-2xl text-gray-600 lg:mb-8">
                 Champs optionnels
               </h3>
+              {diplomeInput.map((diplomeIn, index) => {
+                if (diplomeIn) {
+                  return (
+                    <div className="flex justify-between">
+                      <Autocomplete
+                        disablePortal
+                        id="combo-box-1"
+                        options={diplomeData}
+                        getOptionLabel={(option) =>
+                          option.title.replace("&apos;E", "'É")
+                        }
+                        sx={{
+                          width: "55%",
+                          mb: 1.5,
+                        }}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            label={`Master ${index + 1}`}
+                            color="primary"
+                          />
+                        )}
+                      />
+                      <Autocomplete
+                        disablePortal
+                        id="combo-box-2"
+                        options={promotionData}
+                        getOptionLabel={(option) => option.year}
+                        sx={{
+                          width: "30%",
+                          mb: 1,
+                        }}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            label="Année"
+                            color="primary"
+                          />
+                        )}
+                      />
+                      <button
+                        type="button"
+                        disabled={index === 2}
+                        // className="flex items-center content-center"
+                        className="pb-3"
+                        onClick={() => handleDiplomeInput(index, "plus")}
+                      >
+                        <HiPlus
+                          size={20}
+                          color={index === 2 ? "#d3d3d3" : "black"}
+                        />
+                      </button>
+                      {/* )} */}
+                      <button
+                        type="button"
+                        disabled={index === 0}
+                        className="pb-3"
+                        onClick={() => handleDiplomeInput(index, "minus")}
+                      >
+                        <HiMinus
+                          size={20}
+                          color={index === 0 ? "#d3d3d3" : "black"}
+                        />
+                      </button>
+                    </div>
+                  );
+                }
+                return null;
+              })}
               <TextField label="Employeur actuel" size="medium" />
               <TextField
                 label="Email professionnel"
