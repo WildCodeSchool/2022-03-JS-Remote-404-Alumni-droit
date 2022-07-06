@@ -18,6 +18,7 @@ function SignUp() {
   } = useForm();
 
   const [diplomeInput, setDiplomeInput] = useState([true, false, false]);
+  const [masterInput, setMasterInput] = useState([true, false, false]);
 
   const handleDiplomeInput = (index, type) => {
     const provDiplomeInput = [...diplomeInput];
@@ -29,53 +30,18 @@ function SignUp() {
     setDiplomeInput(provDiplomeInput);
   };
 
+  const handleMasterInput = (index, type) => {
+    const provMasterInput = [...masterInput];
+    if (index < 2 && type === "plus") {
+      provMasterInput[index + 1] = true;
+    } else if (index > 0 && type === "minus") {
+      provMasterInput[index] = false;
+    }
+    setMasterInput(provMasterInput);
+  };
+
   const onSubmit = (data) => console.warn(data);
   console.warn(errors);
-
-  const AntSwitch = styled(Switch)(({ theme }) => ({
-    width: 28,
-    height: 16,
-    padding: 0,
-    display: "flex",
-    "&:active": {
-      "& .MuiSwitch-thumb": {
-        width: 15,
-      },
-      "& .MuiSwitch-switchBase.Mui-checked": {
-        transform: "translateX(9px)",
-      },
-    },
-    "& .MuiSwitch-switchBase": {
-      padding: 2,
-      "&.Mui-checked": {
-        transform: "translateX(12px)",
-        color: "#fff",
-        "& + .MuiSwitch-track": {
-          opacity: 1,
-          backgroundColor:
-            theme.palette.mode === "dark" ? "#177ddc" : "#1890ff",
-        },
-      },
-    },
-    "& .MuiSwitch-thumb": {
-      boxShadow: "0 2px 4px 0 rgb(0 35 11 / 20%)",
-      width: 12,
-      height: 12,
-      borderRadius: 6,
-      transition: theme.transitions.create(["width"], {
-        duration: 200,
-      }),
-    },
-    "& .MuiSwitch-track": {
-      borderRadius: 16 / 2,
-      opacity: 1,
-      backgroundColor:
-        theme.palette.mode === "dark"
-          ? "rgba(255,255,255,.35)"
-          : "rgba(0,0,0,.25)",
-      boxSizing: "border-box",
-    },
-  }));
 
   const [diplomeData, setDiplomeData] = useState([]);
   const [professionData, setProfessionData] = useState([]);
@@ -137,6 +103,51 @@ function SignUp() {
     getMaster();
   }, []);
 
+  const AntSwitch = styled(Switch)(({ theme }) => ({
+    width: 28,
+    height: 16,
+    padding: 0,
+    display: "flex",
+    "&:active": {
+      "& .MuiSwitch-thumb": {
+        width: 15,
+      },
+      "& .MuiSwitch-switchBase.Mui-checked": {
+        transform: "translateX(9px)",
+      },
+    },
+    "& .MuiSwitch-switchBase": {
+      padding: 2,
+      "&.Mui-checked": {
+        transform: "translateX(12px)",
+        color: "#fff",
+        "& + .MuiSwitch-track": {
+          opacity: 1,
+          backgroundColor:
+            theme.palette.mode === "dark" ? "#177ddc" : "#1890ff",
+        },
+      },
+    },
+    "& .MuiSwitch-thumb": {
+      boxShadow: "0 2px 4px 0 rgb(0 35 11 / 20%)",
+      width: 12,
+      height: 12,
+      borderRadius: 6,
+      transition: theme.transitions.create(["width"], {
+        duration: 200,
+      }),
+    },
+    "& .MuiSwitch-track": {
+      borderRadius: 16 / 2,
+      opacity: 1,
+      backgroundColor:
+        theme.palette.mode === "dark"
+          ? "rgba(255,255,255,.35)"
+          : "rgba(0,0,0,.25)",
+      boxSizing: "border-box",
+    },
+  }));
+
   return (
     <>
       <div className="w-[90%] md:w-[80%] lg:w-[80%] flex flex-col flex-wrap bg-zinc-100 rounded-lg shadow-md mx-auto p-4 mt-5 md:mt-10 border-2 h-auto">
@@ -151,7 +162,7 @@ function SignUp() {
                 <h2 className="font-bold text-2xl text-red-800">
                   Création de compte
                 </h2>
-                <p className="text-xs">champs obligatoires</p>
+                <p className="text-xs">Champs obligatoires</p>
               </div>
               <TextField label="Nom" size="medium" />
               <TextField label="Prénom" size="medium" />
@@ -164,8 +175,8 @@ function SignUp() {
               />
               {/* BLOC DIPLOME ANNEE */}
               <div className="flex flex-col">
-                <p className="text-xs text-center mb-2">
-                  Votre cursus au sein du Collège et de l’Ecole de droit :
+                <p className="lg:text-sm text-center mt-1 mb-3">
+                  Votre cursus au sein du Collège et de l’École de droit :
                 </p>
                 {diplomeInput.map((diplomeIn, index) => {
                   if (diplomeIn) {
@@ -185,7 +196,7 @@ function SignUp() {
                           renderInput={(params) => (
                             <TextField
                               {...params}
-                              label={`Diplôme ${index + 1}`}
+                              label={`#${index + 1} Diplôme`}
                               color="primary"
                             />
                           )}
@@ -197,7 +208,6 @@ function SignUp() {
                           getOptionLabel={(option) => option.year}
                           sx={{
                             width: "30%",
-                            mb: 1,
                           }}
                           renderInput={(params) => (
                             <TextField
@@ -267,6 +277,11 @@ function SignUp() {
                 />
                 <Typography>Public</Typography>
               </Stack>
+              <p className="flex text-left text-xs pb-6">
+                <span>*&nbsp;</span>En mode privé, votre profil ne pourra être
+                consulté que par les anciens diplômés inscrits et connectés à
+                l’annuaire. À défaut, le profil est visible par tous.
+              </p>
             </div>
             {/* COLONNE 2 */}
             <div className="flex flex-col lg:flex lg:flex-col lg:w-[48%] space-y-3">
@@ -274,13 +289,13 @@ function SignUp() {
                 Champs optionnels
                 {/* BLOC MASTER ANNEE */}
               </h3>
-              {diplomeInput.map((diplomeIn, index) => {
-                if (diplomeIn) {
+              {masterInput.map((masterIn, index) => {
+                if (masterIn) {
                   return (
-                    <div className="flex justify-between">
+                    <div className="flex flex-wrap justify-between mb-5">
                       <Autocomplete
                         disablePortal
-                        id="combo-box-1"
+                        id="combo-box-4"
                         options={masterData}
                         getOptionLabel={(option) =>
                           option.title.replace("&apos;E", "'É")
@@ -292,14 +307,14 @@ function SignUp() {
                         renderInput={(params) => (
                           <TextField
                             {...params}
-                            label={`Master ${index + 1}`}
+                            label={`#${index + 1} Master 2`}
                             color="primary"
                           />
                         )}
                       />
                       <Autocomplete
                         disablePortal
-                        id="combo-box-2"
+                        id="combo-box-5"
                         options={promotionData}
                         getOptionLabel={(option) => option.year}
                         sx={{
@@ -318,7 +333,7 @@ function SignUp() {
                         type="button"
                         disabled={index === 2}
                         className="pb-3"
-                        onClick={() => handleDiplomeInput(index, "plus")}
+                        onClick={() => handleMasterInput(index, "plus")}
                       >
                         <HiPlus
                           size={20}
@@ -329,18 +344,28 @@ function SignUp() {
                         type="button"
                         disabled={index === 0}
                         className="pb-3"
-                        onClick={() => handleDiplomeInput(index, "minus")}
+                        onClick={() => handleMasterInput(index, "minus")}
                       >
                         <HiMinus
                           size={20}
                           color={index === 0 ? "#d3d3d3" : "black"}
                         />
                       </button>
+                      {/* <div className="flex "> */}
+                      <TextField
+                        label="Université d'obtention"
+                        size="medium"
+                        sx={{
+                          width: "100%",
+                        }}
+                      />
+                      {/* </div> */}
                     </div>
                   );
                 }
                 return null;
               })}
+
               <TextField label="Employeur actuel" size="medium" />
               <TextField
                 label="Email professionnel"
@@ -353,7 +378,7 @@ function SignUp() {
               <TextField label="Twitter" size="medium" />
               <TextField label="Instagram" size="medium" />
               <TextField
-                label="Votre parcours professionnel"
+                label="Votre parcours en quelques mots"
                 size="large"
                 multiline
                 rows={6}
@@ -372,12 +397,13 @@ function SignUp() {
         </form>
       </div>
       <p className="w-[70%] text-gray-400 text-sm mx-auto my-4">
-        « L’Association du Collège et de l’École de droit
+        L’Association du Collège et de l’École de droit
         (cdd.edd.paris2@gmail.com) n’est pas responsable de l’utilisation par
         des tiers des données rendues publiquement accessibles sur ce site par
         les utilisateurs. L’Association est susceptible de traiter ces données
         pour tenir à jour ses registres et établir des statistiques. Pour en
-        savoir plus sur la gestion de vos données et pour exercer vos droits,{" "}
+        savoir plus sur la gestion de vos données et pour exercer vos
+        droits,&nbsp;
         <Link to="/RGPD" className="underline">
           cliquez ici
         </Link>
