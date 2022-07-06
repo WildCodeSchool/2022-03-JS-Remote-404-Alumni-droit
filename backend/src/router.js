@@ -7,6 +7,7 @@ const {
   FilterDiplomeController,
   FilterProfessionController,
   FilterPromotionController,
+  FilterMasterController,
 } = require("./controllers");
 
 const router = express.Router();
@@ -21,6 +22,7 @@ router.post("/login", validateLogin, UserController.login);
 router.get("/diplome", FilterDiplomeController.browse);
 router.get("/profession", FilterProfessionController.browse);
 router.get("/promotion", FilterPromotionController.browse);
+router.get("/master", FilterMasterController.browse);
 
 // router.put("/items/:id", ItemController.edit);
 // router.post("/items", ItemController.add);

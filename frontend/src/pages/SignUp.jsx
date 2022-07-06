@@ -80,6 +80,7 @@ function SignUp() {
   const [diplomeData, setDiplomeData] = useState([]);
   const [professionData, setProfessionData] = useState([]);
   const [promotionData, setPromotionData] = useState([]);
+  const [masterData, setMasterData] = useState([]);
 
   const getDiplome = () => {
     axios
@@ -118,10 +119,22 @@ function SignUp() {
       });
   };
 
+  const getMaster = () => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/master`)
+      .then((res) => {
+        setMasterData(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   useEffect(() => {
     getDiplome();
     getProfession();
     getPromotion();
+    getMaster();
   }, []);
 
   return (
@@ -259,6 +272,7 @@ function SignUp() {
             <div className="flex flex-col lg:flex lg:flex-col lg:w-[48%] space-y-3">
               <h3 className="text-center font-bold text-2xl text-gray-600 lg:mb-8">
                 Champs optionnels
+                {/* BLOC MASTER ANNEE */}
               </h3>
               {diplomeInput.map((diplomeIn, index) => {
                 if (diplomeIn) {
@@ -267,7 +281,7 @@ function SignUp() {
                       <Autocomplete
                         disablePortal
                         id="combo-box-1"
-                        options={diplomeData}
+                        options={masterData}
                         getOptionLabel={(option) =>
                           option.title.replace("&apos;E", "'É")
                         }
