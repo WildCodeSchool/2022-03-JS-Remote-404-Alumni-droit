@@ -272,7 +272,7 @@ function SignUp() {
                 size="medium"
               />
               <TextField label="Téléphone" type="tel" size="medium" />
-              <TextField label="URL Pro" size="medium" />
+              <TextField label="Site Web" size="medium" />
               <TextField label="Facebook" size="medium" />
               <TextField label="Twitter" size="medium" />
               <TextField label="Instagram" size="medium" />

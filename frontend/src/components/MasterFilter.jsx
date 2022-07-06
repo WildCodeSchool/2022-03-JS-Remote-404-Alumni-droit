@@ -51,7 +51,8 @@ function MasterFilter() {
   }, []);
 
   return (
-    <>
+    <div className="flex flex-col border p-5">
+      <p className="lg:text-sm text-center mb-3">Votre cursus annexe :</p>
       {masterInput.map((masterIn, index) => {
         if (masterIn) {
           return (
@@ -75,6 +76,7 @@ function MasterFilter() {
                   />
                 )}
               />
+
               <Autocomplete
                 disablePortal
                 id="combo-box-5"
@@ -105,6 +107,15 @@ function MasterFilter() {
                 <HiMinus size={20} color={index === 0 ? "#d3d3d3" : "black"} />
               </button>
               <TextField
+                label="Le Master ne figure pas dans la liste"
+                size="medium"
+                sx={{
+                  width: "55%",
+                  mb: 1.5,
+                }}
+              />
+
+              <TextField
                 label="Université d'obtention"
                 size="medium"
                 sx={{
@@ -116,7 +127,7 @@ function MasterFilter() {
         }
         return null;
       })}
-    </>
+    </div>
   );
 }
 
