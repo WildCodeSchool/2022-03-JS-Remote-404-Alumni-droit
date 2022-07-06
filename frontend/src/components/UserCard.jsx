@@ -40,10 +40,12 @@ function UserCard({ lastname, firstname, photo, job, userId, diplomes }) {
               </div>
             ))}
       </div>
+      {diplomes.length === 1 && <div className="mb-19" />}
+      {diplomes.length === 2 && <div className="sm:mb-4 md:mb-8" />}
       <div className="flex justify-end">
         <button
           type="button"
-          className="text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-700 font-medium rounded-lg text-sm lg:text-base xl:text-lg mt-5 px-5 py-2.5 inline-flex items-center dark:bg-red-800 dark:hover:bg-red-800 dark:focus:ring-red-800"
+          className="text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-700 font-medium rounded-lg text-sm lg:text-base xl:text-lg md:mt-1 mt-5 px-5 py-2.5 inline-flex items-center dark:bg-red-800 dark:hover:bg-red-800 dark:focus:ring-red-800"
         >
           <Link to={`/profile/${userId}`}>
             <p>Consulter</p>
