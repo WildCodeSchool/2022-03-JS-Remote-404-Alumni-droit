@@ -33,14 +33,11 @@ class UserController {
   };
 
   static edit = (req, res) => {
-    const item = req.body;
-
-    // TODO validations (length, format...)
-
-    item.id = parseInt(req.params.id, 10);
+    const user = req.body;
+    user.id = parseInt(req.params.id, 10);
 
     models.user
-      .update(item)
+      .update(user)
       .then(([result]) => {
         if (result.affectedRows === 0) {
           res.sendStatus(404);
