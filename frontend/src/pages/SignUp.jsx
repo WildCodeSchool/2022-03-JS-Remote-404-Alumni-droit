@@ -132,14 +132,16 @@ function SignUp() {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col md:mx-auto md:w-[95%] space-y-3"
         >
+          <h2 className="font-bold text-3xl text-red-800 text-align">
+            Création de compte
+          </h2>
           <div className="lg:flex lg:flex-row lg:justify-between">
             {/* COLONNE 1 */}
             <div className="flex flex-col lg:flex lg:flex-col lg:w-[48%] space-y-3 lg:border lg:p-6 rounded">
-              <div className="flex justify-center flex-col text-center mb-4">
-                <h2 className="font-bold text-2xl text-red-800">
-                  Création de compte
-                </h2>
-                <p className="text-xs">Champs obligatoires</p>
+              <div className="flex justify-center flex-col text-center">
+                <p className="text-center text-red-800 font-bold text-xl lg:mb-5">
+                  Champs obligatoires
+                </p>
               </div>
               <TextField label="Nom" size="medium" />
               <TextField label="Prénom" size="medium" />
@@ -265,7 +267,7 @@ function SignUp() {
             </div>
             {/* COLONNE 2 */}
             <div className="flex flex-col lg:flex lg:flex-col lg:w-[48%] space-y-3 lg:border lg:p-6 rounded">
-              <h3 className="text-center font-bold text-2xl text-gray-600 lg:mb-5">
+              <h3 className="text-center font-bold text-xl text-gray-600 lg:mb-5">
                 Champs optionnels
                 {/* BLOC MASTER ANNEE */}
               </h3>
