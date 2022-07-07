@@ -2,7 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import AdminToggle from "./AdminToggle";
 
-function UserCard({ lastname, firstname, photo, job, userId, diplomes }) {
+function UserCard({
+  lastname,
+  firstname,
+  photo,
+  job,
+  userId,
+  diplomes,
+  isValid,
+}) {
   return (
     <div className="w-[45%] md:w-[22%] lg:w-[18%] xl:w-[15%] flex flex-col flex-wrap rounded-lg shadow-md m-2 p-3 border-2 h-auto">
       <div>
@@ -63,7 +71,7 @@ function UserCard({ lastname, firstname, photo, job, userId, diplomes }) {
             />
           </svg>
         </button>
-        <AdminToggle />
+        <AdminToggle userId={userId} isValid={isValid} />
       </div>
     </div>
   );
