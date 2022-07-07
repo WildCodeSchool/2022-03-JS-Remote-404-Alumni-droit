@@ -6,7 +6,6 @@ import { HiPlus, HiMinus } from "react-icons/hi";
 
 function MasterFilter() {
   const [masterData, setMasterData] = useState([]);
-  const [promotionData, setPromotionData] = useState([]);
   const [masterInput, setMasterInput] = useState([true, false, false]);
 
   const handleMasterInput = (index, type) => {
@@ -19,22 +18,7 @@ function MasterFilter() {
     setMasterInput(provMasterInput);
   };
 
-  const getPromotion = () => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/promotion`)
-      .then((res) => {
-        const years = res.data.map((el) => ({
-          year: el.year.toString(),
-          id: el.year,
-        }));
-        setPromotionData(years);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
-  const getMaster = () => {
+  useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/master`)
       .then((res) => {
@@ -43,12 +27,7 @@ function MasterFilter() {
       .catch((err) => {
         console.error(err);
       });
-  };
-
-  useEffect(() => {
-    getPromotion();
-    getMaster();
-  }, []);
+  });
 
   return (
     <div className="flex flex-col lg:border lg:p-4 rounded">
@@ -76,20 +55,7 @@ function MasterFilter() {
                   />
                 )}
               />
-
-              <Autocomplete
-                disablePortal
-                id="combo-box-5"
-                options={promotionData}
-                getOptionLabel={(option) => option.year}
-                sx={{
-                  width: "30%",
-                  mb: 1,
-                }}
-                renderInput={(params) => (
-                  <TextField {...params} label="Année" color="primary" />
-                )}
-              />
+              <TextField label="Année" color="primary" />
               <button
                 type="button"
                 disabled={index === 2}
@@ -114,7 +80,6 @@ function MasterFilter() {
                   mb: 1.5,
                 }}
               />
-
               <TextField
                 label="Université d'obtention"
                 size="medium"
