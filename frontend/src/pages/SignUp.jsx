@@ -5,7 +5,7 @@ import axios from "axios";
 
 import MasterFilter from "@components/MasterFilter";
 import { TextField, Autocomplete } from "@mui/material";
-import { styled } from "@mui/material/styles";
+// import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -80,50 +80,50 @@ function SignUp() {
     getPromotion();
   }, []);
 
-  const AntSwitch = styled(Switch)(({ theme }) => ({
-    width: 28,
-    height: 16,
-    padding: 0,
-    display: "flex",
-    "&:active": {
-      "& .MuiSwitch-thumb": {
-        width: 15,
-      },
-      "& .MuiSwitch-switchBase.Mui-checked": {
-        transform: "translateX(9px)",
-      },
-    },
-    "& .MuiSwitch-switchBase": {
-      padding: 2,
-      "&.Mui-checked": {
-        transform: "translateX(12px)",
-        color: "#fff",
-        "& + .MuiSwitch-track": {
-          opacity: 1,
-          backgroundColor:
-            theme.palette.mode === "dark" ? "#177ddc" : "#1890ff",
-        },
-      },
-    },
-    "& .MuiSwitch-thumb": {
-      boxShadow: "0 2px 4px 0 rgb(0 35 11 / 20%)",
-      width: 12,
-      height: 12,
-      borderRadius: 6,
-      transition: theme.transitions.create(["width"], {
-        duration: 200,
-      }),
-    },
-    "& .MuiSwitch-track": {
-      borderRadius: 16 / 2,
-      opacity: 1,
-      backgroundColor:
-        theme.palette.mode === "dark"
-          ? "rgba(255,255,255,.35)"
-          : "rgba(0,0,0,.25)",
-      boxSizing: "border-box",
-    },
-  }));
+  // const AntSwitch = styled(Switch)(({ theme }) => ({
+  //   width: 28,
+  //   height: 16,
+  //   padding: 0,
+  //   display: "flex",
+  //   "&:active": {
+  //     "& .MuiSwitch-thumb": {
+  //       width: 15,
+  //     },
+  //     "& .MuiSwitch-switchBase.Mui-checked": {
+  //       transform: "translateX(9px)",
+  //     },
+  //   },
+  //   "& .MuiSwitch-switchBase": {
+  //     padding: 2,
+  //     "&.Mui-checked": {
+  //       transform: "translateX(12px)",
+  //       color: "#fff",
+  //       "& + .MuiSwitch-track": {
+  //         opacity: 1,
+  //         backgroundColor:
+  //           theme.palette.mode === "dark" ? "#177ddc" : "#1890ff",
+  //       },
+  //     },
+  //   },
+  //   "& .MuiSwitch-thumb": {
+  //     boxShadow: "0 2px 4px 0 rgb(0 35 11 / 20%)",
+  //     width: 12,
+  //     height: 12,
+  //     borderRadius: 6,
+  //     transition: theme.transitions.create(["width"], {
+  //       duration: 200,
+  //     }),
+  //   },
+  //   "& .MuiSwitch-track": {
+  //     borderRadius: 16 / 2,
+  //     opacity: 1,
+  //     backgroundColor:
+  //       theme.palette.mode === "dark"
+  //         ? "rgba(255,255,255,.35)"
+  //         : "rgba(0,0,0,.25)",
+  //     boxSizing: "border-box",
+  //   },
+  // }));
 
   return (
     <>
@@ -134,7 +134,7 @@ function SignUp() {
         >
           <div className="lg:flex lg:flex-row lg:justify-between">
             {/* COLONNE 1 */}
-            <div className="flex flex-col lg:flex lg:flex-col lg:w-[48%] space-y-3">
+            <div className="flex flex-col lg:flex lg:flex-col lg:w-[48%] space-y-3 border p-4 rounded">
               <div className="flex justify-center flex-col text-center mb-4">
                 <h2 className="font-bold text-2xl text-red-800">
                   Création de compte
@@ -237,21 +237,26 @@ function SignUp() {
                 )}
               />
               <TextField label="Profession actuelle" size="medium" />
-              <Stack
-                direction="row"
-                spacing={1}
-                alignItems="center"
-                size="medium"
-              >
-                <Typography size="medium">
-                  Etat de votre profil : Privé
-                </Typography>
-                <AntSwitch
-                  defaultChecked
-                  inputProps={{ "aria-label": "ant design" }}
-                />
-                <Typography>Public</Typography>
-              </Stack>
+
+              <div className="mt-20">
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  alignItems="center"
+                  size="medium"
+                >
+                  <Typography size="medium">
+                    Etat de votre profil : Privé
+                  </Typography>
+                  <Switch />
+                  {/* <AntSwitch
+                    defaultChecked
+                    inputProps={{ "aria-label": "ant design" }}
+                  /> */}
+                  <Typography>Public</Typography>
+                </Stack>
+              </div>
+
               <p className="flex text-left text-xs pb-6">
                 <span>*&nbsp;</span>En mode privé, votre profil ne pourra être
                 consulté que par les anciens diplômés inscrits et connectés à
@@ -259,7 +264,7 @@ function SignUp() {
               </p>
             </div>
             {/* COLONNE 2 */}
-            <div className="flex flex-col lg:flex lg:flex-col lg:w-[48%] space-y-3">
+            <div className="flex flex-col lg:flex lg:flex-col lg:w-[48%] space-y-3 border p-4 rounded">
               <h3 className="text-center font-bold text-2xl text-gray-600 lg:mb-8">
                 Champs optionnels
                 {/* BLOC MASTER ANNEE */}

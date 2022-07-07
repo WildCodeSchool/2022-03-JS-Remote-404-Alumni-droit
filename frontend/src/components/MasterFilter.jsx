@@ -51,7 +51,7 @@ function MasterFilter() {
   }, []);
 
   return (
-    <div className="flex flex-col border p-5">
+    <div className="flex flex-col">
       <p className="lg:text-sm text-center mb-3">Votre cursus annexe :</p>
       {masterInput.map((masterIn, index) => {
         if (masterIn) {
