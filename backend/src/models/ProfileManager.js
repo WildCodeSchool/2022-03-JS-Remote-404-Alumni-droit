@@ -19,8 +19,11 @@ class ProfileManager extends AbstractManager {
       sqlQuery += ` INNER JOIN profile_diplome as PD ON PD.profile_id = P.id`;
       sqlQuery += ` INNER JOIN diplome as D ON PD.diplome_id = D.id`;
     }
-
-    sqlQuery += ` ${this.andOrWhere(sqlQuery)} U.is_valid = 1`;
+    /**
+     * si is Admin, alors affiche pas la query U.is_valid
+     * si is User, alors affiche U.is_valid = 1
+    //  */
+    // sqlQuery += ` ${this.andOrWhere(sqlQuery)} U.is_valid = 0`;
 
     if (diplome) {
       sqlQuery += `${this.andOrWhere(sqlQuery)} PD.diplome_id = ?`;

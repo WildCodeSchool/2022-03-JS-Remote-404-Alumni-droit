@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { Switch } from "@headlessui/react";
 
 import axios from "axios";
@@ -14,10 +14,9 @@ import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 
-function AdminToggle({ isValid }) {
+function AdminToggle({ isValid, userId }) {
   const [isValidSwitch, setIsValidSwitch] = useState(isValid);
   const [open, setOpen] = useState(false);
-  const { userId } = useParams();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -28,31 +27,38 @@ function AdminToggle({ isValid }) {
   };
 
   useEffect(() => {
-    const newValid = isValidSwitch === 0 ? 1 : 0;
+    const newValid = isValidSwitch === false ? 0 : 1;
+    // console.log("=======useEffect=====");
+    // console.log(`userId: ${userId}`);
+    // console.log(`newValid: ${newValid} ; isValidSwitch: ${isValidSwitch}`);
     axios
       .put(`${import.meta.env.VITE_BACKEND_URL}/user/update/${userId}`, {
-        isValidSwitch: `${newValid}`,
+        is_valid: `${newValid}`,
       })
-      .then((res) => setIsValidSwitch(res.data))
       .catch((err) => console.error(err));
-  }, []);
+  }, [isValidSwitch]);
 
   return (
     <div className="flex justify-between flex-col contents-center pt-3">
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-row items-center">
-          <Switch
-            checked={isValidSwitch}
-            onChange={setIsValidSwitch}
-            className={`${isValidSwitch ? "bg-green-500" : "bg-slate-400"}
-                relative inline-flex h-[1.3rem] w-[2.3rem] mr-1 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
+          <button
+            type="button"
+            onClick={() => setIsValidSwitch(!isValidSwitch)}
           >
-            <span
-              aria-hidden="true"
-              className={`${isValidSwitch ? "translate-x-4" : "translate-x-0"}
-                    pointer-events-none inline-block h-[1rem] w-[1rem] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
-            />
-          </Switch>
+            <Switch
+              checked={isValidSwitch}
+              onChange={() => setIsValidSwitch()}
+              className={`${isValidSwitch ? "bg-green-500" : "bg-slate-400"}
+            relative inline-flex h-[1.3rem] w-[2.3rem] mr-1 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
+            >
+              <span
+                aria-hidden="true"
+                className={`${isValidSwitch ? "translate-x-4" : "translate-x-0"}
+              pointer-events-none inline-block h-[1rem] w-[1rem] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
+              />
+            </Switch>
+          </button>
           {isValidSwitch === true ? (
             <p className="text-green-500 font-bold text-[.7rem]">Validé</p>
           ) : (
