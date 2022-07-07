@@ -60,6 +60,7 @@ function Listing() {
               key={row.id}
               userId={row.id}
               diplomes={row.diplomes}
+              isValid={row.is_valid}
             />
           ))}
       </div>
