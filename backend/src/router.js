@@ -4,10 +4,10 @@ const { validateUser, validateLogin } = require("./middlewares/userMiddleware");
 const {
   ProfileController,
   UserController,
-  FilterDiplomeController,
-  FilterProfessionController,
-  FilterPromotionController,
-  FilterMasterController,
+  DiplomeController,
+  JobController,
+  PromotionController,
+  MasterController,
 } = require("./controllers");
 
 const router = express.Router();
@@ -19,10 +19,10 @@ router.get("/count", ProfileController.count);
 router.post("/signIn", validateUser, UserController.add);
 router.post("/login", validateLogin, UserController.login);
 
-router.get("/diplome", FilterDiplomeController.browse);
-router.get("/profession", FilterProfessionController.browse);
-router.get("/promotion", FilterPromotionController.browse);
-router.get("/master", FilterMasterController.browse);
+router.get("/diplome", DiplomeController.browse);
+router.get("/profession", JobController.browse);
+router.get("/promotion", PromotionController.browse);
+router.get("/master", MasterController.browse);
 
 // router.put("/items/:id", ItemController.edit);
 // router.post("/items", ItemController.add);

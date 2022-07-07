@@ -12,6 +12,12 @@ class JobManager extends AbstractManager {
       .then((res) => res[0]);
   }
 
+  findAll() {
+    return this.connection.query(
+      `select * from  ${this.table} ORDER BY id ASC`
+    );
+  }
+
   jobFind(data) {
     return Promise.all(data.map((pers) => this.find(pers.id)));
   }

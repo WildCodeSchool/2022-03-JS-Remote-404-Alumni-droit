@@ -12,6 +12,10 @@ class MasterManager extends AbstractManager {
       .then((res) => res[0]);
   }
 
+  findAll() {
+    return this.connection.query(`select DISTINCT title from ${this.table}`);
+  }
+
   multipleFind(data) {
     return Promise.all(data.map((pers) => this.find(pers.id)));
   }
