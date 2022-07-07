@@ -51,8 +51,8 @@ function MasterFilter() {
   }, []);
 
   return (
-    <div className="flex flex-col">
-      <p className="lg:text-sm text-center mb-3">Votre cursus annexe :</p>
+    <div className="flex flex-col lg:border lg:p-4 rounded">
+      <p className="lg:text-sm text-center mb-6 ">Votre cursus annexe :</p>
       {masterInput.map((masterIn, index) => {
         if (masterIn) {
           return (
@@ -107,7 +107,7 @@ function MasterFilter() {
                 <HiMinus size={20} color={index === 0 ? "#d3d3d3" : "black"} />
               </button>
               <TextField
-                label="Le Master ne figure pas dans la liste"
+                label="Entrer un master"
                 size="medium"
                 sx={{
                   width: "55%",

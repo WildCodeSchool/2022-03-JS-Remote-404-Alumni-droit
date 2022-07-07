@@ -134,7 +134,7 @@ function SignUp() {
         >
           <div className="lg:flex lg:flex-row lg:justify-between">
             {/* COLONNE 1 */}
-            <div className="flex flex-col lg:flex lg:flex-col lg:w-[48%] space-y-3 border p-4 rounded">
+            <div className="flex flex-col lg:flex lg:flex-col lg:w-[48%] space-y-3 lg:border lg:p-6 rounded">
               <div className="flex justify-center flex-col text-center mb-4">
                 <h2 className="font-bold text-2xl text-red-800">
                   Création de compte
@@ -151,8 +151,8 @@ function SignUp() {
                 size="medium"
               />
               {/* BLOC DIPLOME ANNEE */}
-              <div className="flex flex-col">
-                <p className="lg:text-sm text-center mt-1 mb-3">
+              <div className="flex flex-col lg:border lg:p-4 rounded">
+                <p className="lg:text-sm text-center mt-3 mb-6">
                   Votre cursus au sein du Collège et de l’École de droit :
                 </p>
                 {diplomeInput.map((diplomeIn, index) => {
@@ -264,8 +264,8 @@ function SignUp() {
               </p>
             </div>
             {/* COLONNE 2 */}
-            <div className="flex flex-col lg:flex lg:flex-col lg:w-[48%] space-y-3 border p-4 rounded">
-              <h3 className="text-center font-bold text-2xl text-gray-600 lg:mb-8">
+            <div className="flex flex-col lg:flex lg:flex-col lg:w-[48%] space-y-3 lg:border lg:p-6 rounded">
+              <h3 className="text-center font-bold text-2xl text-gray-600 lg:mb-5">
                 Champs optionnels
                 {/* BLOC MASTER ANNEE */}
               </h3>
