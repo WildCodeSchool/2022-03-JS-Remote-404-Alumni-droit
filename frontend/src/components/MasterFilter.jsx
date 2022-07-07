@@ -55,7 +55,13 @@ function MasterFilter() {
                   />
                 )}
               />
-              <TextField label="Année" color="primary" />
+              <TextField
+                label="Année"
+                color="primary"
+                sx={{
+                  width: "30%",
+                }}
+              />
               <button
                 type="button"
                 disabled={index === 2}

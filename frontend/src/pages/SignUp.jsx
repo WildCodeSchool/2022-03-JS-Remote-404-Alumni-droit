@@ -132,9 +132,12 @@ function SignUp() {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col md:mx-auto md:w-[95%] space-y-3"
         >
-          <h2 className="font-bold text-3xl text-red-800 text-align">
-            Création de compte
-          </h2>
+          <div className=" flex justify-center pb-6 lg:p-9">
+            <h2 className="font-bold text-3xl text-red-800 text-center">
+              Création de compte
+            </h2>
+          </div>
+
           <div className="lg:flex lg:flex-row lg:justify-between">
             {/* COLONNE 1 */}
             <div className="flex flex-col lg:flex lg:flex-col lg:w-[48%] space-y-3 lg:border lg:p-6 rounded">
