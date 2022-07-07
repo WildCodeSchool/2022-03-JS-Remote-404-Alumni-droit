@@ -8,6 +8,15 @@ import ExportContextUser from "./contexts/UserContext";
 import App from "./App";
 
 const theme = createTheme({
+  components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#ffff",
+        },
+      },
+    },
+  },
   palette: {
     primary: {
       main: "#862628",
