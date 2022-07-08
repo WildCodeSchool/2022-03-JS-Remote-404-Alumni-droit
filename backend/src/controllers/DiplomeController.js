@@ -1,6 +1,6 @@
 const models = require("../models");
 
-class FilterDiplomeController {
+class DiplomeController {
   static browse = (req, res) => {
     models.diplome
       .findAll()
@@ -80,4 +80,4 @@ class FilterDiplomeController {
   };
 }
 
-module.exports = FilterDiplomeController;
+module.exports = DiplomeController;

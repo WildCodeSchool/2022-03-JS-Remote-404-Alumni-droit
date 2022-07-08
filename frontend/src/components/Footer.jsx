@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/Footer.css";
 import "../App.css";
+import { Link } from "react-router-dom";
 import logoFacebook from "../assets/facebook.png";
 import logoLinkedin from "../assets/linkedin.png";
 import logoTwitter from "../assets/twitter.png";
@@ -31,21 +32,27 @@ function Footer() {
         <div className="images flex flex-row space-x-5">
           {/* cadre général / images */}
           <div className="img-social-media w-10">
-            <img src={logoLinkedin} alt="logo linkedin" />
-          </div>
+          <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/company/coll%C3%A8ge-de-droit-universit%C3%A9-paris-ii-panth%C3%A9on-assas/">
+          <img src={logoLinkedin} alt="logo linkedin" />
+        </a></div>
           <div className="img-social-media w-10">
-            <img src={logoFacebook} alt="logo facebook" />
-          </div>
+          <a target="_blank" rel="noreferrer" href="https://twitter.com/CddAssas">
+          <img src={logoTwitter} alt="logo twitter" />
+        </a></div>
           <div className="img-social-media w-10">
-            <img src={logoTwitter} alt="logo twitter" />
-          </div>
+          <a target="_blank" rel="noreferrer" href="https://www.facebook.com/aecdd.assas/?__tn__=%2Cd%2CP-R&eid=ARDiEiQUjTLsqAJiv3-O5jXDEqSGXn9HX3R1KFN_pbvtAuOYe4y8y7N5-mykIkf_OTnPyninYcSnAu5z">
+          <img src={logoFacebook} alt="logo Facebook" />
+        </a></div>
           <div className="img-social-media w-10">
-            <img src={logoInstagram} alt="logo instagram" />
-          </div>
+          <a target="_blank" rel="noreferrer" href="https://www.instagram.com/collegededroitassas/">
+          <img src={logoInstagram} alt="logo Instagram" />
+        </a></div>
         </div>{" "}
         {/* cadre général / images */}
         <div className="links">
-          <p className="footer-paragraph">Mentions légales</p>
+          <Link to="RGPD">Mentions légales
+          <p src="./pages/RGPD" alt="logo"  />
+        </Link>
         </div>
       </div>{" "}
       {/* cadre général */}

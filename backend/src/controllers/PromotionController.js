@@ -1,8 +1,8 @@
 const models = require("../models");
 
-class FilterProfessionController {
+class PromotionController {
   static browse = (req, res) => {
-    models.profession
+    models.profile_diplome
       .findAll()
       .then(([rows]) => {
         res.send(rows);
@@ -80,4 +80,4 @@ class FilterProfessionController {
   };
 }
 
-module.exports = FilterProfessionController;
+module.exports = PromotionController;
