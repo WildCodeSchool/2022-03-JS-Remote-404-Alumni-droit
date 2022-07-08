@@ -9,7 +9,7 @@ class ProfileManager extends AbstractManager {
 
   findAll(query) {
     const { diplome, promo, job, nomPrenom } = query;
-    let sqlQuery = `SELECT lastname, firstname, P.id, W.job, photo FROM ${ProfileManager.table} as P`;
+    let sqlQuery = `SELECT lastname, firstname, P.id, W.job, U.is_valid, photo FROM ${ProfileManager.table} as P`;
     const sqlValue = [];
 
     sqlQuery += ` INNER JOIN user as U ON P.id = U.id`;
@@ -19,8 +19,11 @@ class ProfileManager extends AbstractManager {
       sqlQuery += ` INNER JOIN profile_diplome as PD ON PD.profile_id = P.id`;
       sqlQuery += ` INNER JOIN diplome as D ON PD.diplome_id = D.id`;
     }
-
-    sqlQuery += ` ${this.andOrWhere(sqlQuery)} U.is_valid = 1`;
+    /**
+     * si is Admin, alors affiche pas la query U.is_valid
+     * si is User, alors affiche U.is_valid = 1
+    // //  */
+    // sqlQuery += ` ${this.andOrWhere(sqlQuery)} U.is_valid = 1`;
 
     if (diplome) {
       sqlQuery += `${this.andOrWhere(sqlQuery)} PD.diplome_id = ?`;
