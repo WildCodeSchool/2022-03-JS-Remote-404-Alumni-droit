@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-// import { useParams } from "react-router-dom";
+import React, { useState } from "react";
 import { Switch } from "@headlessui/react";
 
 import axios from "axios";
@@ -26,29 +25,24 @@ function AdminToggle({ isValid, userId }) {
     setOpen(false);
   };
 
-  useEffect(() => {
-    const newValid = isValidSwitch === false ? 0 : 1;
-    // console.log("=======useEffect=====");
-    // console.log(`userId: ${userId}`);
-    // console.log(`newValid: ${newValid} ; isValidSwitch: ${isValidSwitch}`);
+  const handleValidSwitch = (bool) => {
+    const newValid = bool === true ? 1 : 0;
     axios
       .put(`${import.meta.env.VITE_BACKEND_URL}/user/update/${userId}`, {
         is_valid: `${newValid}`,
       })
+      .then(() => setIsValidSwitch(bool))
       .catch((err) => console.error(err));
-  }, [isValidSwitch]);
+  };
 
   return (
     <div className="flex justify-between flex-col contents-center pt-3">
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-row items-center">
-          <button
-            type="button"
-            onClick={() => setIsValidSwitch(!isValidSwitch)}
-          >
+          <button type="button">
             <Switch
               checked={isValidSwitch}
-              onChange={() => setIsValidSwitch()}
+              onChange={() => handleValidSwitch(!isValidSwitch)}
               className={`${isValidSwitch ? "bg-green-500" : "bg-slate-400"}
             relative inline-flex h-[1.3rem] w-[2.3rem] mr-1 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
             >

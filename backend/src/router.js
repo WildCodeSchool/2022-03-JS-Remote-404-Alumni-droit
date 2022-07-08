@@ -12,7 +12,7 @@ const {
 const router = express.Router();
 
 router.get("/annuaire", ProfileController.browse);
-router.get("/annuaire/:id", ProfileController.read);
+router.get("/annuaire/:id", ProfileController.read); // ajouter middleware pour vérifier  is_private && is_valid === true
 router.get("/count", ProfileController.count);
 
 router.get("/diplome", FilterDiplomeController.browse);

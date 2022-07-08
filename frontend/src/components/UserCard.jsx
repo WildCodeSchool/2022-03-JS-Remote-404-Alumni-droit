@@ -12,7 +12,10 @@ function UserCard({
   isValid,
 }) {
   return (
-    <div className="w-[45%] md:w-[22%] lg:w-[18%] xl:w-[15%] flex flex-col flex-wrap rounded-lg shadow-md m-2 p-3 border-2 h-auto">
+    <div
+      key={Date.now()}
+      className="w-[45%] md:w-[22%] lg:w-[18%] xl:w-[15%] flex flex-col flex-wrap rounded-lg shadow-md m-2 p-3 border-2 h-auto"
+    >
       <div>
         <img
           src={photo != null ? photo : ""}
@@ -71,6 +74,7 @@ function UserCard({
             />
           </svg>
         </button>
+
         <AdminToggle userId={userId} isValid={isValid} />
       </div>
     </div>
