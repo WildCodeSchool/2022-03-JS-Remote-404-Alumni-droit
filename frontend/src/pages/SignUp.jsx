@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+import years from "@assets/years";
 import MasterFilter from "@components/MasterFilter";
 import { TextField, Autocomplete } from "@mui/material";
 // import { styled } from "@mui/material/styles";
@@ -12,9 +13,13 @@ import { HiPlus, HiMinus } from "react-icons/hi";
 function SignUp() {
   const {
     // register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const onSubmit = (data) => console.warn(data);
+  console.warn(errors);
 
   const [diplomeInput, setDiplomeInput] = useState([true, false, false]);
 
@@ -28,12 +33,9 @@ function SignUp() {
     setDiplomeInput(provDiplomeInput);
   };
 
-  const onSubmit = (data) => console.warn(data);
-  console.warn(errors);
-
   const [diplomeData, setDiplomeData] = useState([]);
   const [professionData, setProfessionData] = useState([]);
-  const [promotionData, setPromotionData] = useState([]);
+  // const [promotionData, setPromotionData] = useState([]);
 
   const getDiplome = () => {
     axios
@@ -57,25 +59,25 @@ function SignUp() {
       });
   };
 
-  const getPromotion = () => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/promotion`)
-      .then((res) => {
-        const years = res.data.map((el) => ({
-          year: el.year.toString(),
-          id: el.year,
-        }));
-        setPromotionData(years);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
+  // const getPromotion = () => {
+  //   axios
+  //     .get(`${import.meta.env.VITE_BACKEND_URL}/promotion`)
+  //     .then((res) => {
+  //       const years = res.data.map((el) => ({
+  //         year: el.year.toString(),
+  //         id: el.year,
+  //       }));
+  //       setPromotionData(years);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // };
 
   useEffect(() => {
     getDiplome();
     getProfession();
-    getPromotion();
+    // getPromotion();
   }, []);
 
   // const AntSwitch = styled(Switch)(({ theme }) => ({
@@ -144,7 +146,15 @@ function SignUp() {
                   Champs obligatoires
                 </p>
               </div>
-              <TextField label="Nom" size="medium" />
+              <Controller
+                control={control}
+                name="Nom"
+                // defaultValue=""
+                render={({ field }) => (
+                  <TextField {...field} label="Nom" size="medium" />
+                )}
+              />
+
               <TextField label="Prénom" size="medium" />
               <TextField label="Email" type="email" size="medium" />
               <TextField label="Mot de passe" type="password" size="medium" />
@@ -161,39 +171,61 @@ function SignUp() {
                 {diplomeInput.map((diplomeIn, index) => {
                   if (diplomeIn) {
                     return (
-                      <div className="flex justify-between">
-                        <Autocomplete
-                          disablePortal
-                          id="combo-box-1"
-                          options={diplomeData}
-                          getOptionLabel={(option) =>
-                            option.title.replace("&apos;E", "'É")
-                          }
-                          sx={{
-                            width: "55%",
-                            mb: 1.5,
-                          }}
-                          renderInput={(params) => (
-                            <TextField
-                              {...params}
-                              label={`#${index + 1} Diplôme`}
-                              color="primary"
+                      <div key={Date.now()} className="flex justify-between">
+                        <Controller
+                          control={control}
+                          name="diplomeAutoComplete"
+                          // defaultValue={diplomeData[0]}
+                          render={({ field: { ref, onChange, ...field } }) => (
+                            <Autocomplete
+                              disablePortal
+                              id="combo-box-1"
+                              options={diplomeData}
+                              getOptionLabel={(option) =>
+                                option.title.replace("&apos;E", "'É")
+                              }
+                              sx={{
+                                width: "55%",
+                                mb: 1.5,
+                              }}
+                              onChange={(_, data) => onChange(data.value)}
+                              // defaultValue={diplomeData[0]}
+                              renderInput={(params) => (
+                                <TextField
+                                  {...params}
+                                  {...field}
+                                  label="Diplôme"
+                                  color="primary"
+                                  inputRef={ref}
+                                />
+                              )}
                             />
                           )}
                         />
-                        <Autocomplete
-                          disablePortal
-                          id="combo-box-2"
-                          options={promotionData}
-                          getOptionLabel={(option) => option.year}
-                          sx={{
-                            width: "30%",
-                          }}
-                          renderInput={(params) => (
-                            <TextField
-                              {...params}
-                              label="Année"
-                              color="primary"
+                        <Controller
+                          control={control}
+                          name="promotionAutoComplete"
+                          // defaultValue={promotionData[0]}
+                          render={({ field: { ref, onChange, ...field } }) => (
+                            <Autocomplete
+                              disablePortal
+                              id="combo-box-2"
+                              options={years}
+                              // getOptionLabel={(option) => option.year}
+                              sx={{
+                                width: "30%",
+                              }}
+                              onChange={(_, data) => onChange(data.value)}
+                              // defaultValue={promotionData[0]}
+                              renderInput={(params) => (
+                                <TextField
+                                  {...params}
+                                  {...field}
+                                  label="Année"
+                                  color="primary"
+                                  inputRef={ref}
+                                />
+                              )}
                             />
                           )}
                         />

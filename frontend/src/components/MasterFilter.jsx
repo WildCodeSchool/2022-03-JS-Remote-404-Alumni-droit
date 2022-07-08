@@ -35,7 +35,10 @@ function MasterFilter() {
       {masterInput.map((masterIn, index) => {
         if (masterIn) {
           return (
-            <div className="flex flex-wrap justify-between mb-5">
+            <div
+              key={Date.now()}
+              className="flex flex-wrap justify-between mb-5"
+            >
               <Autocomplete
                 disablePortal
                 id="combo-box-4"
