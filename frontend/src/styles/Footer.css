@@ -2,13 +2,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Hind:wght@300;400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Expletus+Sans&family=Hind:wght@300;400&display=swap");
 
-
 .footer {
   display: flex;
   justify-content: center;
-  flex-direction:column;
+  flex-direction: column;
   width: 100%;
-  background-color: #EBEBEB;
+  background-color: #ebebeb;
   padding: 5px 1px 5px 1px;
 }
 
@@ -17,4 +16,4 @@
     display: flex;
     padding-left: 8px;
   }
-}  
+}
