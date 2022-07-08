@@ -35,7 +35,6 @@ function SignUp() {
 
   const [diplomeData, setDiplomeData] = useState([]);
   const [professionData, setProfessionData] = useState([]);
-  // const [promotionData, setPromotionData] = useState([]);
 
   const getDiplome = () => {
     axios
@@ -59,25 +58,9 @@ function SignUp() {
       });
   };
 
-  // const getPromotion = () => {
-  //   axios
-  //     .get(`${import.meta.env.VITE_BACKEND_URL}/promotion`)
-  //     .then((res) => {
-  //       const years = res.data.map((el) => ({
-  //         year: el.year.toString(),
-  //         id: el.year,
-  //       }));
-  //       setPromotionData(years);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // };
-
   useEffect(() => {
     getDiplome();
     getProfession();
-    // getPromotion();
   }, []);
 
   // const AntSwitch = styled(Switch)(({ theme }) => ({
