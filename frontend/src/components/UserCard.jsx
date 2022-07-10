@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import AdminToggle from "./AdminToggle";
+import Initiales from "./Initiales";
 
 function UserCard({
   lastname,
@@ -17,10 +18,11 @@ function UserCard({
       className="w-[45%] md:w-[22%] lg:w-[18%] xl:w-[15%] flex flex-col flex-wrap rounded-lg shadow-md m-2 p-3 border-2 h-auto"
     >
       <div>
-        <img
-          src={photo != null ? photo : ""}
-          alt={`Portrait de ${firstname} ${lastname}`}
-        />
+        {photo != null ? (
+          <Initiales lastname={lastname} firstname={firstname} />
+        ) : (
+          <img src={photo} alt={`Portrait de ${firstname} ${lastname}`} />
+        )}
       </div>
       <div className="flex justify-center flex-col text-center bg-red-800 text-slate-50 p-2 xl:p-1 leading-4">
         <p className="text-sm lg:text-1xl xl:text-[1rem]">{firstname}</p>
