@@ -11,9 +11,11 @@ class UserManager extends AbstractManager {
   }
 
   update(user) {
+    // console.log(">>>>>>");
+    // console.log(user);
     return this.connection.query(
-      `update ${UserManager.table} set title = ? where id = ?`,
-      [user.title, user.id]
+      `update ${UserManager.table} set is_valid = ? where id = ?`,
+      [user.is_valid, user.id]
     );
   }
 

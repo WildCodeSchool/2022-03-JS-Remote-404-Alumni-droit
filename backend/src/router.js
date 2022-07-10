@@ -13,16 +13,18 @@ const {
 const router = express.Router();
 
 router.get("/annuaire", ProfileController.browse);
-router.get("/annuaire/:id", ProfileController.read);
+router.get("/annuaire/:id", ProfileController.read); // ajouter middleware pour vérifier  is_private && is_valid === true
 router.get("/count", ProfileController.count);
+
+router.get("/diplome", FilterDiplomeController.browse);
+router.get("/profession", FilterProfessionController.browse);
+router.get("/promotion", FilterPromotionController.browse);
+router.get("/master", MasterController.browse);
 
 router.post("/signIn", validateUser, UserController.add);
 router.post("/login", validateLogin, UserController.login);
 
-router.get("/diplome", DiplomeController.browse);
-router.get("/profession", JobController.browse);
-router.get("/promotion", PromotionController.browse);
-router.get("/master", MasterController.browse);
+router.put("/user/update/:id", UserController.edit);
 
 // router.put("/items/:id", ItemController.edit);
 // router.post("/items", ItemController.add);

@@ -99,6 +99,8 @@ function Profile() {
                     className="font-normal hover:text-red-800
                   visited:text-red-700"
                     href={rows.emailpro ? `mailto:${rows.emailpro}` : ""}
+                    rel="noreferrer"
+                    target="_blank"
                   >
                     {rows.emailpro ? rows.emailpro : "Non Renseigné"}
                   </a>

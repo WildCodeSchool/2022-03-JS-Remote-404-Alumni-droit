@@ -1,10 +1,21 @@
 import React from "react";
-
 import { Link } from "react-router-dom";
+import AdminToggle from "./AdminToggle";
 
-function UserCard({ lastname, firstname, photo, job, userId, diplomes }) {
+function UserCard({
+  lastname,
+  firstname,
+  photo,
+  job,
+  userId,
+  diplomes,
+  isValid,
+}) {
   return (
-    <div className="w-[45%] md:w-[22%] lg:w-[18%] xl:w-[15%] flex flex-col flex-wrap rounded-lg shadow-md m-2 p-3 border-2 h-auto">
+    <div
+      key={Date.now()}
+      className="w-[45%] md:w-[22%] lg:w-[18%] xl:w-[15%] flex flex-col flex-wrap rounded-lg shadow-md m-2 p-3 border-2 h-auto"
+    >
       <div>
         <img
           src={photo != null ? photo : ""}
@@ -22,7 +33,7 @@ function UserCard({ lastname, firstname, photo, job, userId, diplomes }) {
             .sort((a, b) => b.year - a.year)
             .map((dip) => (
               <span>
-                {dip.year} {dip.title.replace("&apos;E", "'É")}
+                {dip.year} {dip.title}
               </span>
             ))} */}
         {diplomes != null &&
@@ -34,7 +45,7 @@ function UserCard({ lastname, firstname, photo, job, userId, diplomes }) {
                   <p className="font-semibold">{dip.year}</p>
                 </div>
                 <p className="font-normal">
-                  {dip.title.replace("&apos;E", "'É")}
+                  {dip.title}
                   <br />
                 </p>
               </div>
@@ -42,7 +53,7 @@ function UserCard({ lastname, firstname, photo, job, userId, diplomes }) {
       </div>
       {diplomes.length === 1 && <div className="mb-19" />}
       {diplomes.length === 2 && <div className="sm:mb-4 md:mb-8" />}
-      <div className="flex justify-end">
+      <div className="flex flex-col justify-end">
         <button
           type="button"
           className="text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-700 font-medium rounded-lg text-sm lg:text-base xl:text-lg md:mt-1 mt-5 px-5 py-2.5 inline-flex items-center dark:bg-red-800 dark:hover:bg-red-800 dark:focus:ring-red-800"
@@ -63,6 +74,8 @@ function UserCard({ lastname, firstname, photo, job, userId, diplomes }) {
             />
           </svg>
         </button>
+
+        <AdminToggle userId={userId} isValid={isValid} />
       </div>
     </div>
   );
