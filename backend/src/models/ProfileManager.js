@@ -79,86 +79,10 @@ class ProfileManager extends AbstractManager {
     );
   }
 
-  questionMarkComa(sqlQueryToTest) {
-    return sqlQueryToTest.charAt(sqlQueryToTest.length - 1) === "?" ? "," : " ";
-  }
-
   update(user, id) {
-    const {
-      lastname,
-      firstname,
-      emailpro,
-      phone,
-      professionId,
-      employeur,
-      poste,
-      bio,
-      siteweb,
-      facebook,
-      linkedin,
-      twitter,
-      instagram,
-    } = user;
-
-    let sqlQuery = `UPDATE ${ProfileManager.table} set`;
-    const sqlValue = [];
-
-    if (lastname) {
-      sqlQuery += `${this.questionMarkComa(sqlQuery)} lastname = ?`;
-      sqlValue.push(`${lastname}`);
-    }
-    if (firstname) {
-      sqlQuery += `${this.questionMarkComa(sqlQuery)} firstname = ?`;
-      sqlValue.push(`${firstname}`);
-    }
-    if (emailpro) {
-      sqlQuery += `${this.questionMarkComa(sqlQuery)} emailpro = ?`;
-      sqlValue.push(`${emailpro}`);
-    }
-    if (phone) {
-      sqlQuery += `${this.questionMarkComa(sqlQuery)} phone = ?`;
-      sqlValue.push(`${phone}`);
-    }
-    if (professionId) {
-      sqlQuery += `${this.questionMarkComa(sqlQuery)} profession_id = ?`;
-      sqlValue.push(`${professionId}`);
-    }
-    if (employeur) {
-      sqlQuery += `${this.questionMarkComa(sqlQuery)} employeur = ?`;
-      sqlValue.push(`${employeur}`);
-    }
-    if (poste) {
-      sqlQuery += `${this.questionMarkComa(sqlQuery)} poste = ?`;
-      sqlValue.push(`${poste}`);
-    }
-    if (bio) {
-      sqlQuery += `${this.questionMarkComa(sqlQuery)} bio = ?`;
-      sqlValue.push(`${bio}`);
-    }
-    if (siteweb) {
-      sqlQuery += `${this.questionMarkComa(sqlQuery)} siteweb = ?`;
-      sqlValue.push(`${siteweb}`);
-    }
-    if (facebook) {
-      sqlQuery += `${this.questionMarkComa(sqlQuery)} facebook = ?`;
-      sqlValue.push(`${facebook}`);
-    }
-    if (linkedin) {
-      sqlQuery += `${this.questionMarkComa(sqlQuery)} linkedin = ?`;
-      sqlValue.push(`${linkedin}`);
-    }
-    if (twitter) {
-      sqlQuery += `${this.questionMarkComa(sqlQuery)} twitter = ?`;
-      sqlValue.push(`${twitter}`);
-    }
-    if (instagram) {
-      sqlQuery += `${this.questionMarkComa(sqlQuery)} instagram = ?`;
-      sqlValue.push(`${instagram}`);
-    }
-    sqlQuery += ` where id = ?`;
-    sqlValue.push(`${id}`);
-
-    return this.connection.query(sqlQuery, sqlValue).then((res) => res[0]);
+    return this.connection
+      .query(`UPDATE ${ProfileManager.table} set ? where id=?`, [user, id])
+      .then((res) => res[0]);
   }
 
   countAll() {
