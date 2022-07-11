@@ -1,4 +1,9 @@
 const express = require("express");
+
+const multer = require("multer");
+
+const upload = multer({ dest: "public/tmp" });
+
 const { validateUser, validateLogin } = require("./middlewares/userMiddleware");
 
 const {
@@ -8,6 +13,7 @@ const {
   JobController,
   PromotionController,
   MasterController,
+  UploadController,
 } = require("./controllers");
 
 const router = express.Router();
@@ -23,6 +29,8 @@ router.get("/master", MasterController.browse);
 
 router.post("/signIn", validateUser, UserController.add);
 router.post("/login", validateLogin, UserController.login);
+
+router.post("/upload", upload.single("myfile"), UploadController.upload);
 
 router.put("/user/update/:id", UserController.edit);
 router.put("/profile/update/:id", ProfileController.edit);
