@@ -19,9 +19,9 @@ function UserCard({
     >
       <div>
         {photo != null ? (
-          <Initiales lastname={lastname} firstname={firstname} />
-        ) : (
           <img src={photo} alt={`Portrait de ${firstname} ${lastname}`} />
+        ) : (
+          <Initiales lastname={lastname} firstname={firstname} />
         )}
       </div>
       <div className="flex justify-center flex-col text-center bg-red-800 text-slate-50 p-2 xl:p-1 leading-4">
@@ -47,7 +47,7 @@ function UserCard({
                   <p className="font-semibold">{dip.year}</p>
                 </div>
                 <p className="font-normal">
-                  {dip.title}
+                  {dip.title.replace(`&apos;`, `'`)}
                   <br />
                 </p>
               </div>
