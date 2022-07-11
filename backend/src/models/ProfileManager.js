@@ -79,6 +79,88 @@ class ProfileManager extends AbstractManager {
     );
   }
 
+  questionMarkComa(sqlQueryToTest) {
+    return sqlQueryToTest.charAt(sqlQueryToTest.length - 1) === "?" ? "," : " ";
+  }
+
+  update(user, id) {
+    const {
+      lastname,
+      firstname,
+      emailpro,
+      phone,
+      profession,
+      employeur,
+      poste,
+      bio,
+      siteweb,
+      facebook,
+      linkedin,
+      twitter,
+      instagram,
+    } = user;
+
+    let sqlQuery = `UPDATE ${ProfileManager.table} set`;
+    const sqlValue = [];
+
+    if (lastname) {
+      sqlQuery += `${this.Coma(sqlQuery)} lastname = ?`;
+      sqlValue.push(`${lastname}`);
+    }
+    if (firstname) {
+      sqlQuery += `${this.Coma(sqlQuery)} firstname = ?`;
+      sqlValue.push(`${firstname}`);
+    }
+    if (emailpro) {
+      sqlQuery += `${this.Coma(sqlQuery)} emailpro = ?`;
+      sqlValue.push(`${emailpro}`);
+    }
+    if (phone) {
+      sqlQuery += `${this.Coma(sqlQuery)} phone = ?`;
+      sqlValue.push(`${phone}`);
+    }
+    if (profession) {
+      sqlQuery += `${this.Coma(sqlQuery)} profession_id = ?`;
+      sqlValue.push(`${profession}`);
+    }
+    if (employeur) {
+      sqlQuery += `${this.Coma(sqlQuery)} employeur = ?`;
+      sqlValue.push(`${employeur}`);
+    }
+    if (poste) {
+      sqlQuery += `${this.Coma(sqlQuery)} poste = ?`;
+      sqlValue.push(`${poste}`);
+    }
+    if (bio) {
+      sqlQuery += `${this.Coma(sqlQuery)} bio = ?`;
+      sqlValue.push(`${bio}`);
+    }
+    if (siteweb) {
+      sqlQuery += `${this.Coma(sqlQuery)} siteweb = ?`;
+      sqlValue.push(`${siteweb}`);
+    }
+    if (facebook) {
+      sqlQuery += `${this.Coma(sqlQuery)} facebook = ?`;
+      sqlValue.push(`${facebook}`);
+    }
+    if (linkedin) {
+      sqlQuery += `${this.Coma(sqlQuery)} linkedin = ?`;
+      sqlValue.push(`${linkedin}`);
+    }
+    if (twitter) {
+      sqlQuery += `${this.Coma(sqlQuery)} twitter = ?`;
+      sqlValue.push(`${twitter}`);
+    }
+    if (instagram) {
+      sqlQuery += `${this.Coma(sqlQuery)} instagram = ?`;
+      sqlValue.push(`${instagram}`);
+    }
+    sqlQuery += ` where id = ?`;
+    sqlValue.push(`${id}`);
+
+    return this.connection.query(sqlQuery, sqlValue).then((res) => res[0]);
+  }
+
   countAll() {
     return this.connection
       .query(
@@ -87,12 +169,12 @@ class ProfileManager extends AbstractManager {
       .then((res) => res[0][0].n);
   }
 
-  update(item) {
-    return this.connection.query(
-      `update ${ProfileManager.table} set title = ? where id = ?`,
-      [item.title, item.id]
-    );
-  }
+  // update(item) {
+  //   return this.connection.query(
+  //     `update ${ProfileManager.table} set title = ? where id = ?`,
+  //     [item.title, item.id]
+  //   );
+  // }
 }
 
 module.exports = ProfileManager;
