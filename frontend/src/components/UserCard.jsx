@@ -45,8 +45,7 @@ function UserCard({
               </div>
             ))}
       </div>
-      {diplomes.length === 1 && <div className="sm:mb-4 md:mb-16" />}
-      {diplomes.length === 1 && <div className="sm:mb-4 md:mb-1" />}
+      {diplomes.length === 1 && <div className="mb-8 md:mb-16 lg:mb-16" />}
       {diplomes.length === 2 && <div className="sm:mb-4 md:mb-8" />}
       <div className="flex flex-col justify-end">
         <button
