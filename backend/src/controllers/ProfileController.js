@@ -14,6 +14,7 @@ class ProfileController {
 
   static browse = async (req, res) => {
     // "annuaire" listing
+
     try {
       const profiles = await models.profile.findAll(req.query);
 
@@ -21,7 +22,6 @@ class ProfileController {
         const diplomes = await Promise.all(
           profiles.map((profile) => models.diplome.find(profile.id))
         );
-
         profiles.forEach((profile, index) => {
           profile.diplomes = diplomes[index];
         });
@@ -55,15 +55,13 @@ class ProfileController {
   };
 
   static edit = (req, res) => {
-    const item = req.body;
+    const user = req.body;
 
     // TODO validations (length, format...)
 
-    item.id = parseInt(req.params.id, 10);
-
-    models.item
-      .update(item)
-      .then(([result]) => {
+    models.profile
+      .update(user, parseInt(req.params.id, 10))
+      .then((result) => {
         if (result.affectedRows === 0) {
           res.sendStatus(404);
         } else {
