@@ -26,7 +26,7 @@ router.post("/login", validateLogin, UserController.login);
 
 router.put("/user/update/:id", UserController.edit);
 
-router.delete("/annuaire/:id", ProfileController.delete);
+router.delete("/annuaire/delete/:id", ProfileController.delete);
 router.delete("/user/delete/:id", UserController.delete);
 
 // router.put("/items/:id", ItemController.edit);

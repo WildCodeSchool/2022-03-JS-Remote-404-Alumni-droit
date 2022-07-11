@@ -87,13 +87,6 @@ class ProfileManager extends AbstractManager {
       .then((res) => res[0][0].n);
   }
 
-  update(item) {
-    return this.connection.query(
-      `update ${ProfileManager.table} set title = ? where id = ?`,
-      [item.title, item.id]
-    );
-  }
-
   delete(user) {
     return this.connection.query(
       `DELETE FROM ${ProfileManager.table} WHERE id = ?`,
