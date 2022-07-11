@@ -25,6 +25,7 @@ router.post("/signIn", validateUser, UserController.add);
 router.post("/login", validateLogin, UserController.login);
 
 router.put("/user/update/:id", UserController.edit);
+router.put("/profile/update/:id", ProfileController.edit);
 
 // router.put("/items/:id", ItemController.edit);
 // router.post("/items", ItemController.add);
