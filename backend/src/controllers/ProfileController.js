@@ -91,7 +91,7 @@ class ProfileController {
   };
 
   static delete = (req, res) => {
-    models.item
+    models.profile
       .delete(req.params.id)
       .then(() => {
         res.sendStatus(204);

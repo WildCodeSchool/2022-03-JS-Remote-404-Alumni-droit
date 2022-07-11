@@ -92,6 +92,13 @@ class ProfileManager extends AbstractManager {
       )
       .then((res) => res[0][0].n);
   }
+
+  delete(user) {
+    return this.connection.query(
+      `DELETE FROM ${ProfileManager.table} WHERE id = ?`,
+      [user.id]
+    );
+  }
 }
 
 module.exports = ProfileManager;
