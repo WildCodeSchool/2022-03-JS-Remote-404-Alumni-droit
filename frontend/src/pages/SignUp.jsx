@@ -79,6 +79,7 @@ function SignUp() {
         console.error(err);
       });
   };
+
   useEffect(() => {
     getDiplome();
     getProfession();
@@ -159,14 +160,42 @@ function SignUp() {
                   <TextField {...field} label="Nom" size="medium" />
                 )}
               />
-
-              <TextField label="Prénom" size="medium" />
-              <TextField label="Email" type="email" size="medium" />
-              <TextField label="Mot de passe" type="password" size="medium" />
-              <TextField
-                label="Confirmer mot de passe"
-                type="password"
-                size="medium"
+              <Controller
+                control={control}
+                name="Prénom"
+                // defaultValue=""
+                render={({ field }) => (
+                  <TextField {...field} label="Prénom" size="medium" />
+                )}
+              />
+              <Controller
+                control={control}
+                name="Email"
+                // defaultValue=""
+                render={({ field }) => (
+                  <TextField {...field} label="Email" size="medium" />
+                )}
+              />
+              <Controller
+                control={control}
+                name="Mot de passe"
+                // defaultValue=""
+                render={({ field }) => (
+                  <TextField {...field} label="Mot de passe" size="medium" />
+                )}
+              />
+              <Controller
+                control={control}
+                name="Confirmer mot de passe"
+                // defaultValue=""
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Confirmer mot de passe"
+                    type="password"
+                    size="medium"
+                  />
+                )}
               />
               {/* BLOC DIPLOME ANNEE */}
               <div className="flex flex-col lg:border lg:p-4 rounded">
@@ -176,7 +205,8 @@ function SignUp() {
                 {diplomeInput.map((diplomeIn, index) => {
                   if (diplomeIn) {
                     return (
-                      <div key={Date.now()} className="flex justify-between">
+                      <div className="flex justify-between">
+                        {/* key={Date.now()} */}
                         <Controller
                           control={control}
                           name="diplomeAutoComplete"
@@ -199,7 +229,7 @@ function SignUp() {
                                 <TextField
                                   {...params}
                                   {...field}
-                                  label="Diplôme"
+                                  label={`#${index + 1} Diplôme`}
                                   color="primary"
                                   inputRef={ref}
                                 />
@@ -262,7 +292,7 @@ function SignUp() {
                   return null;
                 })}
               </div>
-              <Autocomplete
+              {/* <Autocomplete
                 disablePortal
                 id="combo-box-3"
                 options={professionData}
@@ -275,8 +305,45 @@ function SignUp() {
                     size="medium"
                   />
                 )}
+              /> */}
+              <Controller
+                control={control}
+                name="professionAutoComplete"
+                // defaultValue={diplomeData[0]}
+                render={({ field: { ref, onChange, ...field } }) => (
+                  <Autocomplete
+                    disablePortal
+                    id="combo-box-3"
+                    options={professionData}
+                    getOptionLabel={(option) =>
+                      option.job.replace("&apos;E", "'É")
+                    }
+                    onChange={(_, data) => onChange(data.value)}
+                    // defaultValue={diplomeData[0]}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        {...field}
+                        label="Profession"
+                        color="primary"
+                        inputRef={ref}
+                      />
+                    )}
+                  />
+                )}
               />
-              <TextField label="Profession actuelle" size="medium" />
+              <Controller
+                control={control}
+                name="Profession actuelle"
+                // defaultValue=""
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Profession actuelle"
+                    size="medium"
+                  />
+                )}
+              />
 
               <div className="mt-20 flex text-sm">
                 <div className="w-[39%] md:w-[20%] lg:w-[35%] xl:w-[25%] flex items-center">
@@ -303,40 +370,69 @@ function SignUp() {
               </h3>
               <div className="flex flex-col lg:border lg:p-4 rounded">
                 <p className="lg:text-sm text-center mb-6 ">
-                  Votre cursus annexe :
+                  Votre cursus de Master :
                 </p>
                 {masterInput.map((masterIn, index) => {
                   if (masterIn) {
                     return (
-                      <div
-                        key={Date.now()}
-                        className="flex flex-wrap justify-between mb-5"
-                      >
-                        <Autocomplete
-                          disablePortal
-                          id="combo-box-4"
-                          options={masterData}
-                          getOptionLabel={(option) =>
-                            option.title.replace("&apos;E", "'É")
-                          }
-                          sx={{
-                            width: "55%",
-                            mb: 1.5,
-                          }}
-                          renderInput={(params) => (
-                            <TextField
-                              {...params}
-                              label={`#${index + 1} Master 2`}
-                              color="primary"
+                      <div className="flex flex-wrap justify-between mb-5">
+                        {/* key={Date.now()} */}
+                        <Controller
+                          control={control}
+                          name="diplomeAutoComplete"
+                          // defaultValue={diplomeData[0]}
+                          render={({ field: { ref, onChange, ...field } }) => (
+                            <Autocomplete
+                              disablePortal
+                              id="combo-box-4"
+                              options={masterData}
+                              getOptionLabel={(option) =>
+                                option.title.replace("&apos;E", "'É")
+                              }
+                              sx={{
+                                width: "55%",
+                                mb: 1.5,
+                              }}
+                              onChange={(_, data) => onChange(data.value)}
+                              // defaultValue={masterData[0]}
+                              renderInput={(params) => (
+                                <TextField
+                                  {...params}
+                                  {...field}
+                                  label={`#${index + 1} Master`}
+                                  color="primary"
+                                  inputRef={ref}
+                                />
+                              )}
                             />
                           )}
                         />
-                        <TextField
-                          label="Année"
-                          color="primary"
-                          sx={{
-                            width: "30%",
-                          }}
+                        <Controller
+                          control={control}
+                          name="promotionAutoComplete"
+                          // defaultValue={promotionData[0]}
+                          render={({ field: { ref, onChange, ...field } }) => (
+                            <Autocomplete
+                              disablePortal
+                              id="combo-box-5"
+                              options={years}
+                              // getOptionLabel={(option) => option.year}
+                              sx={{
+                                width: "30%",
+                              }}
+                              onChange={(_, data) => onChange(data.value)}
+                              // defaultValue={promotionData[0]}
+                              renderInput={(params) => (
+                                <TextField
+                                  {...params}
+                                  {...field}
+                                  label="Année"
+                                  color="primary"
+                                  inputRef={ref}
+                                />
+                              )}
+                            />
+                          )}
                         />
                         <button
                           type="button"
@@ -360,20 +456,36 @@ function SignUp() {
                             color={index === 0 ? "#d3d3d3" : "black"}
                           />
                         </button>
-                        <TextField
-                          label="Entrer un master"
-                          size="medium"
-                          sx={{
-                            width: "55%",
-                            mb: 1.5,
-                          }}
+                        <Controller
+                          control={control}
+                          name="Entrer un master"
+                          // defaultValue=""
+                          render={({ field }) => (
+                            <TextField
+                              {...field}
+                              label="Entrer un master"
+                              sx={{
+                                width: "55%",
+                                mb: 1.5,
+                              }}
+                              size="medium"
+                            />
+                          )}
                         />
-                        <TextField
-                          label="Université d'obtention"
-                          size="medium"
-                          sx={{
-                            width: "100%",
-                          }}
+                        <Controller
+                          control={control}
+                          name="Université d'obtention"
+                          // defaultValue=""
+                          render={({ field }) => (
+                            <TextField
+                              {...field}
+                              label="Université d'obtention"
+                              sx={{
+                                width: "100%",
+                              }}
+                              size="medium"
+                            />
+                          )}
                         />
                       </div>
                     );
@@ -381,22 +493,83 @@ function SignUp() {
                   return null;
                 })}
               </div>
-              <TextField label="Employeur actuel" size="medium" />
-              <TextField
-                label="Email professionnel"
-                type="email"
-                size="medium"
+              <Controller
+                control={control}
+                name="Employeur actuel"
+                // defaultValue=""
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Employeur actuel"
+                    size="medium"
+                  />
+                )}
               />
-              <TextField label="Téléphone" type="tel" size="medium" />
-              <TextField label="Site Web" size="medium" />
-              <TextField label="Facebook" size="medium" />
-              <TextField label="Twitter" size="medium" />
-              <TextField label="Instagram" size="medium" />
-              <TextField
-                label="Votre parcours en quelques mots"
-                size="large"
-                multiline
-                rows={6}
+              <Controller
+                control={control}
+                name="Email professionnel"
+                // defaultValue=""
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Email professionnel"
+                    size="medium"
+                  />
+                )}
+              />
+              <Controller
+                control={control}
+                name="Téléphone"
+                // defaultValue=""
+                render={({ field }) => (
+                  <TextField {...field} label="Téléphone" size="medium" />
+                )}
+              />
+              <Controller
+                control={control}
+                name="Site web"
+                // defaultValue=""
+                render={({ field }) => (
+                  <TextField {...field} label="Site web" size="medium" />
+                )}
+              />
+              <Controller
+                control={control}
+                name="Facebook"
+                // defaultValue=""
+                render={({ field }) => (
+                  <TextField {...field} label="Facebook" size="medium" />
+                )}
+              />
+              <Controller
+                control={control}
+                name="Twitter"
+                // defaultValue=""
+                render={({ field }) => (
+                  <TextField {...field} label="Twitter" size="medium" />
+                )}
+              />
+              <Controller
+                control={control}
+                name="Instagram"
+                // defaultValue=""
+                render={({ field }) => (
+                  <TextField {...field} label="Instagram" size="medium" />
+                )}
+              />
+              <Controller
+                control={control}
+                name="Votre parcours en quelques mots"
+                // defaultValue=""
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Votre parcours en quelques mots"
+                    size="large"
+                    multiline
+                    rows={6}
+                  />
+                )}
               />
             </div>
           </div>
