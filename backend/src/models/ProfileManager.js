@@ -79,6 +79,12 @@ class ProfileManager extends AbstractManager {
     );
   }
 
+  update(user, id) {
+    return this.connection
+      .query(`UPDATE ${ProfileManager.table} set ? where id=?`, [user, id])
+      .then((res) => res[0]);
+  }
+
   countAll() {
     return this.connection
       .query(
