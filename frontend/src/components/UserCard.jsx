@@ -30,14 +30,6 @@ function UserCard({
       </div>
       <div className="flex flex-col justify-center w-full h-auto text-xs md:text-[.7rem] xl:text-[.8rem] pt-2 leading-snug">
         <p className="font-bold mb-1">{job}</p>
-        {/* {diplomes != null &&
-          diplomes
-            .sort((a, b) => b.year - a.year)
-            .map((dip) => (
-              <span>
-                {dip.year} {dip.title}
-              </span>
-            ))} */}
         {diplomes != null &&
           diplomes
             .sort((a, b) => b.year - a.year)
@@ -53,7 +45,8 @@ function UserCard({
               </div>
             ))}
       </div>
-      {diplomes.length === 1 && <div className="mb-19" />}
+      {diplomes.length === 1 && <div className="sm:mb-4 md:mb-16" />}
+      {diplomes.length === 1 && <div className="sm:mb-4 md:mb-1" />}
       {diplomes.length === 2 && <div className="sm:mb-4 md:mb-8" />}
       <div className="flex flex-col justify-end">
         <button
