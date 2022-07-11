@@ -26,7 +26,11 @@ function UserCard({
       </div>
       <div className="flex justify-center flex-col text-center bg-red-800 text-slate-50 p-2 xl:p-1 leading-4">
         <p className="text-sm lg:text-1xl xl:text-[1rem]">{firstname}</p>
-        <p className="font-bold text-[.7rem] lg:text-[.9rem]">{lastname}</p>
+        {lastname.length < 15 ? (
+          <p className="font-bold text-[.7rem] lg:text-[.9rem]">{lastname}</p>
+        ) : (
+          <p className="font-bold text-[.7rem] lg:text-[.8rem]">{lastname}</p>
+        )}
       </div>
       <div className="flex flex-col justify-center w-full h-auto text-xs md:text-[.7rem] xl:text-[.8rem] pt-2 leading-snug">
         <p className="font-bold mb-1">{job}</p>
