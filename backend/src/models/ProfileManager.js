@@ -23,7 +23,7 @@ class ProfileManager extends AbstractManager {
      * si is Admin, alors affiche pas la query U.is_valid
      * si is User, alors affiche U.is_valid = 1
     // //  */
-    // sqlQuery += ` ${this.andOrWhere(sqlQuery)} U.is_valid = 1`;
+    sqlQuery += ` ${this.andOrWhere(sqlQuery)} U.is_valid = 1`;
 
     if (diplome) {
       sqlQuery += `${this.andOrWhere(sqlQuery)} PD.diplome_id = ?`;
