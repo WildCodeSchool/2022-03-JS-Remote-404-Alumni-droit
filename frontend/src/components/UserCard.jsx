@@ -19,7 +19,8 @@ function UserCard({
     >
       <div>
         {photo != null ? (
-          <img src={photo} alt={`Portrait de ${firstname} ${lastname}`} />
+          // <img src={photo} alt={`Portrait de ${firstname} ${lastname}`} />
+          <Initiales lastname={lastname} firstname={firstname} />
         ) : (
           <Initiales lastname={lastname} firstname={firstname} />
         )}
