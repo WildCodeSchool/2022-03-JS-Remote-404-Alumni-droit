@@ -1,9 +1,5 @@
 const express = require("express");
-const {
-  validateUser,
-  validateLogin,
-  validateUpdate,
-} = require("./middlewares/userMiddleware");
+const { validateUser, validateLogin } = require("./middlewares/userMiddleware");
 
 const {
   ProfileController,
@@ -29,7 +25,7 @@ router.post("/signIn", validateUser, UserController.add);
 router.post("/login", validateLogin, UserController.login);
 
 router.put("/user/update/:id", UserController.edit);
-router.put("/profile/update/:id", validateUpdate, ProfileController.edit);
+router.put("/profile/update/:id", ProfileController.edit);
 
 // router.put("/items/:id", ItemController.edit);
 // router.post("/items", ItemController.add);

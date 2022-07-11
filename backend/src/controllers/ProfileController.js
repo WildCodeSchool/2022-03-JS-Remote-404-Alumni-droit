@@ -60,9 +60,8 @@ class ProfileController {
     // TODO validations (length, format...)
 
     user.id = parseInt(req.params.id, 10);
-
     models.user
-      .update(user)
+      .update(user, user.id)
       .then(([result]) => {
         if (result.affectedRows === 0) {
           res.sendStatus(404);

@@ -89,7 +89,7 @@ class ProfileManager extends AbstractManager {
       firstname,
       emailpro,
       phone,
-      profession,
+      professionId,
       employeur,
       poste,
       bio,
@@ -119,9 +119,9 @@ class ProfileManager extends AbstractManager {
       sqlQuery += `${this.questionMarkComa(sqlQuery)} phone = ?`;
       sqlValue.push(`${phone}`);
     }
-    if (profession) {
+    if (professionId) {
       sqlQuery += `${this.questionMarkComa(sqlQuery)} profession_id = ?`;
-      sqlValue.push(`${profession}`);
+      sqlValue.push(`${professionId}`);
     }
     if (employeur) {
       sqlQuery += `${this.questionMarkComa(sqlQuery)} employeur = ?`;
@@ -168,13 +168,6 @@ class ProfileManager extends AbstractManager {
       )
       .then((res) => res[0][0].n);
   }
-
-  // update(item) {
-  //   return this.connection.query(
-  //     `update ${ProfileManager.table} set title = ? where id = ?`,
-  //     [item.title, item.id]
-  //   );
-  // }
 }
 
 module.exports = ProfileManager;
