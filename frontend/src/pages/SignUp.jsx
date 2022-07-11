@@ -7,8 +7,6 @@ import MasterFilter from "@components/MasterFilter";
 import { TextField, Autocomplete } from "@mui/material";
 // import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import { HiPlus, HiMinus } from "react-icons/hi";
 
 function SignUp() {
@@ -243,23 +241,15 @@ function SignUp() {
               />
               <TextField label="Profession actuelle" size="medium" />
 
-              <div className="mt-20">
-                <Stack
-                  direction="row"
-                  spacing={1}
-                  alignItems="center"
-                  size="medium"
-                >
-                  <Typography size="medium">
-                    Etat de votre profil : Privé
-                  </Typography>
+              <div className="mt-20 flex text-sm">
+                <div className="w-[39%] md:w-[20%] lg:w-[35%] xl:w-[25%] flex items-center">
+                  <p>Etat du profile :</p>
+                </div>
+                <div className="flex flex-row justify-center items-center">
+                  <p>Privé</p>
                   <Switch />
-                  {/* <AntSwitch
-                    defaultChecked
-                    inputProps={{ "aria-label": "ant design" }}
-                  /> */}
-                  <Typography>Public</Typography>
-                </Stack>
+                  <p>Publique</p>
+                </div>
               </div>
 
               <p className="flex text-left text-xs pb-6">
