@@ -3,30 +3,24 @@ import { useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-import years from "@assets/years";
-
 import { TextField, Autocomplete } from "@mui/material";
 import Switch from "@mui/material/Switch";
 import { HiPlus, HiMinus } from "react-icons/hi";
 
+import years from "@assets/years";
+
 function SignUp() {
   const { register, control, handleSubmit } = useForm();
-
-  const onSubmit = (data) => {
-    console.warn(data);
-  };
-
+  const [checked, setChecked] = useState(true);
   const [diplomeData, setDiplomeData] = useState([]);
   const [professionData, setProfessionData] = useState([]);
   const [masterData, setMasterData] = useState([]);
-
   const [diplomeInput, setDiplomeInput] = useState([true, false, false]);
   const [masterInput, setMasterInput] = useState([true, false, false]);
 
-  const [checked, setChecked] = useState(true);
-
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
+  const onSubmit = (data) => {
+    console.warn(data);
+    console.warn(checked);
   };
 
   const handleDiplomeInput = (index, type) => {
@@ -47,6 +41,10 @@ function SignUp() {
       provMasterInput[index] = false;
     }
     setMasterInput(provMasterInput);
+  };
+
+  const handleChange = (e) => {
+    setChecked(e.target.checked);
   };
 
   const getDiplome = () => {
@@ -442,6 +440,7 @@ function SignUp() {
                   return null;
                 })}
               </div>
+              {/* CHAMPS OPTIONNELS */}
               <Controller
                 control={control}
                 name="employeur"
@@ -493,7 +492,6 @@ function SignUp() {
               <Controller
                 control={control}
                 name="facebook"
-                // defaultValue=""
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -543,7 +541,6 @@ function SignUp() {
               />
             </div>
           </div>
-          {/* CHAMPS OPTIONNELS */}
           <div className="flex justify-end">
             <input
               type="submit"
