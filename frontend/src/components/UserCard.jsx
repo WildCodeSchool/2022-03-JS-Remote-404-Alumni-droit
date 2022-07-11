@@ -19,25 +19,21 @@ function UserCard({
     >
       <div>
         {photo != null ? (
-          <Initiales lastname={lastname} firstname={firstname} />
-        ) : (
           <img src={photo} alt={`Portrait de ${firstname} ${lastname}`} />
+        ) : (
+          <Initiales lastname={lastname} firstname={firstname} />
         )}
       </div>
       <div className="flex justify-center flex-col text-center bg-red-800 text-slate-50 p-2 xl:p-1 leading-4">
         <p className="text-sm lg:text-1xl xl:text-[1rem]">{firstname}</p>
-        <p className="font-bold text-[.7rem] lg:text-[.9rem]">{lastname}</p>
+        {lastname.length < 15 ? (
+          <p className="font-bold text-[.7rem] lg:text-[.9rem]">{lastname}</p>
+        ) : (
+          <p className="font-bold text-[.7rem] lg:text-[.8rem]">{lastname}</p>
+        )}
       </div>
       <div className="flex flex-col justify-center w-full h-auto text-xs md:text-[.7rem] xl:text-[.8rem] pt-2 leading-snug">
         <p className="font-bold mb-1">{job}</p>
-        {/* {diplomes != null &&
-          diplomes
-            .sort((a, b) => b.year - a.year)
-            .map((dip) => (
-              <span>
-                {dip.year} {dip.title}
-              </span>
-            ))} */}
         {diplomes != null &&
           diplomes
             .sort((a, b) => b.year - a.year)
@@ -47,13 +43,13 @@ function UserCard({
                   <p className="font-semibold">{dip.year}</p>
                 </div>
                 <p className="font-normal">
-                  {dip.title}
+                  {dip.title.replace(`&apos;`, `'`)}
                   <br />
                 </p>
               </div>
             ))}
       </div>
-      {diplomes.length === 1 && <div className="mb-19" />}
+      {diplomes.length === 1 && <div className="mb-8 md:mb-16 lg:mb-16" />}
       {diplomes.length === 2 && <div className="sm:mb-4 md:mb-8" />}
       <div className="flex flex-col justify-end">
         <button
