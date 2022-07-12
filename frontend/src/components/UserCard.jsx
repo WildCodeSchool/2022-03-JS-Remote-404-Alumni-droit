@@ -54,27 +54,26 @@ function UserCard({
       )}
       {diplomes.length === 2 && <div className="sm:mb-4 md:mb-8" />}
       <div className="flex flex-col justify-end">
-        <button
-          type="button"
-          className="text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-700 font-medium rounded-lg text-sm lg:text-base xl:text-lg md:mt-1 mt-5 px-5 py-2.5 inline-flex items-center dark:bg-red-800 dark:hover:bg-red-800 dark:focus:ring-red-800"
-        >
-          <Link to={`/profile/${userId}`}>
-            <p>Consulter</p>
-          </Link>
-          <svg
-            className="invisible w-0 h-0 ml-0 md:visible md:w-4 md:h-4 md:ml-2 -mr-1"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
+        <Link to={`/profile/${userId}`}>
+          <button
+            type="button"
+            className="flex justify-center text-white w-full bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-700 font-medium rounded-lg text-sm lg:text-base xl:text-lg md:mt-1 mt-5 py-2.5 items-center dark:bg-red-800 dark:hover:bg-red-800 dark:focus:ring-red-800"
           >
-            <path
-              fillRule="evenodd"
-              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
-
+            <p className="text-center">Consulter</p>
+            <svg
+              className="invisible w-0 h-0 ml-0 md:visible md:w-4 md:h-4 md:ml-2 -mr-1"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+        </Link>
         <AdminToggle userId={userId} isValid={isValid} />
       </div>
     </div>
