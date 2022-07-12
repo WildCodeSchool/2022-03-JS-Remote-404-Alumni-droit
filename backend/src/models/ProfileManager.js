@@ -19,10 +19,10 @@ class ProfileManager extends AbstractManager {
       sqlQuery += ` INNER JOIN profile_diplome as PD ON PD.profile_id = P.id`;
       sqlQuery += ` INNER JOIN diplome as D ON PD.diplome_id = D.id`;
     }
-    /**
+    /*
      * si is Admin, alors affiche pas la query U.is_valid
      * si is User, alors affiche U.is_valid = 1
-    // //  */
+     */
     sqlQuery += ` ${this.andOrWhere(sqlQuery)} U.is_valid = 1`;
 
     if (diplome) {
@@ -81,7 +81,7 @@ class ProfileManager extends AbstractManager {
 
   update(user, id) {
     return this.connection
-      .query(`UPDATE ${ProfileManager.table} set ? where id=?`, [user, id])
+      .query(`UPDATE ${ProfileManager.table} set ? where id = ?`, [user, id])
       .then((res) => res[0]);
   }
 

@@ -53,9 +53,6 @@ class UserController {
 
   static add = async (req, res) => {
     try {
-      // console.log(req.body);
-      // console.log(req.diplome);
-      // console.log(req.master);
       const hash = await passwordHash(req.body.password);
       const id = uuidv4();
       const request = await models.user.insert(req.body.email, hash, id);
@@ -66,6 +63,11 @@ class UserController {
       await Promise.all(
         req.diplome.map((dip) =>
           models.diplome.insert(dip, profile[0].insertId)
+        )
+      );
+      await Promise.all(
+        req.master.map((mast) =>
+          models.master.insert(mast, profile[0].insertId)
         )
       );
       res.status(200).json({

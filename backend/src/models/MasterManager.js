@@ -19,6 +19,13 @@ class MasterManager extends AbstractManager {
   multipleFind(data) {
     return Promise.all(data.map((pers) => this.find(pers.id)));
   }
+
+  insert(master, id) {
+    return this.connection.query(
+      `insert into ${this.table} (profile_id, title, year, university) values (?, ?, ?, ?)`,
+      [id, master.masterName, master.masterYear, master.masterLocation]
+    );
+  }
 }
 
 module.exports = MasterManager;
