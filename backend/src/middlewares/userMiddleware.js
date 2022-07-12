@@ -1,4 +1,6 @@
 const Joi = require("joi");
+const jwt = require("jsonwebtoken");
+const models = require("../models");
 
 const validateUser = (req, res, next) => {
   const { error } = Joi.object({
@@ -63,17 +65,60 @@ const validateLogin = (req, res, next) => {
   }
 };
 
-const privateUser = (req, res, next) => {
-  const { error } = Joi.object({
-    is_valid: Joi.number().max(2).presence("required"),
-    is_private: Joi.number().max(2).presence("required"),
-  }).validate(req.body, { abortEarly: false });
-
-  if (!error) {
+const checkAuth = (req, res, next) => {
+  if (req.cookies) {
+    jwt.verify(
+      req.cookies.access_token,
+      process.env.JWT_AUTH_SECRET,
+      (err, decode) => {
+        if (err) {
+          res.status(401).send("You dont have the correct rights");
+        } else {
+          req.access_token = decode;
+          next();
+        }
+      }
+    );
+  } else {
+    res.status(401).send("You dont have the correct rights");
+  }
+};
+// Check is_valid
+const checkRights = async (req, res, next) => {
+  const user = await models.user.findByMail(req.access_token.email);
+  if (user[0].id === parseInt(req.params.id, 10) || user[0].role === "admin") {
     next();
   } else {
-    res.status(400).json("Les champs saisis sont incorrects");
+    res.status(401).send("You dont have the correct rights");
   }
 };
 
-module.exports = { validateUser, validateLogin, validateUpdate, privateUser };
+const decodeCookie = (req, res, next) => {
+  if (req.cookies) {
+    jwt.verify(
+      req.cookies.access_token,
+      process.env.JWT_AUTH_SECRET,
+      (err, decode) => {
+        if (err) {
+          req.access_token = false;
+          next();
+        } else {
+          req.access_token = decode;
+          next();
+        }
+      }
+    );
+  } else {
+    req.access_token = false;
+    next();
+  }
+};
+
+module.exports = {
+  validateUser,
+  validateLogin,
+  validateUpdate,
+  checkAuth,
+  checkRights,
+  decodeCookie,
+};

@@ -7,7 +7,7 @@ class ProfileManager extends AbstractManager {
     return sqlQueryToTest.includes("WHERE") ? " AND" : " WHERE";
   }
 
-  findAll(query) {
+  findAll(query, cookie) {
     const { diplome, promo, job, nomPrenom } = query;
     let sqlQuery = `SELECT lastname, firstname, P.id, W.job, U.is_valid, photo FROM ${ProfileManager.table} as P`;
     const sqlValue = [];
@@ -19,11 +19,13 @@ class ProfileManager extends AbstractManager {
       sqlQuery += ` INNER JOIN profile_diplome as PD ON PD.profile_id = P.id`;
       sqlQuery += ` INNER JOIN diplome as D ON PD.diplome_id = D.id`;
     }
-    /**
-     * si is Admin, alors affiche pas la query U.is_valid
-     * si is User, alors affiche U.is_valid = 1
-    // //  */
-    sqlQuery += ` ${this.andOrWhere(sqlQuery)} U.is_valid = 1`;
+
+    if (!cookie) {
+      sqlQuery += ` ${this.andOrWhere(sqlQuery)} P.is_private = 0`;
+    }
+    if (!cookie || cookie.role !== "admin") {
+      sqlQuery += ` ${this.andOrWhere(sqlQuery)} U.is_valid = 1`;
+    }
 
     if (diplome) {
       sqlQuery += `${this.andOrWhere(sqlQuery)} PD.diplome_id = ?`;

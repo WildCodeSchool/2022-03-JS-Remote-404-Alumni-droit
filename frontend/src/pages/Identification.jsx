@@ -4,6 +4,7 @@ import axios from "axios";
 import Footer from "../components/Footer";
 
 import ExportContextUser from "../contexts/UserContext";
+// import { data } from "autoprefixer";
 
 function Identification() {
   const [email, setEmail] = useState("");
@@ -22,7 +23,7 @@ function Identification() {
       .post(`${import.meta.env.VITE_BACKEND_URL}/login`, { email, password })
       .then((res) => {
         setUser(res.data);
-        navigate("/RGPD");
+        navigate(`/profile/${res.data.id}`);
       })
       .catch((err) => console.error(err));
   };

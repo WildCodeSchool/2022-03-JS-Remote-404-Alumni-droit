@@ -3,6 +3,8 @@ const path = require("path");
 
 const cors = require("cors");
 
+const cookie = require("cookie-parser");
+
 // let's create express app
 
 const app = express();
@@ -15,7 +17,7 @@ app.use(
     credentials: true,
   })
 );
-
+app.use(cookie());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));
 

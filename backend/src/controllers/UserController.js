@@ -58,8 +58,10 @@ class UserController {
       const id = uuidv4();
       const request = await models.user.insert(user.email, hash, id);
       await models.profile.insert(user, request[0].insertId);
+      await models.master.insert(user, request[0].insertId); // todo: master
+      await models.diplomes.insert(user, request[0].insertId); // todo: diplomes
       res.status(200).json({
-        msg: "Votre compte a été crée avec succès, en attente de validation",
+        msg: "Votre compte a été créé avec succès, en attente de validation",
       });
     } catch (error) {
       res.status(500).send(error);

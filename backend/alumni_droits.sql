@@ -179,12 +179,12 @@ CREATE TABLE IF NOT EXISTS `alumni_droits`.`profile` (
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `alumni_droits`;
-INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (1, 'modgftdepasse', 'email2@verif.com', 'user', true);
-INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (2, 'motdepagdsse', 'emai2@verif.com', 'user', true);
-INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (3, 'modfgtdepasse', 'emil2@verif.com', 'user', true);
-INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (4, 'motdergepasse', 'eail2@verif.com', 'user', true);
-INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (5, 'motdescpasse', 'mail2@verif.com', 'user', false);
-INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (6, 'motdepsdcasse', 'emaskdnfl2@verif.com', 'user', false);
+INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (1, '$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'email2@verif.com', 'user', true);
+INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (2, '$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'emai2@verif.com', 'user', true);
+INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (3, '$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'emil2@verif.com', 'user', true);
+INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (4, '$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'eail2@verif.com', 'user', true);
+INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (5, '$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'mail2@verif.com', 'user', false);
+INSERT INTO `alumni_droits`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (6, '$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'emaskdnfl2@verif.com', 'user', false);
 
 COMMIT;
 
