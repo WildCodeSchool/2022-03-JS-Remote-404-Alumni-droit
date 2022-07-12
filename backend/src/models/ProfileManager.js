@@ -101,6 +101,15 @@ class ProfileManager extends AbstractManager {
       [user.id]
     );
   }
+
+  visible(user) {
+    return this.connection
+      .query(
+        `SELECT is_valid, is_private FROM ${ProfileManager.table} INNER JOIN user ON user.id = ${ProfileManager.table}.user_id WHERE user.id = ?`,
+        [user]
+      )
+      .then((res) => res[0][0]);
+  }
 }
 
 module.exports = ProfileManager;

@@ -22,8 +22,9 @@ function Identification() {
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/login`, { email, password })
       .then((res) => {
+        // console.log(res.data);
         setUser(res.data);
-        navigate(`/profile/${res.data.id}`);
+        navigate(`/annuaire`);
       })
       .catch((err) => console.error(err));
   };

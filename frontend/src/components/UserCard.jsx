@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import AdminToggle from "./AdminToggle";
 import Initiales from "./Initiales";
+
+import ExportContextUser from "../contexts/UserContext";
 
 function UserCard({
   lastname,
@@ -12,6 +14,8 @@ function UserCard({
   diplomes,
   isValid,
 }) {
+  const { user } = useContext(ExportContextUser.UserContext);
+  // console.log(user);
   return (
     <div
       key={Date.now()}
@@ -74,7 +78,11 @@ function UserCard({
             </svg>
           </button>
         </Link>
-        <AdminToggle userId={userId} isValid={isValid} />
+        {user && user.role === "admin" ? (
+          <AdminToggle userId={userId} isValid={isValid} />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

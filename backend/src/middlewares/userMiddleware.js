@@ -2,6 +2,8 @@ const Joi = require("joi");
 const jwt = require("jsonwebtoken");
 const models = require("../models");
 
+const nope = "Vous ne disposez pas des droits nécessaires à cette opération";
+
 const validateUser = (req, res, next) => {
   const { error } = Joi.object({
     email: Joi.string().max(255).presence("required"),
@@ -72,7 +74,7 @@ const checkAuth = (req, res, next) => {
       process.env.JWT_AUTH_SECRET,
       (err, decode) => {
         if (err) {
-          res.status(401).send("You dont have the correct rights");
+          res.status(401).send(nope);
         } else {
           req.access_token = decode;
           next();
@@ -80,16 +82,37 @@ const checkAuth = (req, res, next) => {
       }
     );
   } else {
-    res.status(401).send("You dont have the correct rights");
+    res.status(401).send(nope);
   }
 };
-// Check is_valid
+
 const checkRights = async (req, res, next) => {
+  // console.log("*******Check Rights******");
   const user = await models.user.findByMail(req.access_token.email);
-  if (user[0].id === parseInt(req.params.id, 10) || user[0].role === "admin") {
+  // console.log(user);
+  if (user === []) {
+    res.status(401).send(nope);
+  } else if (
+    user !== [] &&
+    (user[0].id === parseInt(req.params.id, 10) || user[0].role === "admin")
+  ) {
     next();
   } else {
-    res.status(401).send("You dont have the correct rights");
+    res.status(401).send(nope);
+  }
+
+  next();
+};
+
+const checkVisibility = async (req, res, next) => {
+  const visible = await models.profile.visible(req.params.id);
+  // console.log("====checkVisible====");
+  // console.log(visible);
+  if (visible.is_valid === 1 && visible.is_private === 0) {
+    next();
+  } else {
+    // console.log("****oh oh oh*****");
+    checkRights();
   }
 };
 
@@ -120,5 +143,6 @@ module.exports = {
   validateUpdate,
   checkAuth,
   checkRights,
+  checkVisibility,
   decodeCookie,
 };
