@@ -156,6 +156,7 @@ function SignUp() {
                   <TextField
                     {...field}
                     label="Mot de passe"
+                    type="password"
                     size="medium"
                     {...register("password", { required: true })}
                   />
