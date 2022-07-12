@@ -15,6 +15,13 @@ class ProfileManager extends AbstractManager {
   multipleFind(data) {
     return Promise.all(data.map((pers) => this.find(pers.id)));
   }
+
+  insert(diplome, id) {
+    return this.connection.query(
+      `insert into profile_diplome (profile_id, diplome_id, year) values (?, ?, ?)`,
+      [id, diplome.diplome, diplome.diplomeYear]
+    );
+  }
 }
 
 module.exports = ProfileManager;

@@ -52,12 +52,22 @@ class UserController {
   };
 
   static add = async (req, res) => {
-    const user = req.body;
     try {
-      const hash = await passwordHash(user.password);
+      // console.log(req.body);
+      // console.log(req.diplome);
+      // console.log(req.master);
+      const hash = await passwordHash(req.body.password);
       const id = uuidv4();
-      const request = await models.user.insert(user.email, hash, id);
-      await models.profile.insert(user, request[0].insertId);
+      const request = await models.user.insert(req.body.email, hash, id);
+      const profile = await models.profile.insert(
+        req.body,
+        request[0].insertId
+      );
+      await Promise.all(
+        req.diplome.map((dip) =>
+          models.diplome.insert(dip, profile[0].insertId)
+        )
+      );
       res.status(200).json({
         msg: "Votre compte a été crée avec succès, en attente de validation",
       });

@@ -1,5 +1,6 @@
 const express = require("express");
 const { validateUser, validateLogin } = require("./middlewares/userMiddleware");
+const { preparedDataForSignIn } = require("./middlewares/dataMiddleware");
 
 const {
   ProfileController,
@@ -21,7 +22,7 @@ router.get("/profession", JobController.browse);
 router.get("/promotion", PromotionController.browse);
 router.get("/master", MasterController.browse);
 
-router.post("/signIn", validateUser, UserController.add);
+router.post("/signIn", preparedDataForSignIn, validateUser, UserController.add);
 router.post("/login", validateLogin, UserController.login);
 
 router.put("/user/update/:id", UserController.edit);

@@ -199,7 +199,7 @@ function SignUp() {
                                 width: "55%",
                                 mb: 1.5,
                               }}
-                              onChange={(_, data) => onChange(data.title)}
+                              onChange={(_, data) => onChange(data.id)}
                               renderInput={(params) => (
                                 <TextField
                                   {...params}
@@ -266,7 +266,7 @@ function SignUp() {
               </div>
               <Controller
                 control={control}
-                name="profession"
+                name="profession_id"
                 render={({ field: { ref, onChange, ...field } }) => (
                   <Autocomplete
                     disablePortal
@@ -275,7 +275,7 @@ function SignUp() {
                     getOptionLabel={(option) =>
                       option.job.replace("&apos;E", "'É")
                     }
-                    onChange={(_, data) => onChange(data.job)}
+                    onChange={(_, data) => onChange(data.id)}
                     renderInput={(params) => (
                       <TextField
                         {...params}
@@ -351,7 +351,7 @@ function SignUp() {
                                 width: "55%",
                                 mb: 1.5,
                               }}
-                              onChange={(_, data) => onChange(data.title)}
+                              onChange={(_, data) => onChange(data.id)}
                               renderInput={(params) => (
                                 <TextField
                                   {...params}
