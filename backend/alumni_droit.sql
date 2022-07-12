@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `alumni_droit`.`profile` (
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `alumni_droit`;
-INSERT INTO `alumni_droit`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (0, '$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'admin@verif.com', 'admin', true);
+INSERT INTO `alumni_droit`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (979969989, '$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'admin@verif.com', 'admin', true);
 INSERT INTO `alumni_droit`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (1, '$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'email2@verif.com', 'user', true);
 INSERT INTO `alumni_droit`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (2, '$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'emai2@verif.com', 'user', true);
 INSERT INTO `alumni_droit`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (3, '$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'emil2@verif.com', 'user', true);
