@@ -21,7 +21,7 @@ function UserCard({
         {photo != null ? (
           <img src={photo} alt={`Portrait de ${firstname} ${lastname}`} />
         ) : (
-          <Initiales lastname={lastname} firstname={firstname} />
+          <Initiales lastname={lastname} firstname={firstname} /> // Les initiales s'affichent si l'alumni n'a pas uploadé son portrait
         )}
       </div>
       <div className="flex justify-center flex-col text-center bg-red-800 text-slate-50 p-2 xl:p-1 leading-4">
