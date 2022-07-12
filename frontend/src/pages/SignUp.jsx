@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { TextField, Autocomplete } from "@mui/material";
-import Switch from "@mui/material/Switch";
+import { Switch, Stack, Typography } from "@mui/material/Switch";
 import { HiPlus, HiMinus } from "react-icons/hi";
 
 import years from "@assets/years";
