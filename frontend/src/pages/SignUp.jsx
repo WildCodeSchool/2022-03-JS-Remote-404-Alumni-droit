@@ -135,17 +135,12 @@ function SignUp() {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    error={errors && errors.lastname}
-                    id={
-                      errors && errors.lastname
-                        ? "outlined-error-helper-text"
-                        : ""
-                    }
                     label="Nom"
                     size="medium"
+                    error={errors && errors.lastname}
                     helperText={
                       errors.lastname?.type === "required" &&
-                      "First name is required"
+                      "Veuillez saisir votre nom"
                     }
                     {...register("lastname", { required: true })}
                   />
@@ -159,6 +154,11 @@ function SignUp() {
                     {...field}
                     label="Prénom"
                     size="medium"
+                    error={errors && errors.lastname}
+                    helperText={
+                      errors.lastname?.type === "required" &&
+                      "Veuillez saisir votre prénom"
+                    }
                     {...register("firstname", { required: true })}
                   />
                 )}
@@ -171,6 +171,11 @@ function SignUp() {
                     {...field}
                     label="Email"
                     size="medium"
+                    error={errors && errors.lastname}
+                    helperText={
+                      errors.lastname?.type === "required" &&
+                      "Veuillez saisir votre email"
+                    }
                     {...register("email", { required: true })}
                   />
                 )}
@@ -182,8 +187,13 @@ function SignUp() {
                   <TextField
                     {...field}
                     label="Mot de passe"
-                    type="password"
                     size="medium"
+                    type="password"
+                    error={errors && errors.lastname}
+                    helperText={
+                      errors.lastname?.type === "required" &&
+                      "Veuillez saisir votre mot de passe"
+                    }
                     {...register("password", { required: true })}
                   />
                 )}
@@ -195,8 +205,12 @@ function SignUp() {
                   <TextField
                     {...field}
                     label="Confirmer mot de passe"
-                    type="password"
                     size="medium"
+                    error={errors && errors.lastname}
+                    helperText={
+                      errors.lastname?.type === "required" &&
+                      "Veuillez confirmer votre mot de passe"
+                    }
                     {...register("confirmedPassword", { required: true })}
                   />
                 )}
@@ -237,18 +251,11 @@ function SignUp() {
                                     errors &&
                                     errors[`diplome_${index}`]
                                   }
-                                  id={
-                                    index === 0 &&
-                                    errors &&
-                                    errors[`diplome_${index}`]
-                                      ? "outlined-error-helper-text"
-                                      : ""
-                                  }
                                   helperText={
                                     index === 0 &&
                                     errors[`diplome_${index}`]?.type ===
                                       "required" &&
-                                    "Diplôme is required"
+                                    "Veuillez choisir un diplôme"
                                   }
                                   label={`#${index + 1} Diplôme`}
                                   color="primary"
@@ -280,6 +287,20 @@ function SignUp() {
                                   label="Année"
                                   color="primary"
                                   inputRef={ref}
+                                  error={
+                                    index === 0 &&
+                                    errors &&
+                                    errors[`diplomeYear_${index}`]
+                                  }
+                                  helperText={
+                                    index === 0 &&
+                                    errors[`diplomeYear_${index}`]?.type ===
+                                      "required" &&
+                                    "Veuillez choisir une année"
+                                  }
+                                  {...register(`diplomeYear_${index}`, {
+                                    required: true,
+                                  })}
                                 />
                               )}
                             />
@@ -332,6 +353,14 @@ function SignUp() {
                         label="Profession"
                         color="primary"
                         inputRef={ref}
+                        error={errors && errors.profession_id}
+                        helperText={
+                          errors.profession_id?.type === "required" &&
+                          "Veuillez choisir une profession"
+                        }
+                        {...register("profession_id", {
+                          required: true,
+                        })}
                       />
                     )}
                   />
@@ -345,11 +374,15 @@ function SignUp() {
                     {...field}
                     label="Poste actuel"
                     size="medium"
+                    error={errors && errors.lastname}
+                    helperText={
+                      errors.lastname?.type === "required" &&
+                      "Veuillez saisir votre poste actuel"
+                    }
                     {...register("poste", { required: true })}
                   />
                 )}
               />
-
               <div className="pt-10">
                 <Stack
                   direction="row"
@@ -364,7 +397,6 @@ function SignUp() {
                   <Typography>Public</Typography>
                 </Stack>
               </div>
-
               <p className="flex text-left text-xs pb-6">
                 <span>*&nbsp;</span>En mode privé, votre profil ne pourra être
                 consulté que par les anciens diplômés inscrits et connectés à
