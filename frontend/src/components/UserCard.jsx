@@ -13,12 +13,13 @@ function UserCard({
   userId,
   diplomes,
   isValid,
+  kkey,
 }) {
   const { user } = useContext(ExportContextUser.UserContext);
   // console.log(user);
   return (
     <div
-      key={Date.now()}
+      key={kkey}
       className="w-[45%] md:w-[22%] lg:w-[18%] xl:w-[15%] flex flex-col flex-wrap rounded-lg shadow-md m-2 p-3 border-2 h-auto"
     >
       <div>

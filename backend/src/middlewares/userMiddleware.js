@@ -93,7 +93,7 @@ const checkRights = async (req, res, next) => {
   if (user === []) {
     res.status(401).send(nope);
   } else if (
-    user !== [] &&
+    user &&
     (user[0].id === parseInt(req.params.id, 10) || user[0].role === "admin")
   ) {
     next();
