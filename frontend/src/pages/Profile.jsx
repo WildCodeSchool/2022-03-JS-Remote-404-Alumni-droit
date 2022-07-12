@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import axios from "axios";
 
@@ -252,7 +251,9 @@ function Profile() {
             type="button"
             className="text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-700 font-medium rounded-lg text-sm lg:text-base xl:text-lg mt-5 px-5 py-2.5 inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
           >
-            <p>Retour à la liste</p>
+            <Link to="/">
+              <p>Retour à la liste</p>
+            </Link>
           </button>
         </div>
         <Footer />
