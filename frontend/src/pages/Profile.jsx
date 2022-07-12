@@ -247,14 +247,14 @@ function Profile() {
           </div>
         </div>
         <div className="flex justify-end mb-5 mr-5 md:mx-10 lg:mx-20 xl:mx-40">
-          <button
-            type="button"
-            className="text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-700 font-medium rounded-lg text-sm lg:text-base xl:text-lg mt-5 px-5 py-2.5 inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
-          >
-            <Link to="/">
+          <Link to="/">
+            <button
+              type="button"
+              className="text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-700 font-medium rounded-lg text-sm lg:text-base xl:text-lg mt-5 px-5 py-2.5 inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+            >
               <p>Retour à la liste</p>
-            </Link>
-          </button>
+            </button>
+          </Link>
         </div>
         <Footer />
       </div>
