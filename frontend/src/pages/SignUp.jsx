@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import {
@@ -16,17 +16,37 @@ import { HiPlus, HiMinus } from "react-icons/hi";
 import years from "@assets/years";
 
 function SignUp() {
-  const { register, control, handleSubmit } = useForm();
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const [checked, setChecked] = useState(true);
   const [diplomeData, setDiplomeData] = useState([]);
   const [professionData, setProfessionData] = useState([]);
   const [masterData, setMasterData] = useState([]);
   const [diplomeInput, setDiplomeInput] = useState([true, false, false]);
   const [masterInput, setMasterInput] = useState([true, false, false]);
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    console.warn(data);
-    console.warn(checked);
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/sign_up`, {
+        ...data,
+        is_private: checked,
+      })
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        console.warn(error);
+      });
+  };
+
+  const handleChange = (e) => {
+    setChecked(e.target.checked);
   };
 
   const handleDiplomeInput = (index, type) => {
@@ -47,10 +67,6 @@ function SignUp() {
       provMasterInput[index] = false;
     }
     setMasterInput(provMasterInput);
-  };
-
-  const handleChange = (e) => {
-    setChecked(e.target.checked);
   };
 
   const getDiplome = () => {
@@ -119,8 +135,18 @@ function SignUp() {
                 render={({ field }) => (
                   <TextField
                     {...field}
+                    error={errors && errors.lastname}
+                    id={
+                      errors && errors.lastname
+                        ? "outlined-error-helper-text"
+                        : ""
+                    }
                     label="Nom"
                     size="medium"
+                    helperText={
+                      errors.lastname?.type === "required" &&
+                      "First name is required"
+                    }
                     {...register("lastname", { required: true })}
                   />
                 )}
@@ -183,15 +209,16 @@ function SignUp() {
                 {diplomeInput.map((diplomeIn, index) => {
                   if (diplomeIn) {
                     return (
-                      <div className="flex justify-between">
-                        {/* key={Date.now()} */}
+                      <div
+                        key={`diplome_key_${index.id}`}
+                        className="flex justify-between"
+                      >
                         <Controller
                           control={control}
                           name={`diplome_${index}`}
                           render={({ field: { ref, onChange, ...field } }) => (
                             <Autocomplete
                               disablePortal
-                              id="combo-box-1"
                               options={diplomeData}
                               getOptionLabel={(option) =>
                                 option.title.replace("&apos;E", "'É")
@@ -200,14 +227,35 @@ function SignUp() {
                                 width: "55%",
                                 mb: 1.5,
                               }}
-                              onChange={(_, data) => onChange(data.id)}
+                              onChange={(_, data) => onChange(data)}
                               renderInput={(params) => (
                                 <TextField
                                   {...params}
                                   {...field}
+                                  error={
+                                    index === 0 &&
+                                    errors &&
+                                    errors[`diplome_${index}`]
+                                  }
+                                  id={
+                                    index === 0 &&
+                                    errors &&
+                                    errors[`diplome_${index}`]
+                                      ? "outlined-error-helper-text"
+                                      : ""
+                                  }
+                                  helperText={
+                                    index === 0 &&
+                                    errors[`diplome_${index}`]?.type ===
+                                      "required" &&
+                                    "Diplôme is required"
+                                  }
                                   label={`#${index + 1} Diplôme`}
                                   color="primary"
                                   inputRef={ref}
+                                  {...register(`diplome_${index}`, {
+                                    required: true,
+                                  })}
                                 />
                               )}
                             />
@@ -352,7 +400,7 @@ function SignUp() {
                                 width: "55%",
                                 mb: 1.5,
                               }}
-                              onChange={(_, data) => onChange(data.id)}
+                              onChange={(_, data) => onChange(data)}
                               renderInput={(params) => (
                                 <TextField
                                   {...params}
