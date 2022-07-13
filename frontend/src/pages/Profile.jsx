@@ -18,6 +18,13 @@ function Profile() {
   const [copied, setCopied] = useState(false);
   const textToCopy = `${import.meta.env.VITE_BACKEND_URL}/annuaire/${userId}`;
 
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/annuaire/${userId}`)
+      .then((res) => setRows(res.data))
+      .catch((err) => console.error(err));
+  }, [userId]);
+
   const copyToClipboard = () => {
     navigator.clipboard.writeText(textToCopy).then(
       () => {
@@ -32,14 +39,7 @@ function Profile() {
     );
   };
 
-  const btnStyle = copied ? "bg-gray-500 text-white" : "";
-
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/annuaire/${userId}`)
-      .then((res) => setRows(res.data))
-      .catch((err) => console.error(err));
-  }, [userId]);
+  const linkStyle = copied ? "text-red-800" : "";
 
   return (
     rows != null && (
@@ -180,13 +180,10 @@ function Profile() {
                   ? rows.bio
                   : `${rows.firstname} ${rows.lastname} n'a pas encore rempli cette partie de son profil`}
               </p>
-
               {/* RESEAUX SOCIAUX */}
-
               <h2 className="mb-1 text-2xl font-bold my-5 text-red-800">
                 Réseaux Sociaux :
               </h2>
-
               {rows.linkedin ? (
                 <div className="flex items-center mt-2 mb-3">
                   <img
@@ -244,7 +241,7 @@ function Profile() {
               ) : (
                 ""
               )}
-              {rows.twitter ? (
+              {rows.facebook ? (
                 <div className="flex items-center mt-2 mb-3">
                   <img
                     src={facebook}
@@ -263,33 +260,16 @@ function Profile() {
               ) : (
                 ""
               )}
-              {rows.twitter ? (
-                <div className="flex items-center space-x-3 mt-2 mb-3 ">
-                  <BsLink size={25} />
-                  <button
-                    type="button"
-                    onClick={copyToClipboard}
-                    className={`${btnStyle}text-sm border w-36 border-gray-500 rounded p-2 transition`}
-                  >
-                    {copied ? "Lien copié" : "Partagez votre profil"}
-                  </button>
-                  {/* <img
-                    src={facebook}
-                    alt="facebook"
-                    className="z-10 w-[6%] mr-2"
-                  />
-                  <a
-                    className="font-normal hover:text-red-800 visited:text-red-700"
-                    href={rows != null && rows.facebook}
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    <p>{rows != null && rows.facebook}</p>
-                  </a> */}
-                </div>
-              ) : (
-                ""
-              )}
+              <div className="flex items-center space-x-3 mt-2 mb-3 ">
+                <BsLink size={25} />
+                <button
+                  type="button"
+                  onClick={copyToClipboard}
+                  className={linkStyle}
+                >
+                  {copied ? "Lien copié" : "Partagez votre profil"}
+                </button>
+              </div>
             </div>
           </div>
         </div>
