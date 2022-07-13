@@ -11,8 +11,8 @@ import logoOfficiel from "../assets/officiel.png";
 function Footer() {
   return (
     <div>
-      <div className="footer flex flex-col justify-between md:flex-row items-center p-8 md:px-16 lg:px-[10rem] xl:px-[15rem]">
-        {/* cadre général */}
+      <div className="flex flex-col justify-between md:flex-row items-center p-8 md:px-16 lg:px-[10rem] xl:px-[15rem]">
+        {/* CADRE GENERAL */}
         <img
           src={logoOfficiel}
           alt="officiel"
@@ -33,32 +33,48 @@ function Footer() {
                 rel="noreferrer"
                 href="https://www.linkedin.com/company/coll%C3%A8ge-de-droit-universit%C3%A9-paris-ii-panth%C3%A9on-assas/"
               >
-                <img src={logoLinkedin} alt="logo linkedin" />
+                <img
+                  src={logoLinkedin}
+                  alt="logo linkedin"
+                  className="delay-150 transition duration-300 ease-out hover:scale-110"
+                />
               </a>
               <a
                 target="_blank"
                 rel="noreferrer"
                 href="https://twitter.com/CddAssas"
               >
-                <img src={logoTwitter} alt="logo twitter" />
+                <img
+                  src={logoTwitter}
+                  alt="logo twitter"
+                  className="delay-150 transition duration-300 ease-out hover:scale-110"
+                />
               </a>
               <a
                 target="_blank"
                 rel="noreferrer"
-                href="https://www.facebook.com/aecdd.assas/?__tn__=%2Cd%2CP-R&eid=ARDiEiQUjTLsqAJiv3-O5jXDEqSGXn9HX3R1KFN_pbvtAuOYe4y8y7N5-mykIkf_OTnPyninYcSnAu5z"
+                href="https://www.facebook.com/aecdd.assas/?__tn__=%2Cd%2CP-Reid=ARDiEiQUjTLsqAJiv3-O5jXDEqSGXn9HX3R1KFN_pbvtAuOYe4y8y7N5-mykIkf_OTnPyninYcSnAu5z"
               >
-                <img src={logoFacebook} alt="logo Facebook" />
+                <img
+                  src={logoFacebook}
+                  alt="logo Facebook"
+                  className="delay-150 transition duration-300 ease-out hover:scale-110"
+                />
               </a>
               <a
                 target="_blank"
                 rel="noreferrer"
                 href="https://www.instagram.com/collegededroitassas/"
               >
-                <img src={logoInstagram} alt="logo Instagram" />
+                <img
+                  src={logoInstagram}
+                  alt="logo Instagram"
+                  className="delay-150 transition duration-300 ease-out hover:scale-110"
+                />
               </a>
             </div>
             {/* MENTIONS LEGALES */}
-            <div className="links mt-2 mx-auto">
+            <div className="underline underline-offset-2 hover:text-red-700 visited:text-red-700 mt-2 mx-auto">
               <Link to="RGPD">
                 Mentions légales
                 <p src="./pages/RGPD" alt="logo" />
