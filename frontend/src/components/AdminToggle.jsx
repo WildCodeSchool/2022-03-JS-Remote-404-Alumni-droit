@@ -54,9 +54,9 @@ function AdminToggle({ isValid, userId }) {
             </Switch>
           </button>
           {isValidSwitch === true ? (
-            <p className="text-green-500 font-bold text-[.7rem]">Validé</p>
+            <p className="text-green-500 text-[.7rem]">&nbsp;Validé</p>
           ) : (
-            <p className="text-slate-400 font-bold text-[.7rem]">En attente</p>
+            <p className="text-slate-400 text-[.7rem]">&nbsp;En attente</p>
           )}
         </div>
 
@@ -84,9 +84,9 @@ function AdminToggle({ isValid, userId }) {
             <h3 className="mt-5 ml-6 font-bold text-2xl text-gray-700">
               Voulez-vous vraiment supprimer ce compte ?
             </h3>
-            <p className="m-6 text-base text-gray-500 leading-snug">
-              Attention, cette action est irréversible. En cas de doute, nous
-              vous conseillons de cliquer sur annuler.
+            <p className="flex justify-center m-6 text-base text-gray-500 leading-snug">
+              Attention, cette action est irréversible. En cas de doute,
+              veuillez cliquer sur annuler.
             </p>
             <DialogActions>
               <div>
