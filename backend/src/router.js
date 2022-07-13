@@ -1,5 +1,11 @@
 const express = require("express");
-const { validateUser, validateLogin } = require("./middlewares/userMiddleware");
+const {
+  validateUser,
+  validateLogin,
+  checkAuth,
+  checkRights,
+  decodeCookie,
+} = require("./middlewares/userMiddleware");
 const { preparedDataForSignIn } = require("./middlewares/dataMiddleware");
 
 const {
@@ -13,8 +19,8 @@ const {
 
 const router = express.Router();
 
-router.get("/annuaire", ProfileController.browse);
-router.get("/annuaire/:id", ProfileController.read); // ajouter middleware pour vérifier  is_private && is_valid === true
+router.get("/annuaire", decodeCookie, ProfileController.browse);
+router.get("/annuaire/:id", decodeCookie, ProfileController.read); // ajouter middleware pour vérifier  is_private && is_valid === true
 router.get("/count", ProfileController.count);
 
 router.get("/diplome", DiplomeController.browse);
@@ -30,11 +36,26 @@ router.post(
 );
 router.post("/login", validateLogin, UserController.login);
 
-router.put("/user/update/:id", UserController.edit);
-router.put("/profile/update/:id", ProfileController.edit);
+router.put("/user/update/:id", checkAuth, checkRights, UserController.edit);
+router.put(
+  "/profile/update/:id",
+  checkAuth,
+  checkRights,
+  ProfileController.edit
+);
 
-router.delete("/annuaire/delete/:id", ProfileController.delete);
-router.delete("/user/delete/:id", UserController.delete);
+router.delete(
+  "/annuaire/delete/:id",
+  checkAuth,
+  checkRights,
+  ProfileController.delete
+);
+router.delete(
+  "/user/delete/:id",
+  checkAuth,
+  checkRights,
+  UserController.delete
+);
 
 // router.put("/items/:id", ItemController.edit);
 // router.post("/items", ItemController.add);

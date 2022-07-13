@@ -16,7 +16,10 @@ class ProfileController {
     // "annuaire" listing
 
     try {
-      const profiles = await models.profile.findAll(req.query);
+      const profiles = await models.profile.findAll(
+        req.query,
+        req.access_token
+      );
 
       if (profiles) {
         const diplomes = await Promise.all(
@@ -43,7 +46,7 @@ class ProfileController {
   static read = async (req, res) => {
     // fiche profile
     try {
-      const profiles = await models.profile.find(req.params.id);
+      const profiles = await models.profile.find(req.params.id); /// à faire pour résultat vide
       if (profiles[0][0]) {
         const diplomes = await models.diplome.find(profiles[0][0].id);
         const masters = await models.master.find(profiles[0][0].id);

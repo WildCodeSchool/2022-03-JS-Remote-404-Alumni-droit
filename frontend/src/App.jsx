@@ -5,7 +5,6 @@ import Listing from "@pages/Listing";
 import Identification from "@pages/Identification";
 import SignUp from "@pages/SignUp";
 import Profile from "@pages/Profile";
-import ProfileUpdate from "@pages/ProfileUpdate";
 import RGPD from "@pages/RGPD";
 import Navbar from "@components/Navbar";
 import ProtectedRoute from "@components/Layout/ProtectedRoute";
@@ -29,7 +28,7 @@ function App() {
           path="/profile/:userId/update"
           element={
             <ProtectedRoute user={user}>
-              <ProfileUpdate />
+              <SignUp />
             </ProtectedRoute>
           }
         />

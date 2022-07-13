@@ -71,7 +71,7 @@ class UserController {
         )
       );
       res.status(200).json({
-        msg: "Votre compte a été crée avec succès, en attente de validation",
+        msg: "Votre compte a été créé avec succès, en attente de validation",
       });
     } catch (error) {
       res.status(500).send(error);
