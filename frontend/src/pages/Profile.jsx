@@ -277,7 +277,7 @@ function Profile() {
           <Link to="/">
             <button
               type="button"
-              className="text-white bg-red-700 hover:bg-red-600  focus:outline-none font-medium rounded-lg text-sm lg:text-base xl:text-lg mt-5 px-5 py-2.5 inline-flex items-center"
+              className="text-white bg-red-700 hover:bg-red-600 focus:outline-none font-medium rounded-lg text-sm lg:text-base mt-5 px-5 py-2.5 inline-flex items-center"
             >
               <p>Retour à la liste</p>
             </button>

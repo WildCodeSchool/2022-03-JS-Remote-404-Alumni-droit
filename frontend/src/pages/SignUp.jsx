@@ -632,9 +632,7 @@ function SignUp() {
           <div className="flex justify-end">
             <input
               type="submit"
-              className="text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none
-                focus:ring-red-700 font-medium rounded-lg text-sm lg:text-base xl:text-lg
-                my-2 px-5 py-2.5 inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+              className="text-white bg-red-700 hover:bg-red-600 focus:outline-none font-medium rounded-lg text-sm lg:text-base mt-5 px-5 py-2.5 inline-flex items-center"
             />
           </div>
         </form>
@@ -647,7 +645,10 @@ function SignUp() {
         pour tenir à jour ses registres et établir des statistiques. Pour en
         savoir plus sur la gestion de vos données et pour exercer vos
         droits,&nbsp;
-        <Link to="/RGPD" className="underline">
+        <Link
+          to="/RGPD"
+          className="underline underline-offset-2 hover:text-red-700"
+        >
           cliquez ici
         </Link>
         .

@@ -57,7 +57,7 @@ function UserCard({
         <Link to={`/profile/${userId}`}>
           <button
             type="button"
-            className="flex justify-center text-white w-full bg-red-700 hover:bg-red-600 focus:outline-none font-medium rounded-lg text-sm lg:text-base xl:text-lg md:mt-1 mt-5 py-2.5 items-center"
+            className="flex justify-center text-white w-full bg-red-700 hover:bg-red-600 focus:outline-none font-medium rounded-lg text-sm lg:text-base md:mt-1 mt-5 py-2.5 items-center"
           >
             <p className="text-center">Consulter</p>
             <svg
