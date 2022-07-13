@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router-dom";
 
 import axios from "axios";
 
+import { BsLink } from "react-icons/bs";
+
 import Footer from "@components/Footer";
 
 import linkedin from "../assets/linkedin.png";
@@ -239,6 +241,27 @@ function Profile() {
                   >
                     <p>{rows != null && rows.facebook}</p>
                   </a>
+                </div>
+              ) : (
+                ""
+              )}
+              {rows.twitter ? (
+                <div className="flex items-center space-x-3 mt-2 mb-3 ">
+                  <BsLink size={25} />
+                  <p>Partagez votre profil</p>
+                  {/* <img
+                    src={facebook}
+                    alt="facebook"
+                    className="z-10 w-[6%] mr-2"
+                  />
+                  <a
+                    className="font-normal hover:text-red-800 visited:text-red-700"
+                    href={rows != null && rows.facebook}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <p>{rows != null && rows.facebook}</p>
+                  </a> */}
                 </div>
               ) : (
                 ""
