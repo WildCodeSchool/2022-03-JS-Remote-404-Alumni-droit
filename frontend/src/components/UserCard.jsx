@@ -74,7 +74,11 @@ function UserCard({
             </svg>
           </button>
         </Link>
-        <AdminToggle userId={userId} isValid={isValid} />
+       {user && user.role === "admin" ? (
+          <AdminToggle userId={userId} isValid={isValid} />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
