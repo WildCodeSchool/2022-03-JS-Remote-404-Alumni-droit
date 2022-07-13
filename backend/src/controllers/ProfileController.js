@@ -28,6 +28,12 @@ class ProfileController {
         profiles.forEach((profile, index) => {
           profile.diplomes = diplomes[index];
         });
+        const masters = await Promise.all(
+          profiles.map((profile) => models.master.find(profile.id))
+        );
+        profiles.forEach((profile, index) => {
+          profile.masters = masters[index];
+        });
       }
 
       res.status(200).json(profiles);

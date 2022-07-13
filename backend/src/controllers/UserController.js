@@ -56,9 +56,20 @@ class UserController {
       const hash = await passwordHash(req.body.password);
       const id = uuidv4();
       const request = await models.user.insert(req.body.email, hash, id);
-      await models.profile.insert(req.body, request[0].insertId);
-      await models.master.insert(req.body, request[0].insertId); // todo: master
-      await models.diplomes.insert(req.body, request[0].insertId); // todo: diplomes
+      const profile = await models.profile.insert(
+        req.body,
+        request[0].insertId
+      );
+      await Promise.all(
+        req.diplome.map((dip) =>
+          models.diplome.insert(dip, profile[0].insertId)
+        )
+      );
+      await Promise.all(
+        req.master.map((mast) =>
+          models.master.insert(mast, profile[0].insertId)
+        )
+      );
       res.status(200).json({
         msg: "Votre compte a été créé avec succès, en attente de validation",
       });

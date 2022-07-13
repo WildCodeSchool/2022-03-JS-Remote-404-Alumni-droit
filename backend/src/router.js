@@ -6,6 +6,7 @@ const {
   checkRights,
   decodeCookie,
 } = require("./middlewares/userMiddleware");
+const { preparedDataForSignIn } = require("./middlewares/dataMiddleware");
 
 const {
   ProfileController,
@@ -27,7 +28,12 @@ router.get("/profession", JobController.browse);
 router.get("/promotion", PromotionController.browse);
 router.get("/master", MasterController.browse);
 
-router.post("/signIn", validateUser, UserController.add);
+router.post(
+  "/sign_up",
+  preparedDataForSignIn,
+  validateUser,
+  UserController.add
+);
 router.post("/login", validateLogin, UserController.login);
 
 router.put("/user/update/:id", checkAuth, checkRights, UserController.edit);

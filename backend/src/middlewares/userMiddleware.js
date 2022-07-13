@@ -19,7 +19,8 @@ const validateUser = (req, res, next) => {
     linkedin: Joi.string().max(255).presence("optional"),
     twitter: Joi.string().max(255).presence("optional"),
     instagram: Joi.string().max(255).presence("optional"),
-  }).validate(req.body, { abortEarly: false });
+    is_private: Joi.boolean().presence("required"),
+  }).validate(req.profile, { abortEarly: false });
 
   if (!error) {
     next();
