@@ -45,21 +45,21 @@ function Footer() {
               <a
                 target="_blank"
                 rel="noreferrer"
-                href="https://www.facebook.com/aecdd.assas/?__tn__=%2Cd%2CP-R&eid=ARDiEiQUjTLsqAJiv3-O5jXDEqSGXn9HX3R1KFN_pbvtAuOYe4y8y7N5-mykIkf_OTnPyninYcSnAu5z"
+                href="https://fr-fr.facebook.com/cdd.edd.assas/"
               >
                 <img src={logoFacebook} alt="logo Facebook" />
               </a>
               <a
                 target="_blank"
                 rel="noreferrer"
-                href="https://www.instagram.com/collegededroitassas/"
+                href="https://www.instagram.com/collegeecolededroitassas/"
               >
                 <img src={logoInstagram} alt="logo Instagram" />
               </a>
             </div>
             {/* MENTIONS LEGALES */}
             <div className="links mt-2 mx-auto">
-              <Link to="RGPD">
+              <Link to="/RGPD">
                 Mentions légales
                 <p src="./pages/RGPD" alt="logo" />
               </Link>
