@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Footer from "../components/Footer";
 
@@ -68,12 +68,14 @@ function Identification() {
       </form>
       <p className="text-center mt-50">Vous n’avez pas de compte ?</p>
       <div className="flex justify-center">
-        <button
-          type="button"
-          className="m-14 md:m-10 lg:m-14 xl:m-14 text-center mx-auto text-red-700 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm lg:text-base xl:text-lg mt-5 px-5 py-2.5 inline-flex items-center dark:bg-gray-200 dark:hover:bg-gray-200 dark:focus:ring-gray-200"
-        >
-          <p>Créer votre compte</p>
-        </button>
+        <Link to="/SignUp">
+          <button
+            type="button"
+            className="m-14 md:m-10 lg:m-14 xl:m-14 text-center mx-auto text-red-700 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm lg:text-base xl:text-lg mt-5 px-5 py-2.5 inline-flex items-center dark:bg-gray-200 dark:hover:bg-gray-200 dark:focus:ring-gray-200"
+          >
+            <p>Créer votre compte</p>
+          </button>
+        </Link>
       </div>
       <Footer />
     </>
