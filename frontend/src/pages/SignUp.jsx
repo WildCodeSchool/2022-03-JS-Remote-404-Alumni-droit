@@ -206,6 +206,7 @@ function SignUp() {
                     {...field}
                     label="Confirmer mot de passe"
                     size="medium"
+                    type="password"
                     error={errors && errors.lastname}
                     helperText={
                       errors.lastname?.type === "required" &&
