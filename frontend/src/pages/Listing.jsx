@@ -30,7 +30,7 @@ function Listing() {
       url += `${urlParams(url)}years=${years}`;
     }
     axios
-      .get(url)
+      .get(url, { withCredentials: true })
       .then((res) => setRows(res.data))
       .catch((err) => console.error(err));
   }, [diplome, profession, years]);
