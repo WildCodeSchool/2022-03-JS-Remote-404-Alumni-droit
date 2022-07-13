@@ -73,13 +73,13 @@ CREATE TABLE IF NOT EXISTS `alumni_droit`.`profile_diplome` (
   CONSTRAINT `fk_user_diplome_diplome1`
     FOREIGN KEY (`diplome_id`)
     REFERENCES `alumni_droit`.`diplome` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_user_diplome_profile1`
     FOREIGN KEY (`profile_id`)
     REFERENCES `alumni_droit`.`profile` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -97,13 +97,13 @@ CREATE TABLE IF NOT EXISTS `alumni_droit`.`profile_profession` (
   CONSTRAINT `fk_user_profession_profession1`
     FOREIGN KEY (`profession_id`)
     REFERENCES `alumni_droit`.`profession` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_user_profession_profile1`
     FOREIGN KEY (`profile_id`)
     REFERENCES `alumni_droit`.`profile` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
