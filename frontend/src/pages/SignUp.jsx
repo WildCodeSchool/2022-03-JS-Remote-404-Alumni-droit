@@ -33,10 +33,14 @@ function SignUp() {
 
   const onSubmit = (data) => {
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/sign_up`, {
-        ...data,
-        is_private: checked,
-      })
+      .post(
+        `${import.meta.env.VITE_BACKEND_URL}/signup`,
+        { withCredentials: true },
+        {
+          ...data,
+          is_private: checked,
+        }
+      )
       .then(() => {
         navigate("/");
       })
