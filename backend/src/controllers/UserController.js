@@ -82,7 +82,7 @@ class UserController {
     models.user
       .findByMail(req.body.email)
       .then(async (rows) => {
-        if (rows[0] == null) {
+        if (rows[0] === null) {
           return res.status(401).send({
             error: "Mot de passe ou email erroné",
           });

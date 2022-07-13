@@ -20,10 +20,14 @@ function Identification() {
       return;
     }
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/login`, { email, password })
+      .post(
+        `${import.meta.env.VITE_BACKEND_URL}/login`,
+        { email, password },
+        { withCredentials: true }
+      )
       .then((res) => {
         setUser(res.data);
-        navigate(`/profile/${res.data.id}`);
+        navigate("/");
       })
       .catch((err) => console.error(err));
   };

@@ -4,6 +4,7 @@ const {
   validateLogin,
   checkAuth,
   checkRights,
+  checkVisibility,
   decodeCookie,
 } = require("./middlewares/userMiddleware");
 const { preparedDataForSignIn } = require("./middlewares/dataMiddleware");
@@ -20,7 +21,12 @@ const {
 const router = express.Router();
 
 router.get("/annuaire", decodeCookie, ProfileController.browse);
-router.get("/annuaire/:id", decodeCookie, ProfileController.read); // ajouter middleware pour vérifier  is_private && is_valid === true
+router.get(
+  "/annuaire/:id",
+  decodeCookie,
+  checkVisibility,
+  ProfileController.read
+);
 router.get("/count", ProfileController.count);
 
 router.get("/diplome", DiplomeController.browse);
