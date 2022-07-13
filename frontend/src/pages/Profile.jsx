@@ -15,6 +15,24 @@ import twitter from "../assets/twitter.png";
 function Profile() {
   const { userId } = useParams();
   const [rows, setRows] = useState(null);
+  const [copied, setCopied] = useState(false);
+  const textToCopy = `${import.meta.env.VITE_BACKEND_URL}/annuaire/${userId}`;
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(textToCopy).then(
+      () => {
+        setCopied(true);
+        setTimeout(() => {
+          setCopied(false);
+        }, 2000);
+      },
+      (err) => {
+        console.warn("failed to copy", err.message);
+      }
+    );
+  };
+
+  const btnStyle = copied ? "bg-gray-500 text-white" : "";
 
   useEffect(() => {
     axios
@@ -248,7 +266,13 @@ function Profile() {
               {rows.twitter ? (
                 <div className="flex items-center space-x-3 mt-2 mb-3 ">
                   <BsLink size={25} />
-                  <p>Partagez votre profil</p>
+                  <button
+                    type="button"
+                    onClick={copyToClipboard}
+                    className={`${btnStyle}text-sm border w-36 border-gray-500 rounded p-2 transition`}
+                  >
+                    {copied ? "Lien copié" : "Partagez votre profil"}
+                  </button>
                   {/* <img
                     src={facebook}
                     alt="facebook"
