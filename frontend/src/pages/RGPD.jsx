@@ -6,7 +6,7 @@ import Footer from "@components/Footer";
 function RGPD() {
   return (
     <div>
-      <div className="flex justify-center flex-col bg-zinc-100 mx-auto w-[90%] lg:w-[80%] xl:w-[70%] m-8 mb-2">
+      <div className="flex justify-center flex-col bg-zinc-100 mx-auto w-[90%] lg:w-[80%] xl:w-[70%] m-8 mb-2 rounded-md shadow-md">
         <div className="flex justify-center items-center px-6 py-4 bg-red-800 text-center text-slate-50 h-[1.5rem] lg:h-[2.3rem] xl:h-[2.5rem] rounded-t-md">
           <p>Mentions Légales</p>
         </div>
