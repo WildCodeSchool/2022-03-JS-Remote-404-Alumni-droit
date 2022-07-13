@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router-dom";
 
 import axios from "axios";
 
+import { BsLink } from "react-icons/bs";
+
 import Footer from "@components/Footer";
 
 import linkedin from "../assets/linkedin.png";
@@ -13,6 +15,8 @@ import twitter from "../assets/twitter.png";
 function Profile() {
   const { userId } = useParams();
   const [rows, setRows] = useState(null);
+  const [copied, setCopied] = useState(false);
+  const textToCopy = `${import.meta.env.VITE_BACKEND_URL}/annuaire/${userId}`;
 
   useEffect(() => {
     axios
@@ -20,6 +24,22 @@ function Profile() {
       .then((res) => setRows(res.data))
       .catch((err) => console.error(err));
   }, [userId]);
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(textToCopy).then(
+      () => {
+        setCopied(true);
+        setTimeout(() => {
+          setCopied(false);
+        }, 2000);
+      },
+      (err) => {
+        console.warn("failed to copy", err.message);
+      }
+    );
+  };
+
+  const linkStyle = copied ? "text-red-800" : "";
 
   return (
     rows != null && (
@@ -160,13 +180,10 @@ function Profile() {
                   ? rows.bio
                   : `${rows.firstname} ${rows.lastname} n'a pas encore rempli cette partie de son profil`}
               </p>
-
               {/* RESEAUX SOCIAUX */}
-
               <h2 className="mb-1 text-2xl font-bold my-5 text-red-800">
                 Réseaux Sociaux :
               </h2>
-
               {rows.linkedin ? (
                 <div className="flex items-center mt-2 mb-3">
                   <img
@@ -224,7 +241,7 @@ function Profile() {
               ) : (
                 ""
               )}
-              {rows.twitter ? (
+              {rows.facebook ? (
                 <div className="flex items-center mt-2 mb-3">
                   <img
                     src={facebook}
@@ -243,6 +260,16 @@ function Profile() {
               ) : (
                 ""
               )}
+              <div className="flex items-center space-x-3 mt-2 mb-3 ">
+                <BsLink size={25} />
+                <button
+                  type="button"
+                  onClick={copyToClipboard}
+                  className={linkStyle}
+                >
+                  {copied ? "Lien copié" : "Partagez votre profil"}
+                </button>
+              </div>
             </div>
           </div>
         </div>
