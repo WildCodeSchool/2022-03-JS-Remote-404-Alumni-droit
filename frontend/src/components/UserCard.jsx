@@ -1,9 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import AdminToggle from "./AdminToggle";
 import Initiales from "./Initiales";
-
-import ExportContextUser from "../contexts/UserContext";
 
 function UserCard({
   lastname,
@@ -14,10 +12,11 @@ function UserCard({
   diplomes,
   isValid,
 }) {
-  const { user } = useContext(ExportContextUser.UserContext);
-  // console.log(user);
   return (
-    <div className="w-[45%] md:w-[22%] lg:w-[18%] xl:w-[15%] flex flex-col flex-wrap rounded-lg shadow-md m-2 p-3 border-2 h-auto">
+    <div
+      key={Date.now()}
+      className="w-[45%] md:w-[22%] lg:w-[18%] xl:w-[15%] flex flex-col flex-wrap rounded-lg shadow-md m-2 p-3 border-2 h-auto"
+    >
       <div>
         {photo != null ? (
           <img src={photo} alt={`Portrait de ${firstname} ${lastname}`} />
@@ -58,7 +57,7 @@ function UserCard({
         <Link to={`/profile/${userId}`}>
           <button
             type="button"
-            className="flex justify-center text-white w-full bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-700 font-medium rounded-lg text-sm lg:text-base xl:text-lg md:mt-1 mt-5 py-2.5 items-center dark:bg-red-800 dark:hover:bg-red-800 dark:focus:ring-red-800"
+            className="flex justify-center text-white w-full bg-red-700 hover:bg-red-600 focus:outline-none font-medium rounded-lg text-sm lg:text-base xl:text-lg md:mt-1 mt-5 py-2.5 items-center"
           >
             <p className="text-center">Consulter</p>
             <svg
@@ -75,11 +74,7 @@ function UserCard({
             </svg>
           </button>
         </Link>
-        {user && user.role === "admin" ? (
-          <AdminToggle userId={userId} isValid={isValid} />
-        ) : (
-          ""
-        )}
+        <AdminToggle userId={userId} isValid={isValid} />
       </div>
     </div>
   );
