@@ -57,7 +57,7 @@ function Listing() {
               firstname={row.firstname}
               photo={row.photo}
               job={row.job}
-              kkey={Date.now()}
+              key={`userCard_${row.id}`}
               userId={row.id}
               diplomes={row.diplomes}
               isValid={row.is_valid}
