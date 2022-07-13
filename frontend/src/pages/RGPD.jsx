@@ -6,16 +6,17 @@ import Footer from "@components/Footer";
 function RGPD() {
   return (
     <div>
-      <div className="flex justify-center flex-col bg-zinc-100 mx-auto w-[90%] lg:w-[80%] xl:w-[70%] m-8 mb-2">
+      <div className="flex justify-center flex-col bg-zinc-100 mx-auto w-[90%] lg:w-[80%] xl:w-[70%] m-8 mb-2 rounded-md shadow-md">
         <div className="flex justify-center items-center px-6 py-4 bg-red-800 text-center text-slate-50 h-[1.5rem] lg:h-[2.3rem] xl:h-[2.5rem] rounded-t-md">
           <p>Mentions Légales</p>
         </div>
         <div className="p-2 md:px-12 md:py-8 lg:px-10 xl:px-20">
           <p className="w-[90%] text-gray-400 text-xs mx-auto my-4">
-            RGPD : Les utilisateurs de l’annuaire des anciens sont seuls
-            responsables des informations qu’ils rendent accessibles aux autres
-            utilisateurs (inscrits ou non) au moyen de ce dispositif. En aucun
-            cas, l’Association du Collège et de l’Ecole de droit ne saurait être
+            RGPD :<br />
+            Les utilisateurs de l’annuaire des anciens sont seuls responsables
+            des informations qu’ils rendent accessibles aux autres utilisateurs
+            (inscrits ou non) au moyen de ce dispositif. En aucun cas,
+            l’Association du Collège et de l’Ecole de droit ne saurait être
             tenue responsable de l’utilisation ou de la collecte de ces données
             par des tiers. Les utilisateurs peuvent à tout moment supprimer leur
             profil et ainsi effacer toutes leurs données. Ils peuvent aussi
@@ -25,6 +26,7 @@ function RGPD() {
               href="mailto:cdd.edd.paris2@gmail.com"
               target="_blank"
               rel="noreferrer"
+              className="mx-1 underline underline-offset-1"
             >
               cdd.edd.paris2@gmail.com
             </a>
@@ -52,7 +54,12 @@ function RGPD() {
             demander leur effacement ou exercer votre droit à la limitation du
             traitement de vos données. Vous pouvez également vous opposer au
             traitement de vos données. Consultez le site
-            <a href="http://www.cnil.fr" target="_blank" rel="noreferrer">
+            <a
+              href="http://www.cnil.fr"
+              target="_blank"
+              rel="noreferrer"
+              className="mx-1 underline underline-offset-1"
+            >
               www.cnil.fr
             </a>
             pour plus d’informations sur vos droits.
@@ -66,6 +73,7 @@ function RGPD() {
               href="mailto:cdd.edd.paris2@gmail.com"
               target="_blank"
               rel="noreferrer"
+              className="mx-1 underline underline-offset-1"
             >
               cdd.edd.paris2@gmail.com
             </a>

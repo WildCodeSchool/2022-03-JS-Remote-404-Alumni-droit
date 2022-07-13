@@ -53,7 +53,7 @@ function Footer() {
               <a
                 target="_blank"
                 rel="noreferrer"
-                href="https://www.facebook.com/aecdd.assas/?__tn__=%2Cd%2CP-Reid=ARDiEiQUjTLsqAJiv3-O5jXDEqSGXn9HX3R1KFN_pbvtAuOYe4y8y7N5-mykIkf_OTnPyninYcSnAu5z"
+                href="https://fr-fr.facebook.com/cdd.edd.assas/"
               >
                 <img
                   src={logoFacebook}
@@ -64,7 +64,7 @@ function Footer() {
               <a
                 target="_blank"
                 rel="noreferrer"
-                href="https://www.instagram.com/collegededroitassas/"
+                href="https://www.instagram.com/collegeecolededroitassas/"
               >
                 <img
                   src={logoInstagram}
