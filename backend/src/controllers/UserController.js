@@ -93,7 +93,6 @@ class UserController {
               })
               .status(200)
               .json({ ...rows[0], ...profile[0] });
-            // .json({ ...rows[0] })
           }
           return res.status(401).send({
             error: "Mot de passe ou email erroné",
