@@ -40,14 +40,14 @@ class UserController {
       .update(user)
       .then(([result]) => {
         if (result.affectedRows === 0) {
-          res.sendStatus(404);
+          res.status(404).send("Erreur à l'update");
         } else {
-          res.sendStatus(204);
+          res.status(204).send("User mis à jour correctement");
         }
       })
       .catch((err) => {
         console.error(err);
-        res.sendStatus(500);
+        res.status(500).send("Erreur serveur");
       });
   };
 
