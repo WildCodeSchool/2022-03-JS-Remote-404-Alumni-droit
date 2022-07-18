@@ -6,7 +6,9 @@ function RedBannerAlumni() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/count`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/count`, {
+        withCredentials: true,
+      })
       .then((res) => setCount(res.data))
       .catch((err) => console.error(err));
   }, []);

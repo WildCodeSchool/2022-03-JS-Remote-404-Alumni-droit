@@ -75,7 +75,9 @@ function SignUp() {
 
   const getDiplome = () => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/diplome`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/diplome`, {
+        withCredentials: true,
+      })
       .then((res) => {
         setDiplomeData(res.data);
       })
@@ -86,7 +88,9 @@ function SignUp() {
 
   const getProfession = () => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/profession`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/profession`, {
+        withCredentials: true,
+      })
       .then((res) => {
         setProfessionData(res.data);
       })
@@ -97,7 +101,9 @@ function SignUp() {
 
   const getMaster = () => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/master`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/master`, {
+        withCredentials: true,
+      })
       .then((res) => {
         setMasterData(res.data);
       })
