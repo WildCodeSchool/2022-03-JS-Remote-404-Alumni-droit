@@ -15,11 +15,19 @@ function RedBannerAlumni() {
 
   return (
     <div>
-      <div className="flex justify-center bg-red-800 text-white mt-8 mb-4 py-1 lg:py-2 text-lg font-light lg:text-xl text-center tracking-wide">
-        <p>Annuaire de{count ? ` ${count} ` : "s "}alumnis</p>
+      <div className="flex justify-center bg-red-800 text-white mt-8 mb-4 py-1 lg:py-2 text-sm font-light lg:text-lg text-center tracking-wide">
+        {count ? (
+          <p>
+            Notre base de données comporte actuellement {count} anciens diplômés
+            du Collège et de l’Ecole de droit
+          </p>
+        ) : (
+          ""
+        )}
+        {/* <p>Annuaire de{count ? ` ${count} ` : "s "}alumnis</p>
         <p className="hidden md:inline md:ml-2">
-          du Collège et de l&apos;École de droit
-        </p>
+          du Collège et de l&apos;Ecole de droit
+        </p> */}
       </div>
     </div>
   );
