@@ -175,7 +175,7 @@ function Profile() {
             {/* MA BIOGRAPHIE */}
             <div className="md:w-[45%]">
               <h2 className="mb-1 text-2xl font-bold mt-5 md:mt-0  text-red-800">
-                INformations complémentaires :
+                Informations complémentaires :
               </h2>
               <p className="w-full md:w-[90%]">
                 {rows != null && rows.bio

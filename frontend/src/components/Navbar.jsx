@@ -94,7 +94,7 @@ function Navbar() {
                           "block px-4 py-2 text-sm"
                         )}
                       >
-                        <p>Modifier profil</p>
+                        <p>Modifier mon profil</p>
                       </Link>
                     )}
                   </Menu.Item>
