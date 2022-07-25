@@ -28,9 +28,13 @@ function AdminToggle({ isValid, userId }) {
   const handleValidSwitch = (bool) => {
     const newValid = bool === true ? 1 : 0;
     axios
-      .put(`${import.meta.env.VITE_BACKEND_URL}/user/update/${userId}`, {
-        is_valid: `${newValid}`,
-      })
+      .put(
+        `${import.meta.env.VITE_BACKEND_URL}/user/update/${userId}`,
+        {
+          is_valid: `${newValid}`,
+        },
+        { withCredentials: true }
+      )
       .then(() => setIsValidSwitch(bool))
       .catch((err) => console.error(err));
   };

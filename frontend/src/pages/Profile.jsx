@@ -20,7 +20,9 @@ function Profile() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/annuaire/${userId}`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/annuaire/${userId}`, {
+        withCredentials: true,
+      })
       .then((res) => setRows(res.data))
       .catch((err) => console.error(err));
   }, [userId]);

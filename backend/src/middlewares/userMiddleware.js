@@ -99,8 +99,6 @@ const checkRights = async (req, res, next) => {
   } else {
     res.status(401).send(nope);
   }
-
-  next();
 };
 
 const checkVisibility = async (req, res, next) => {
