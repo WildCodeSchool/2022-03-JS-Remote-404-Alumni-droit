@@ -55,7 +55,9 @@ class UserController {
     try {
       const hash = await passwordHash(req.body.password);
       const id = uuidv4();
+      // console.log(req.body);
       const request = await models.user.insert(req.body.email, hash, id);
+      // console.log(request);
       const profile = await models.profile.insert(
         req.body,
         request[0].insertId
@@ -74,7 +76,8 @@ class UserController {
         msg: "Votre compte a été créé avec succès, en attente de validation",
       });
     } catch (error) {
-      res.status(500).send(error);
+      console.error(error);
+      res.status(500).send("echec");
     }
   };
 

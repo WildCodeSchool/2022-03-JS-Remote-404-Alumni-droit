@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import {
@@ -29,7 +29,6 @@ function SignUp() {
   const [masterData, setMasterData] = useState([]);
   const [diplomeInput, setDiplomeInput] = useState([true, false, false]);
   const [masterInput, setMasterInput] = useState([true, false, false]);
-  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     axios
@@ -41,12 +40,10 @@ function SignUp() {
           is_private: checked,
         }
       )
-      .then(() => {
-        navigate("/");
-      })
       .catch((error) => {
         console.warn(error);
       });
+    // .finally((window.location.href = "/"));
   };
 
   const handleChange = (e) => {

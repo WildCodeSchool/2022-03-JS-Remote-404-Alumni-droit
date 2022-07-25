@@ -59,6 +59,8 @@ class ProfileManager extends AbstractManager {
 
   insert(user, id) {
     const date = new Date();
+    // console.log(user);
+    // console.log(id);
     return this.connection.query(
       `insert into ${ProfileManager.table} (user_id, lastname, firstname, creation_date, emailpro, phone, profession_id, employeur, poste, bio, siteweb, facebook, linkedin, twitter, instagram) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
