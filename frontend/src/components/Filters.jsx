@@ -74,14 +74,18 @@ function Filters({ setDiplome, setProfession, setYears, setSearch }) {
           }}
           onChange={(e, diplome) => setDiplome(diplome.id)}
           renderInput={(params) => (
-            <TextField {...params} label="Diplôme" color="primary" />
+            <TextField
+              {...params}
+              label="Filtrer par diplôme"
+              color="primary"
+            />
           )}
         />
         <Autocomplete
           disablePortal
           id="combo-box-demo"
           options={professionData}
-          getOptionLabel={(option) => option.job.replace("&apos;E", "'É")}
+          getOptionLabel={(option) => option.job.replace("&apos;", "'")}
           sx={{
             width: 300,
             mb: 1,
@@ -91,7 +95,11 @@ function Filters({ setDiplome, setProfession, setYears, setSearch }) {
           }}
           onChange={(e, profession) => setProfession(profession.id)}
           renderInput={(params) => (
-            <TextField {...params} label="Profession" color="primary" />
+            <TextField
+              {...params}
+              label="Filtrer par secteur professionnel"
+              color="primary"
+            />
           )}
         />
         <Autocomplete
@@ -108,7 +116,11 @@ function Filters({ setDiplome, setProfession, setYears, setSearch }) {
           }}
           onChange={(e, years) => setYears(years.id)}
           renderInput={(params) => (
-            <TextField {...params} label="Année" color="primary" />
+            <TextField
+              {...params}
+              label="Filtrer par promotion"
+              color="primary"
+            />
           )}
         />
       </div>

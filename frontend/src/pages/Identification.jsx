@@ -34,12 +34,16 @@ function Identification() {
   return (
     <>
       <form className="flex flex-col justify-center mb-10 w-[100%] md:w-[70%] lg:w-[50%]  mx-auto text-center space-y-4 rounded-md shadow-md border-2 bg-zinc-100 m-3 mt-[2.5rem] p-3">
-        <p>Vous avez un compte</p>
+        <p>Déjà inscrit ?</p>
+        <p>
+          Connectez-vous en renseignant votre identifiant (adresse électronique)
+          et votre mot de passe
+        </p>
         <label htmlFor="Email">
           {msg && <p className="text-red-500 pb-2">{msg}</p>}
           <input
             type="email"
-            placeholder="Email"
+            placeholder="Identifiant"
             className="p-3 w-[90%]"
             value={email}
             onChange={(e) => {
@@ -78,7 +82,7 @@ function Identification() {
             type="button"
             className="m-14 md:m-10 lg:m-14 xl:m-14 text-center mx-auto text-red-700 bg-gray-200 border-gray-200 hover:bg-gray-100 font-medium rounded-lg text-sm lg:text-base mt-5 px-5 py-2.5 inline-flex items-center"
           >
-            <p>Créer votre compte</p>
+            <p>Créez votre compte</p>
           </button>
         </Link>
       </div>

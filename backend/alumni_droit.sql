@@ -195,19 +195,19 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `alumni_droit`;
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (1, 'Administrateur judiciaire');
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (2, 'Avocat');
+INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (1, 'Administrateur ou mandataire judiciaire');
+INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (2, 'Avocat à la Cour');
 INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (3, 'Avocat au Conseil d&apos;Etat et à la Cour de cassation');
 INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (4, 'Commissaire de justice');
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (5, 'Etudiant');
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (6, 'Fonctionnaire');
+INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (5, 'Poursuite d&apos;études');
+INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (6, 'Administrations publiques');
 INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (7, 'Juriste d’entreprise');
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (8, 'Magistrat');
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (9, 'Notaire');
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (10, 'Officier');
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (11, 'Universitaire');
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (12, 'Autres professions juridiques');
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (13, 'Autres professions');
+INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (8, 'Magistrature');
+INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (9, 'Notariat');
+INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (10, 'Sécurité et défense');
+INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (11, 'Enseignement et recherche');
+INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (12, 'Autres métiers de la justice');
+INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (13, 'Autres métiers');
 
 COMMIT;
 

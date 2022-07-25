@@ -76,10 +76,10 @@ function Profile() {
             <div className="md:w-[45%]">
               {/* PROFESSION ACTUELLE */}
               <h2 className="mt-0 mb-1 text-2xl font-bold my-5 text-red-800">
-                Profession :
+                Situation professionnelle :
               </h2>
               <p className="font-semibold">
-                Profession :{" "}
+                Secteur professionnel :{" "}
                 <span className="font-normal">{rows != null && rows.job}</span>
               </p>
               <p className="font-semibold">
@@ -175,7 +175,7 @@ function Profile() {
             {/* MA BIOGRAPHIE */}
             <div className="md:w-[45%]">
               <h2 className="mb-1 text-2xl font-bold mt-5 md:mt-0  text-red-800">
-                Parcours professionnel :
+                Informations complémentaires :
               </h2>
               <p className="w-full md:w-[90%]">
                 {rows != null && rows.bio
@@ -184,7 +184,7 @@ function Profile() {
               </p>
               {/* RESEAUX SOCIAUX */}
               <h2 className="mb-1 text-2xl font-bold my-5 text-red-800">
-                Réseaux Sociaux :
+                Réseaux sociaux :
               </h2>
               {rows.linkedin ? (
                 <div className="flex items-center mt-2 mb-3">
