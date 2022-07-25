@@ -7,6 +7,7 @@ function Filters({ setDiplome, setProfession, setYears, setSearch }) {
   const [diplomeData, setDiplomeData] = useState([]);
   const [professionData, setProfessionData] = useState([]);
   const [promotionData, setPromotionData] = useState([]);
+  const [reset, setReset] = useState([]);
 
   const getDiplome = () => {
     axios
@@ -61,6 +62,7 @@ function Filters({ setDiplome, setProfession, setYears, setSearch }) {
     <>
       <div className="flex flex-col items-center mt-10 md:flex-row justify-center">
         <Autocomplete
+          reset={reset}
           disablePortal
           id="combo-box-demo"
           options={diplomeData}
@@ -72,7 +74,15 @@ function Filters({ setDiplome, setProfession, setYears, setSearch }) {
               mr: 1,
             },
           }}
-          onChange={(e, diplome) => setDiplome(diplome.id)}
+          onChange={(e, diplome) => {
+            if (diplome === null) {
+              setDiplome([]);
+              setReset([]);
+            } else {
+              setDiplome(diplome.id);
+              setReset([]);
+            }
+          }}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -93,7 +103,15 @@ function Filters({ setDiplome, setProfession, setYears, setSearch }) {
               mr: 1,
             },
           }}
-          onChange={(e, profession) => setProfession(profession.id)}
+          onChange={(e, profession) => {
+            if (profession === null) {
+              setProfession([]);
+              setReset([]);
+            } else {
+              setProfession(profession.id);
+              setReset([]);
+            }
+          }}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -114,7 +132,15 @@ function Filters({ setDiplome, setProfession, setYears, setSearch }) {
               mr: 1,
             },
           }}
-          onChange={(e, years) => setYears(years.id)}
+          onChange={(e, years) => {
+            if (years === null) {
+              setYears([]);
+              setReset([]);
+            } else {
+              setYears(years.id);
+              setReset([]);
+            }
+          }}
           renderInput={(params) => (
             <TextField
               {...params}
