@@ -5,6 +5,10 @@ const models = require("../models");
 const nope = "Vous ne disposez pas des droits nécessaires à cette opération";
 
 const validateUser = (req, res, next) => {
+  const data = { ...req.profile };
+  Object.keys(data).forEach((el) => {
+    if (data[el] === "") delete data[el];
+  });
   const { error } = Joi.object({
     email: Joi.string().max(255).presence("required"),
     password: Joi.string().max(30).presence("required"),
@@ -12,7 +16,7 @@ const validateUser = (req, res, next) => {
     firstname: Joi.string().max(80).presence("required"),
     emailpro: Joi.string().max(255).presence("optional"),
     phone: Joi.string().max(37).presence("optional"),
-    profession_id: Joi.number().max(30).presence("required"),
+    profession_id: Joi.string().max(30).presence("required"),
     employeur: Joi.string().max(255).presence("optional"),
     poste: Joi.string().max(255).presence("optional"),
     bio: Joi.string().max(1000).presence("optional"),
@@ -22,7 +26,7 @@ const validateUser = (req, res, next) => {
     twitter: Joi.string().max(255).presence("optional"),
     instagram: Joi.string().max(255).presence("optional"),
     is_private: Joi.boolean().presence("required"),
-  }).validate(req.profile, { abortEarly: false });
+  }).validate(data, { abortEarly: false });
 
   if (!error) {
     next();
@@ -32,6 +36,10 @@ const validateUser = (req, res, next) => {
 };
 
 const validateUpdate = (req, res, next) => {
+  const data = { ...req.profile };
+  Object.keys(data).forEach((el) => {
+    if (data[el] === "") delete data[el];
+  });
   const { error } = Joi.object({
     lastname: Joi.string().max(80).presence("required"),
     firstname: Joi.string().max(80).presence("required"),
@@ -46,7 +54,7 @@ const validateUpdate = (req, res, next) => {
     linkedin: Joi.string().max(255).presence("optional"),
     twitter: Joi.string().max(255).presence("optional"),
     instagram: Joi.string().max(255).presence("optional"),
-  }).validate(req.body, { abortEarly: false });
+  }).validate(data, { abortEarly: false });
 
   if (!error) {
     next();

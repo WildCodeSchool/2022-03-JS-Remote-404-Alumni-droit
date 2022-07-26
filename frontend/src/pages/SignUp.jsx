@@ -30,15 +30,21 @@ function SignUp() {
   const [diplomeInput, setDiplomeInput] = useState([true, false, false]);
   const [masterInput, setMasterInput] = useState([true, false, false]);
 
+  // const jobId = (data) => {
+  //   data.profession === "Avocat" ? (data.profession_id = "2") : "";
+  //   delete data.profession;
+  // };
+
   const onSubmit = (data) => {
+    // jobId(data);
     axios
       .post(
         `${import.meta.env.VITE_BACKEND_URL}/signup`,
-        { withCredentials: true },
         {
           ...data,
           is_private: checked,
-        }
+        },
+        { withCredentials: true }
       )
       .catch((error) => {
         console.warn(error);
@@ -344,7 +350,7 @@ function SignUp() {
               </div>
               <Controller
                 control={control}
-                name="profession_id"
+                name="profession"
                 render={({ field: { ref, onChange, ...field } }) => (
                   <Autocomplete
                     disablePortal
@@ -353,7 +359,12 @@ function SignUp() {
                     getOptionLabel={(option) =>
                       option.job.replace("&apos;E", "'É")
                     }
-                    onChange={(_, data) => onChange(data.id)}
+                    isOptionEqualToValue={(option, value) => {
+                      return option.id === value.id;
+                    }}
+                    onChange={(_, data) => {
+                      onChange(data);
+                    }}
                     renderInput={(params) => (
                       <TextField
                         {...params}
@@ -366,7 +377,7 @@ function SignUp() {
                           errors.profession_id?.type === "required" &&
                           "Veuillez choisir une profession"
                         }
-                        {...register("profession_id", {
+                        {...register("profession", {
                           required: true,
                         })}
                       />

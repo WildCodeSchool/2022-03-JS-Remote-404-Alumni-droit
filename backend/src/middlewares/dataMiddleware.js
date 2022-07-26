@@ -15,7 +15,6 @@ const preparedDataForSignIn = (req, res, next) => {
       profile[key] = req.body[key];
     }
   });
-
   delete profile.confirmedPassword;
   req.diplome = diplome;
   req.master = master;
