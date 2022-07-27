@@ -54,8 +54,8 @@ class UserController {
   static add = async (req, res) => {
     try {
       const hash = await passwordHash(req.body.password);
-      const id = uuidv4();
-      const request = await models.user.insert(req.body.email, hash, id);
+      // const id = uuidv4();
+      const request = await models.user.insert(req.body.email, hash);
       // console.log(request);
       const profile = await models.profile.insert(
         req.body,

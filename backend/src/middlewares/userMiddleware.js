@@ -7,7 +7,7 @@ const nope = "Vous ne disposez pas des droits nécessaires à cette opération";
 const validateUser = (req, res, next) => {
   const data = { ...req.profile };
   Object.keys(data).forEach((el) => {
-    if (data[el] === "") delete data[el];
+    if (data[el] === "" || data[el] === null) delete data[el];
   });
   const { error } = Joi.object({
     email: Joi.string().max(255).presence("required"),
@@ -26,6 +26,26 @@ const validateUser = (req, res, next) => {
     twitter: Joi.string().max(255).presence("optional"),
     instagram: Joi.string().max(255).presence("optional"),
     is_private: Joi.boolean().presence("required"),
+    mastersId: Joi.array().presence("optional"),
+    diplomesId: Joi.array().presence("optional"),
+    diplome_0: Joi.string().max(30).presence("optional"),
+    diplomeYear_0: Joi.string().max(4).presence("optional"),
+    master_0: Joi.string().max(30).presence("optional"),
+    masterYear_0: Joi.string().max(4).presence("optional"),
+    masterName_0: Joi.string().max(30).presence("optional"),
+    masterLocation_0: Joi.string().max(30).presence("optional"),
+    diplome_1: Joi.string().max(30).presence("optional"),
+    diplomeYear_1: Joi.string().max(4).presence("optional"),
+    master_1: Joi.string().max(30).presence("optional"),
+    masterName_1: Joi.string().max(30).presence("optional"),
+    masterYear_1: Joi.string().max(4).presence("optional"),
+    masterLocation_1: Joi.string().max(30).presence("optional"),
+    diplome_2: Joi.string().max(30).presence("optional"),
+    diplomeYear_2: Joi.string().max(4).presence("optional"),
+    master_2: Joi.string().max(30).presence("optional"),
+    masterYear_2: Joi.string().max(4).presence("optional"),
+    masterName_2: Joi.string().max(30).presence("optional"),
+    masterLocation_2: Joi.string().max(30).presence("optional"),
   }).validate(data, { abortEarly: false });
 
   if (!error) {

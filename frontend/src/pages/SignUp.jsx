@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -29,19 +29,35 @@ function SignUp() {
   const [masterData, setMasterData] = useState([]);
   const [diplomeInput, setDiplomeInput] = useState([true, false, false]);
   const [masterInput, setMasterInput] = useState([true, false, false]);
+  const [profValue, setProfValue] = useState();
+  const [diplomesId, setDiplomesId] = useState([]);
+  const [mastersId, setMastersId] = useState([]);
 
-  // const jobId = (data) => {
-  //   data.profession === "Avocat" ? (data.profession_id = "2") : "";
-  //   delete data.profession;
-  // };
+  const handleDiplomesId = (value, index) => {
+    const provDiplomesId = [...diplomesId];
+    provDiplomesId[index] = value;
+    setDiplomesId(provDiplomesId);
+  };
+
+  const handleMastersId = (value, index) => {
+    const provMastersId = [...mastersId];
+    provMastersId[index] = value;
+    setMastersId(provMastersId);
+  };
 
   const onSubmit = (data) => {
-    // jobId(data);
+    const copyTemp = { ...data };
+    copyTemp.profession_id = profValue.toString();
+    copyTemp.diplomesId = diplomesId;
+    copyTemp.mastersId = mastersId;
+    // console.log("ùùùùùùùùùù COPY TEMP ùùùùùùùùù");
+    // console.log(copyTemp);
+
     axios
       .post(
         `${import.meta.env.VITE_BACKEND_URL}/signup`,
         {
-          ...data,
+          ...copyTemp,
           is_private: checked,
         },
         { withCredentials: true }
@@ -255,7 +271,9 @@ function SignUp() {
                                 width: "55%",
                                 mb: 1.5,
                               }}
-                              onChange={(_, data) => onChange(data)}
+                              onChange={(_, data) =>
+                                handleDiplomesId(data.id, index)
+                              }
                               renderInput={(params) => (
                                 <TextField
                                   {...params}
@@ -348,9 +366,10 @@ function SignUp() {
                   return null;
                 })}
               </div>
+              {/* ***************************************************** */}
               <Controller
                 control={control}
-                name="profession"
+                name="profession_id"
                 render={({ field: { ref, onChange, ...field } }) => (
                   <Autocomplete
                     disablePortal
@@ -359,11 +378,9 @@ function SignUp() {
                     getOptionLabel={(option) =>
                       option.job.replace("&apos;E", "'É")
                     }
-                    isOptionEqualToValue={(option, value) => {
-                      return option.id === value.id;
-                    }}
                     onChange={(_, data) => {
-                      onChange(data);
+                      // console.log(data);
+                      setProfValue(data.id);
                     }}
                     renderInput={(params) => (
                       <TextField
@@ -377,7 +394,7 @@ function SignUp() {
                           errors.profession_id?.type === "required" &&
                           "Veuillez choisir une profession"
                         }
-                        {...register("profession", {
+                        {...register("profession_id", {
                           required: true,
                         })}
                       />
@@ -433,9 +450,13 @@ function SignUp() {
                   Votre cursus de Master :
                 </p>
                 {masterInput.map((masterIn, index) => {
+                  // {"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"}
                   if (masterIn) {
                     return (
-                      <div className="flex flex-wrap justify-between mb-5">
+                      <div
+                        key={`master_key_${index.id}`}
+                        className="flex flex-wrap justify-between mb-5"
+                      >
                         <Controller
                           control={control}
                           name={`master_${index}`}
@@ -451,7 +472,9 @@ function SignUp() {
                                 width: "55%",
                                 mb: 1.5,
                               }}
-                              onChange={(_, data) => onChange(data)}
+                              onChange={(_, data) =>
+                                handleMastersId(data.id, index)
+                              }
                               renderInput={(params) => (
                                 <TextField
                                   {...params}
@@ -459,6 +482,7 @@ function SignUp() {
                                   label={`#${index + 1} Master`}
                                   color="primary"
                                   inputRef={ref}
+                                  {...register(`master_${index}`)}
                                 />
                               )}
                             />
