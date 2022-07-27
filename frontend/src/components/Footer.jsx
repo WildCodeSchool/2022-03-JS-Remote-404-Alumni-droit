@@ -11,7 +11,7 @@ import logoOfficiel from "../assets/officiel.png";
 function Footer() {
   return (
     <div>
-      <div className="flex flex-col justify-between md:flex-row items-center p-8 md:px-16 lg:px-[10rem] xl:px-[15rem]">
+      <div className="flex flex-col justify-between md:flex-row items-center bg-gray-200 p-8 md:px-16 lg:px-[10rem] xl:px-[15rem]">
         {/* CADRE GENERAL */}
         <img
           src={logoOfficiel}
