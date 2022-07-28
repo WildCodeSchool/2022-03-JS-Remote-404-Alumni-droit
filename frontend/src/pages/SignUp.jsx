@@ -207,7 +207,7 @@ function SignUp() {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="Mot de passe"
+                    label="Renseignez un mot de passe"
                     size="medium"
                     type="password"
                     error={errors && errors.lastname}
@@ -225,7 +225,7 @@ function SignUp() {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="Confirmer mot de passe"
+                    label="Confirmez votre mot de passe"
                     size="medium"
                     type="password"
                     error={errors && errors.lastname}
@@ -378,7 +378,7 @@ function SignUp() {
                       <TextField
                         {...params}
                         {...field}
-                        label="Profession"
+                        label="Secteur professionnel"
                         color="primary"
                         inputRef={ref}
                         error={errors && errors.profession_id}
@@ -419,7 +419,7 @@ function SignUp() {
                   size="medium"
                 >
                   <Typography size="medium">
-                    Etat de votre profil : &nbsp;&nbsp; Privé
+                    Etat de votre profil : &nbsp;&nbsp; Privé *
                   </Typography>
                   <Switch checked={checked} onChange={handleChange} />
                   <Typography>Public</Typography>
@@ -458,7 +458,7 @@ function SignUp() {
                               id="combo-box-4"
                               options={masterData}
                               getOptionLabel={(option) =>
-                                option.title.replace("&apos;E", "'É")
+                                option.title.replace("&apos;", "'")
                               }
                               sx={{
                                 width: "55%",

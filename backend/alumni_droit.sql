@@ -203,6 +203,7 @@ INSERT INTO `alumni_droit`.`profession` (`job`) VALUES ( 'Universitaire');
 INSERT INTO `alumni_droit`.`profession` (`job`) VALUES ( 'Autres professions juridiques');
 INSERT INTO `alumni_droit`.`profession` (`job`) VALUES ( 'Autres professions');
 
+
 COMMIT;
 
 
