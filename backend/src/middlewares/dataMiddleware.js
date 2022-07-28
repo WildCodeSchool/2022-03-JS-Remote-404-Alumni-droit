@@ -1,25 +1,25 @@
+// const { login } = require("../controllers/UserController");
+
 const preparedDataForSignIn = (req, res, next) => {
-  const diplome = [];
-  const master = [];
+  req.diplome = req.body.diplomesId.map((id, index) => ({
+    id,
+    year: req.body[`diplomeYear_${index}`],
+  }));
+
   const profile = {};
+
+  const master = [];
   Object.keys(req.body).forEach((key) => {
-    if (key.includes("diplome")) {
+    if (key.includes("master")) {
       const [cle, index] = key.split("_");
-
-      diplome[index] = { ...diplome[index], [cle]: req.body[key] };
-    } else if (key.includes("master")) {
-      const [cle, index] = key.split("_");
-
       master[index] = { ...master[index], [cle]: req.body[key] };
-    } else {
+    } else if (!key.includes("diplome")) {
       profile[key] = req.body[key];
     }
   });
-
   delete profile.confirmedPassword;
-  req.diplome = diplome;
-  req.master = master;
   req.profile = profile;
+  req.master = master;
   next();
 };
 

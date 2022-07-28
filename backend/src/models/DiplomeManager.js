@@ -19,7 +19,7 @@ class ProfileManager extends AbstractManager {
   insert(diplome, id) {
     return this.connection.query(
       `insert into profile_diplome (profile_id, diplome_id, year) values (?, ?, ?)`,
-      [id, diplome.diplome, diplome.diplomeYear]
+      [id, diplome.id, diplome.year]
     );
   }
 }

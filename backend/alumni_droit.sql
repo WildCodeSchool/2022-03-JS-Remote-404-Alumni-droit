@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `alumni_droit`.`user` (
 
 
 CREATE TABLE IF NOT EXISTS `alumni_droit`.`profession` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `job` VARCHAR(100) NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `job_UNIQUE` (`job` ASC))
@@ -54,7 +54,7 @@ ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS `alumni_droit`.`diplome` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(100) NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `title_UNIQUE` (`title` ASC))
@@ -156,12 +156,6 @@ CREATE TABLE IF NOT EXISTS `alumni_droit`.`profile` (
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   INDEX `fk_profile_user1_idx` (`user_id` ASC),
   INDEX `fk_profile_profession1_idx` (`profession_id` ASC),
-  UNIQUE INDEX `facebook_UNIQUE` (`facebook` ASC),
-  UNIQUE INDEX `linkedin_UNIQUE` (`linkedin` ASC),
-  UNIQUE INDEX `twitter_UNIQUE` (`twitter` ASC),
-  UNIQUE INDEX `instagram_UNIQUE` (`instagram` ASC),
-  UNIQUE INDEX `photo_UNIQUE` (`photo` ASC),
-  UNIQUE INDEX `cv_UNIQUE` (`cv` ASC),
 
   CONSTRAINT `fk_profile_user1`
     FOREIGN KEY (`user_id`)
@@ -179,13 +173,13 @@ CREATE TABLE IF NOT EXISTS `alumni_droit`.`profile` (
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `alumni_droit`;
-INSERT INTO `alumni_droit`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (979969989, '$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'admin@verif.com', 'admin', true);
-INSERT INTO `alumni_droit`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (1, '$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'email2@verif.com', 'user', true);
-INSERT INTO `alumni_droit`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (2, '$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'emai2@verif.com', 'user', true);
-INSERT INTO `alumni_droit`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (3, '$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'emil2@verif.com', 'user', true);
-INSERT INTO `alumni_droit`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (4, '$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'eail2@verif.com', 'user', false);
-INSERT INTO `alumni_droit`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (5, '$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'mail2@verif.com', 'user', false);
-INSERT INTO `alumni_droit`.`user` (`id`, `password`, `email`, `role`, `is_valid`) VALUES (6, '$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'emaskdnfl2@verif.com', 'user', false);
+INSERT INTO `alumni_droit`.`user` (`password`, `email`, `role`, `is_valid`) VALUES ('$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'email2@verif.com', 'user', true);
+INSERT INTO `alumni_droit`.`user` (`password`, `email`, `role`, `is_valid`) VALUES ('$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'emai2@verif.com', 'user', true);
+INSERT INTO `alumni_droit`.`user` (`password`, `email`, `role`, `is_valid`) VALUES ('$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'emil2@verif.com', 'user', true);
+INSERT INTO `alumni_droit`.`user` (`password`, `email`, `role`, `is_valid`) VALUES ('$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'eail2@verif.com', 'user', false);
+INSERT INTO `alumni_droit`.`user` (`password`, `email`, `role`, `is_valid`) VALUES ('$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'mail2@verif.com', 'user', false);
+INSERT INTO `alumni_droit`.`user` (`password`, `email`, `role`, `is_valid`) VALUES ('$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'emaskdnfl2@verif.com', 'user', false);
+INSERT INTO `alumni_droit`.`user` (`password`, `email`, `role`, `is_valid`) VALUES ('$argon2id$v=19$m=65536,t=5,p=1$FkjcCc0+F15P0N5TLh3ndQ$FkttWmV6YpXwaqtjrKfALtaYkwyHv2ongXDP/C6bvY4', 'admin@verif.com', 'admin', true);
 
 COMMIT;
 
@@ -195,19 +189,20 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `alumni_droit`;
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (1, 'Administrateur ou mandataire judiciaire');
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (2, 'Avocat à la Cour');
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (3, 'Avocat au Conseil d&apos;Etat et à la Cour de cassation');
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (4, 'Commissaire de justice');
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (5, 'Poursuite d&apos;études');
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (6, 'Administrations publiques');
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (7, 'Juriste d’entreprise');
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (8, 'Magistrature');
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (9, 'Notariat');
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (10, 'Sécurité et défense');
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (11, 'Enseignement et recherche');
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (12, 'Autres métiers de la justice');
-INSERT INTO `alumni_droit`.`profession` (`id`, `job`) VALUES (13, 'Autres métiers');
+INSERT INTO `alumni_droit`.`profession` (`job`) VALUES ( 'Administrateur judiciaire');
+INSERT INTO `alumni_droit`.`profession` (`job`) VALUES ( 'Avocat');
+INSERT INTO `alumni_droit`.`profession` (`job`) VALUES ( 'Avocat au Conseil d&apos;Etat et à la Cour de cassation');
+INSERT INTO `alumni_droit`.`profession` (`job`) VALUES ( 'Commissaire de justice');
+INSERT INTO `alumni_droit`.`profession` (`job`) VALUES ( 'Etudiant');
+INSERT INTO `alumni_droit`.`profession` (`job`) VALUES ( 'Fonctionnaire');
+INSERT INTO `alumni_droit`.`profession` (`job`) VALUES ( 'Juriste d’entreprise');
+INSERT INTO `alumni_droit`.`profession` (`job`) VALUES ( 'Magistrat');
+INSERT INTO `alumni_droit`.`profession` (`job`) VALUES ( 'Notaire');
+INSERT INTO `alumni_droit`.`profession` (`job`) VALUES ( 'Officier');
+INSERT INTO `alumni_droit`.`profession` (`job`) VALUES ( 'Universitaire');
+INSERT INTO `alumni_droit`.`profession` (`job`) VALUES ( 'Autres professions juridiques');
+INSERT INTO `alumni_droit`.`profession` (`job`) VALUES ( 'Autres professions');
+
 
 COMMIT;
 
@@ -217,9 +212,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `alumni_droit`;
-INSERT INTO `alumni_droit`.`diplome` (`id`, `title`) VALUES (1, 'Diplôme du Collège de Droit');
-INSERT INTO `alumni_droit`.`diplome` (`id`, `title`) VALUES (2, 'Certificat de l&apos;Ecole de Droit');
-INSERT INTO `alumni_droit`.`diplome` (`id`, `title`) VALUES (3, 'Diplôme de l&apos;Ecole de Droit');
+INSERT INTO `alumni_droit`.`diplome` (`title`) VALUES ( 'Diplôme du Collège de Droit');
+INSERT INTO `alumni_droit`.`diplome` (`title`) VALUES ( 'Certificat de l&apos;Ecole de Droit');
+INSERT INTO `alumni_droit`.`diplome` (`title`) VALUES ( 'Diplôme de l&apos;Ecole de Droit');
 
 COMMIT;
 
@@ -235,6 +230,7 @@ INSERT INTO `alumni_droit`.`profile` ( `user_id`, `lastname`, `firstname`, `crea
 INSERT INTO `alumni_droit`.`profile` ( `user_id`, `lastname`, `firstname`, `creation_date`, `phone`, `emailpro`, `cv`, `profession_id`, `employeur`, `poste`, `bio`, `siteweb`, `facebook`, `linkedin`, `twitter`, `instagram`, `photo`, `is_private`) VALUES (4, 'PETRILLO', 'Réan', '2022-05-31', '', 'rean@alumni.com', 'http://dummyimage.com/153x100.png/ff4444/ffffff', 8, 'ENM', 'Auditrice de Justice', 'Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lore(igula. Suspendisse ornare consequat lectus.', 'http://rediff.com/nunc/viverra/dapibus.xml', 'http://sfgate.com/hac/habitasse/platea/dictumst/aliquam.aspx', 'http://oaic.gov.au/justo/aliquam.js', 'https://parallels.com/interdum/mauris.aspx', 'https://wufoo.com/vestibulum/quam/sapien/varius.jsp', '../src/assets/femme1.jpg', false);
 INSERT INTO `alumni_droit`.`profile` ( `user_id`, `lastname`, `firstname`, `creation_date`, `phone`, `emailpro`, `cv`, `profession_id`, `employeur`, `poste`, `bio`, `siteweb`, `facebook`, `linkedin`, `twitter`, `instagram`, `photo`, `is_private`) VALUES (5, 'PEROT', 'Pierre', '2022-05-31', '', 'pierre@alumni.com', 'http://dummyimage.com/237x100.png/dddddd/000000', 2, 'Cabinet Hoyng Rokh Monégier', 'Collaborateur', 'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.', 'null', 'https://elpais.com/convallis/duis/consequat/dui/nec/nisi.jpg', 'https://yellowpages.com/scelerisque.json', 'http://earthlink.net/vestibulum/ante/ipsum.js', 'http://4shared.com/pede/libero/quis.jpg', '../src/assets/homme3.jpg', true);
 INSERT INTO `alumni_droit`.`profile` ( `user_id`, `lastname`, `firstname`, `creation_date`, `phone`, `emailpro`, `cv`, `profession_id`, `employeur`, `poste`, `bio`, `siteweb`, `facebook`, `linkedin`, `twitter`, `instagram`, `photo`, `is_private`) VALUES (6, 'CHARRIÈRE', 'Mathilde', '2022-05-31', '', 'mathilde@alumni.com', 'http://dummyimage.com/148x100.png/5fa2dd/ffffff',11, 'Université Paris Panthéon-Assas', 'Doctorante contractuelle', 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla.', 'http://google.es/pede.xml', 'https://clickbank.net/sem/sed/sagittis.js', 'http://sakura.ne.jp/molestie/hendrerit/at.png', 'http://google.ca/convallis/tortor/risus.jpg', 'https://foxnews.com/dui/proin/leo/odio.html', '../src/assets/femme3.jpg', false);
+INSERT INTO `alumni_droit`.`profile` ( `user_id`, `lastname`, `firstname`, `creation_date`, `phone`, `emailpro`, `cv`, `profession_id`, `employeur`, `poste`, `bio`, `siteweb`, `facebook`, `linkedin`, `twitter`, `instagram`, `photo`, `is_private`) VALUES (7, 'Admin', 'Admin', '2000-01-01', '', '', 'http://dummyimage.com/148x100.png/5fa2dd/ffffff', 1, '', 'Admin', '', '', '', '', '', '', '', true);
 COMMIT;
 
 -- -----------------------------------------------------

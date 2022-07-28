@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import {
@@ -29,24 +29,35 @@ function SignUp() {
   const [masterData, setMasterData] = useState([]);
   const [diplomeInput, setDiplomeInput] = useState([true, false, false]);
   const [masterInput, setMasterInput] = useState([true, false, false]);
-  const navigate = useNavigate();
+  const [profValue, setProfValue] = useState();
+  const [diplomesId, setDiplomesId] = useState([]);
+
+  const handleDiplomesId = (value, index) => {
+    const provDiplomesId = [...diplomesId];
+    provDiplomesId[index] = value;
+    setDiplomesId(provDiplomesId);
+  };
 
   const onSubmit = (data) => {
+    const copyTemp = { ...data };
+    copyTemp.profession_id = profValue.toString();
+    copyTemp.diplomesId = diplomesId;
+    // console.log("ùùùùùùùùùù COPY TEMP ùùùùùùùùù");
+    // console.log(copyTemp);
+
     axios
       .post(
         `${import.meta.env.VITE_BACKEND_URL}/signup`,
-        { withCredentials: true },
         {
-          ...data,
+          ...copyTemp,
           is_private: checked,
-        }
+        },
+        { withCredentials: true }
       )
-      .then(() => {
-        navigate("/");
-      })
       .catch((error) => {
         console.warn(error);
       });
+    // .finally((window.location.href = "/"));
   };
 
   const handleChange = (e) => {
@@ -252,7 +263,9 @@ function SignUp() {
                                 width: "55%",
                                 mb: 1.5,
                               }}
-                              onChange={(_, data) => onChange(data)}
+                              onChange={(_, data) =>
+                                handleDiplomesId(data.id, index)
+                              }
                               renderInput={(params) => (
                                 <TextField
                                   {...params}
@@ -345,6 +358,7 @@ function SignUp() {
                   return null;
                 })}
               </div>
+              {/* ***************************************************** */}
               <Controller
                 control={control}
                 name="profession_id"
@@ -356,7 +370,10 @@ function SignUp() {
                     getOptionLabel={(option) =>
                       option.job.replace("&apos;E", "'É")
                     }
-                    onChange={(_, data) => onChange(data.id)}
+                    onChange={(_, data) => {
+                      // console.log(data);
+                      setProfValue(data.id);
+                    }}
                     renderInput={(params) => (
                       <TextField
                         {...params}
@@ -425,9 +442,13 @@ function SignUp() {
                   Votre cursus de Master :
                 </p>
                 {masterInput.map((masterIn, index) => {
+                  // {"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"}
                   if (masterIn) {
                     return (
-                      <div className="flex flex-wrap justify-between mb-5">
+                      <div
+                        key={`master_key_${index.id}`}
+                        className="flex flex-wrap justify-between mb-5"
+                      >
                         <Controller
                           control={control}
                           name={`master_${index}`}
@@ -451,6 +472,7 @@ function SignUp() {
                                   label={`#${index + 1} Master`}
                                   color="primary"
                                   inputRef={ref}
+                                  {...register(`master_${index}`)}
                                 />
                               )}
                             />
@@ -584,6 +606,18 @@ function SignUp() {
                     label="Site web"
                     size="medium"
                     {...register("siteweb")}
+                  />
+                )}
+              />
+              <Controller
+                control={control}
+                name="linkedin"
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Linkedin"
+                    size="medium"
+                    {...register("linkedin")}
                   />
                 )}
               />

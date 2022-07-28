@@ -4,6 +4,7 @@ class UserManager extends AbstractManager {
   static table = "user";
 
   insert(email, password) {
+    // console.log("coucou userManager");
     return this.connection.query(
       `insert into ${UserManager.table} (email, password, is_valid) values (?, ?, ?)`,
       [email, password, 0]

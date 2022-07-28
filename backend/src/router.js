@@ -34,12 +34,7 @@ router.get("/profession", JobController.browse);
 router.get("/promotion", PromotionController.browse);
 router.get("/master", MasterController.browse);
 
-router.post(
-  "/sign_up",
-  preparedDataForSignIn,
-  validateUser,
-  UserController.add
-);
+router.post("/signup", preparedDataForSignIn, validateUser, UserController.add);
 router.post("/login", validateLogin, UserController.login);
 
 router.put("/user/update/:id", checkAuth, checkRights, UserController.edit);
@@ -62,9 +57,5 @@ router.delete(
   checkRights,
   UserController.delete
 );
-
-// router.put("/items/:id", ItemController.edit);
-// router.post("/items", ItemController.add);
-// router.delete("/items/:id", ItemController.delete);
 
 module.exports = router;
