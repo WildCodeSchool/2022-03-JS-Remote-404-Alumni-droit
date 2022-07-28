@@ -5,20 +5,21 @@ const preparedDataForSignIn = (req, res, next) => {
     id,
     year: req.body[`diplomeYear_${index}`],
   }));
-  req.master = req.body.mastersId.map((id, index) => ({
-    id,
-    year: req.body[`masterYear_${index}`],
-  }));
+
   const profile = {};
+
+  const master = [];
   Object.keys(req.body).forEach((key) => {
-    if (!key.includes("master") || !key.includes("diplome")) {
+    if (key.includes("master")) {
+      const [cle, index] = key.split("_");
+      master[index] = { ...master[index], [cle]: req.body[key] };
+    } else if (!key.includes("diplome")) {
       profile[key] = req.body[key];
     }
   });
   delete profile.confirmedPassword;
-  // console.log(req.diplome);
-  // console.log(req.master);
   req.profile = profile;
+  req.master = master;
   next();
 };
 

@@ -23,7 +23,7 @@ class ProfileManager extends AbstractManager {
     if (!cookie) {
       sqlQuery += ` ${this.andOrWhere(sqlQuery)} P.is_private = 0`;
     }
-    if (!cookie || cookie.role !== "admin") {
+    if (cookie.role !== "admin") {
       sqlQuery += ` ${this.andOrWhere(sqlQuery)} U.is_valid = 1`;
     }
 
@@ -45,7 +45,7 @@ class ProfileManager extends AbstractManager {
       )} P.firstname LIKE ? OR P.lastname LIKE ?`;
       sqlValue.push(`%${nomPrenom}%`, `%${nomPrenom}%`);
     }
-
+    sqlQuery += ` ${this.andOrWhere(sqlQuery)} U.role = 'user'`;
     sqlQuery += ` LIMIT 30`;
 
     return this.connection.query(sqlQuery, sqlValue).then((res) => res[0]);
@@ -59,28 +59,30 @@ class ProfileManager extends AbstractManager {
 
   insert(user, id) {
     const date = new Date();
-    // console.log(user);
-    // console.log(id);
-    return this.connection.query(
-      `insert into ${ProfileManager.table} (user_id, lastname, firstname, creation_date, emailpro, phone, profession_id, employeur, poste, bio, siteweb, facebook, linkedin, twitter, instagram) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [
-        id,
-        user.lastname,
-        user.firstname,
-        `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
-        user.emailpro,
-        user.phone,
-        user.profession_id,
-        user.employeur,
-        user.poste,
-        user.bio,
-        user.siteweb,
-        user.facebook,
-        user.linkedin,
-        user.twitter,
-        user.instagram,
-      ]
-    );
+    return this.connection
+      .query(
+        `INSERT INTO ${ProfileManager.table} (user_id, lastname, firstname, creation_date, emailpro, phone, profession_id, employeur, poste, bio, siteweb, facebook, linkedin, twitter, instagram, is_private) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [
+          id,
+          user.lastname,
+          user.firstname,
+          `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
+          user.emailpro,
+          user.phone,
+          user.profession_id,
+          user.employeur,
+          user.poste,
+          user.bio,
+          user.siteweb,
+          user.facebook,
+          user.linkedin,
+          user.twitter,
+          user.instagram,
+          user.is_private,
+        ]
+      )
+      .then((res) => res)
+      .catch((err) => console.error(err));
   }
 
   update(user, id) {

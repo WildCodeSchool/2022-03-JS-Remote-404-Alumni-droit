@@ -31,7 +31,6 @@ function SignUp() {
   const [masterInput, setMasterInput] = useState([true, false, false]);
   const [profValue, setProfValue] = useState();
   const [diplomesId, setDiplomesId] = useState([]);
-  const [mastersId, setMastersId] = useState([]);
 
   const handleDiplomesId = (value, index) => {
     const provDiplomesId = [...diplomesId];
@@ -39,17 +38,10 @@ function SignUp() {
     setDiplomesId(provDiplomesId);
   };
 
-  const handleMastersId = (value, index) => {
-    const provMastersId = [...mastersId];
-    provMastersId[index] = value;
-    setMastersId(provMastersId);
-  };
-
   const onSubmit = (data) => {
     const copyTemp = { ...data };
     copyTemp.profession_id = profValue.toString();
     copyTemp.diplomesId = diplomesId;
-    copyTemp.mastersId = mastersId;
     // console.log("ùùùùùùùùùù COPY TEMP ùùùùùùùùù");
     // console.log(copyTemp);
 
@@ -472,9 +464,7 @@ function SignUp() {
                                 width: "55%",
                                 mb: 1.5,
                               }}
-                              onChange={(_, data) =>
-                                handleMastersId(data.id, index)
-                              }
+                              onChange={(_, data) => onChange(data)}
                               renderInput={(params) => (
                                 <TextField
                                   {...params}
@@ -616,6 +606,18 @@ function SignUp() {
                     label="Site web"
                     size="medium"
                     {...register("siteweb")}
+                  />
+                )}
+              />
+              <Controller
+                control={control}
+                name="linkedin"
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Linkedin"
+                    size="medium"
+                    {...register("linkedin")}
                   />
                 )}
               />

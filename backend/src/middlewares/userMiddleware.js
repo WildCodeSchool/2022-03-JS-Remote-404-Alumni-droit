@@ -117,12 +117,8 @@ const checkAuth = (req, res, next) => {
 
 const checkRights = async (req, res, next) => {
   const user = await models.user.findByMail(req.access_token.email);
-  if (user === []) {
-    res.status(401).send(nope);
-  } else if (
-    user &&
-    (user[0].id === parseInt(req.params.id, 10) || user[0].role === "admin")
-  ) {
+
+  if (user[0] && user[0].role === "admin") {
     next();
   } else {
     res.status(401).send(nope);
@@ -131,10 +127,12 @@ const checkRights = async (req, res, next) => {
 
 const checkVisibility = async (req, res, next) => {
   const visible = await models.profile.visible(req.params.id);
-  if (visible.is_valid === 1 && visible.is_private === 0) {
+  if (!visible) {
+    res.status(401).send(nope);
+  } else if (visible.is_valid === 1) {
     next();
   } else {
-    checkRights();
+    checkRights(req, res, next);
   }
 };
 

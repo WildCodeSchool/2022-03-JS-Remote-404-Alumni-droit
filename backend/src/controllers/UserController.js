@@ -1,4 +1,3 @@
-const { v4: uuidv4 } = require("uuid");
 const models = require("../models");
 const { passwordHash, passwordVerify } = require("../services/password");
 const { jwtSign } = require("../services/jwt");
@@ -40,23 +39,23 @@ class UserController {
       .update(user)
       .then(([result]) => {
         if (result.affectedRows === 0) {
-          res.status(404).send("Erreur à l'update");
+          res.status(404).send("Erreur lors de la mise à jour");
         } else {
-          res.status(204).send("User mis à jour correctement");
+          res.status(204).send("Utilisateur mis à jour correctement");
         }
       })
       .catch((err) => {
         console.error(err);
-        res.status(500).send("Erreur serveur");
+        res.status(500).send("Erreur du erveur");
       });
   };
 
   static add = async (req, res) => {
     try {
       const hash = await passwordHash(req.body.password);
-      // const id = uuidv4();
+
       const request = await models.user.insert(req.body.email, hash);
-      // console.log(request);
+
       const profile = await models.profile.insert(
         req.body,
         request[0].insertId
@@ -75,8 +74,7 @@ class UserController {
         msg: "Votre compte a été créé avec succès, en attente de validation",
       });
     } catch (error) {
-      console.error(error);
-      res.status(500).send("echec");
+      res.status(500).send("Serveur en échec");
     }
   };
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
@@ -11,9 +11,11 @@ import linkedin from "../assets/linkedin.png";
 import facebook from "../assets/facebook.png";
 import instagram from "../assets/instagram.png";
 import twitter from "../assets/twitter.png";
+// import { getFormControlLabelUtilityClasses } from "@mui/material";
 
 function Profile() {
   const { userId } = useParams();
+  const navigate = useNavigate();
   const [rows, setRows] = useState(null);
   const [copied, setCopied] = useState(false);
   const textToCopy = `${import.meta.env.VITE_BACKEND_URL}/annuaire/${userId}`;
@@ -24,7 +26,11 @@ function Profile() {
         withCredentials: true,
       })
       .then((res) => setRows(res.data))
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        alert("Vous ne disposez pas des droits pour accéder à ce profil");
+        navigate("/");
+        console.error(err);
+      });
   }, [userId]);
 
   const copyToClipboard = () => {

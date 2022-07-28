@@ -21,9 +21,10 @@ class MasterManager extends AbstractManager {
   }
 
   insert(master, id) {
+    const name = master.master === "" ? master.masterName : master.master;
     return this.connection.query(
       `insert into ${this.table} (profile_id, title, year, university) values (?, ?, ?, ?)`,
-      [id, master.masterName, master.masterYear, master.masterLocation]
+      [id, name, master.masterYear, master.masterLocation]
     );
   }
 }

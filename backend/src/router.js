@@ -58,8 +58,4 @@ router.delete(
   UserController.delete
 );
 
-// router.put("/items/:id", ItemController.edit);
-// router.post("/items", ItemController.add);
-// router.delete("/items/:id", ItemController.delete);
-
 module.exports = router;
